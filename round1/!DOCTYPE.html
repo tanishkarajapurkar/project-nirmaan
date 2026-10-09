@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jugaad Gauntlet: Ultimate Face-Off</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: radial-gradient(circle at center, #0a3375 0%, #030e24 100%);
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 4px, rgba(255,255,255,0.02) 4px, rgba(255,255,255,0.02) 8px);
+            color: #fff;
+            font-family: 'Oswald', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(180deg, #103264 0%, #06142e 100%);
+            border: 5px solid #f6d148;
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-top: 2vh; 
+            margin-bottom: 3vh;
+            text-align: center;
+            width: 70%;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(246, 209, 72, 0.3);
+            z-index: 10;
+        }
+
+        .question-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            letter-spacing: 2px;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 3px 3px 6px #000;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            gap: 20px 40px;
+            width: 55%; 
+            flex-grow: 1;
+            z-index: 10;
+            margin-bottom: 5vh;
+        }
+
+        .card-container {
+            perspective: 1500px;
+            height: 11vh;
+            min-height: 80px;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .card-container.flipped .card-inner { transform: rotateX(180deg); }
+
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 60px; 
+            box-sizing: border-box;
+            border: 4px solid #f6d148; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+        }
+
+        .card-front {
+            background: linear-gradient(180deg, #103264 0%, #06142e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            color: #f6d148;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0 35px;
+            border-radius: 50%;
+            border: 2px solid rgba(246, 209, 72, 0.5);
+            line-height: 1.2;
+        }
+
+        .card-back {
+            background: #ffffff; 
+            transform: rotateX(180deg);
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* Fixed the overflowing answer text */
+        .answer {
+            font-size: 1.3vw; /* Responsive font size */
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #000000;
+            padding: 5px 15px 5px 25px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center; /* Vertically center the text */
+            line-height: 1.1;
+        }
+
+        .points {
+            background: #103264; 
+            color: #f6d148; 
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3.5rem;
+            height: 100%;
+            min-width: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-left: 4px solid #f6d148;
+        }
+
+        .strike-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255, 0, 0, 0.3); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none; 
+            transition: opacity 0.1s;
+        }
+        .strike-overlay.active { opacity: 1; }
+
+        .strike-x {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 40rem;
+            color: #ff0000;
+            line-height: 1;
+            text-shadow: -5px -5px 0 #fff, 5px -5px 0 #fff, -5px 5px 0 #fff, 5px 5px 0 #fff, 0 0 50px #000;
+            transform: scale(0.1);
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .strike-overlay.active .strike-x { transform: scale(1); }
+
+        /* FIXED SCOREBOARDS: BOTTOM CORNERS */
+        .team-tracker {
+            position: fixed;
+            bottom: 4vh; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.8);
+            border: 3px solid #00ffff;
+            padding: 15px 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,255,255,0.4);
+            z-index: 100; 
+            width: 15vw;
+            max-width: 220px;
+        }
+        .team-tracker.left { left: 2vw; border-color: #00ffff; }
+        .team-tracker.right { right: 2vw; border-color: #ff00ff; }
+        
+        .team-timer {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 3.5rem;
+            color: #fff;
+            background: #111;
+            border: 3px solid #555;
+            border-radius: 15px;
+            padding: 0 15px;
+            margin-bottom: 10px;
+            text-align: center;
+            width: 90%;
+            box-sizing: border-box;
+            opacity: 0.3;
+            transition: 0.3s;
+        }
+        .team-timer.active { opacity: 1; border-color: #f6d148; color: #f6d148; text-shadow: 0 0 15px #f6d148;}
+        .team-timer.danger { border-color: #ff0000; color: #ff0000; text-shadow: 0 0 20px #ff0000; animation: pulse 0.5s infinite alternate; }
+
+        .team-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            letter-spacing: 2px;
+            margin-bottom: 0px;
+        }
+        .team-tracker.left .team-name { color: #00ffff; text-shadow: 0 0 10px #00ffff;}
+        .team-tracker.right .team-name { color: #ff00ff; text-shadow: 0 0 10px #ff00ff;}
+
+        .team-score {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 5rem;
+            color: #f6d148;
+            text-shadow: 0 0 15px rgba(246, 209, 72, 0.8);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .strike-indicators {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 5px 15px;
+            border-radius: 10px;
+        }
+        .small-strike {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            color: #333; 
+            line-height: 0.8;
+            transition: 0.3s;
+        }
+        .small-strike.active { color: #ff0000; text-shadow: 0 0 15px #ff0000; }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 10px #ff0000; }
+            100% { transform: scale(1.05); box-shadow: 0 0 30px #ff0000; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- AUDIO FILES -->
+    <audio id="suspenseSfx" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="tickSfx" src="https://assets.mixkit.co/active_storage/sfx/2574/2574-preview.mp3"></audio> 
+    <audio id="strikeSfx" src="https://assets.mixkit.co/active_storage/sfx/948/948-preview.mp3"></audio>
+    <audio id="revealAllSfx" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio> 
+    <audio id="coinSfx" src="https://assets.mixkit.co/active_storage/sfx/2019/2019-preview.mp3"></audio> 
+    
+    <audio id="ans1Sfx" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio>
+    <audio id="ans2Sfx" src="https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"></audio>
+    <audio id="ans3Sfx" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
+    <audio id="ans4Sfx" src="https://assets.mixkit.co/active_storage/sfx/2066/2066-preview.mp3"></audio>
+    <audio id="ans5Sfx" src="https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3"></audio>
+    <audio id="ans6Sfx" src="https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3"></audio>
+
+    <div class="strike-overlay" id="strikeOverlay"><div class="strike-x">X</div></div>
+
+    <!-- LEFT TRACKER (TEAM A) -->
+    <div class="team-tracker left">
+        <div class="team-timer" id="timer-a">20</div>
+        <div class="team-name">TEAM A</div>
+        <div class="team-score" id="score-a">0</div>
+        <div class="strike-indicators">
+            <div class="small-strike" id="a-strike-1">X</div>
+            <div class="small-strike" id="a-strike-2">X</div>
+            <div class="small-strike" id="a-strike-3">X</div>
+        </div>
+    </div>
+
+    <!-- RIGHT TRACKER (TEAM B) -->
+    <div class="team-tracker right">
+        <div class="team-timer" id="timer-b">20</div>
+        <div class="team-name">TEAM B</div>
+        <div class="team-score" id="score-b">0</div>
+        <div class="strike-indicators">
+            <div class="small-strike" id="b-strike-1">X</div>
+            <div class="small-strike" id="b-strike-2">X</div>
+            <div class="small-strike" id="b-strike-3">X</div>
+        </div>
+    </div>
+
+    <div class="header">
+        <h1 class="question-text" id="questionDisplay">Initializing Arena...</h1>
+    </div>
+
+    <div class="board" id="boardGrid"></div>
+
+    <!-- BACKEND STATUS BADGE -->
+    <div id="backend-status" style="position:fixed; top:15px; right:15px; font-size:13px; font-family:'Share Tech Mono', monospace; background:rgba(0,0,0,0.8); border:1px solid #00ff80; color:#00ff80; padding:6px 14px; border-radius:20px; z-index:9999; display:flex; align-items:center; gap:8px;">
+        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00ff80; box-shadow:0 0 8px #00ff80;"></span>
+        <span id="backend-status-text">Connecting to MongoDB...</span>
+    </div>
+
+    <script>
+        const API_BASE = (window.location.origin && window.location.origin.includes('http')) 
+            ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
+            : 'http://localhost:5000';
+
+        function updateDbBadge(isOnline, text) {
+            const badge = document.getElementById('backend-status');
+            const txt = document.getElementById('backend-status-text');
+            if (badge && txt) {
+                badge.style.borderColor = isOnline ? '#00ff80' : '#f6d148';
+                badge.style.color = isOnline ? '#00ff80' : '#f6d148';
+                badge.firstElementChild.style.background = isOnline ? '#00ff80' : '#f6d148';
+                badge.firstElementChild.style.boxShadow = isOnline ? '0 0 8px #00ff80' : '0 0 8px #f6d148';
+                txt.innerText = text;
+            }
+        }
+
+        // DEFAULT 10 COLLEGE-LIFE QUESTIONS (Fallback & Seed source)
+        let quizData = [
+            { q: "Name something an engineering student loses in the first year.", a1: "Friends Circle", p1: 35, a2: "Love Interest", p2: 25, a3: "Sleep / Motivation", p3: 20, a4: "Books", p4: 10, a5: "Pen / Stationery", p5: 5, a6: "ID Card", p6: 5 },
+            { q: "What is the most common excuse for submitting an assignment late?", a1: "Printer not working (Shop Closed)", p1: 35, a2: "Laptop Crashed / File Corrupt", p2: 25, a3: "Was Sick / Medical", p3: 15, a4: "Forgot it at home", p4: 10, a5: "Partner didn't do it", p5: 10, a6: "Train Traffic", p6: 5 },
+            { q: "Which app do college students use the most during a boring lecture?", a1: "Instagram (Reels)", p1: 35, a2: "WhatsApp", p2: 25, a3: "Spotify", p3: 15, a4: "YouTube", p4: 10, a5: "Snapchat", p5: 10, a6: "Games (BGMI/Free Fire)", p6: 5 },
+            { q: "What do students mostly eat during the recess in our college?", a1: "Mendu Vada / Idli (Anna)", p1: 20, a2: "Manchurian (Chinese)", p2: 20, a3: "Vada Pav / Bhaji Pav", p3: 20, a4: "Chips / Lays", p4: 20, a5: "Burger / Pizza / Wrap", p5: 10, a6: "Tea / Coffee", p6: 10 },
+            { q: "What is the first thing students do when they get free high-speed campus Wi-Fi?", a1: "Download Movies/Series", p1: 35, a2: "Update Large Apps", p2: 25, a3: "Download Big Games", p3: 15, a4: "Scroll Instagram Reels", p4: 10, a5: "Sending Larger Files", p5: 10, a6: "Watch YouTube 1080p", p6: 5 },
+            { q: "Name a place where students go to bunk classes.", a1: "Washroom", p1: 35, a2: "Ground", p2: 25, a3: "Canteen / Cafe / Tapri", p3: 15, a4: "Home / Friend's Room", p4: 10, a5: "Committee Work", p5: 10, a6: "Library", p6: 5 },
+            { q: "What is the most common lie told to parents by engineering students?", a1: "Need money for Books/Print", p1: 35, a2: "Extra classes are going on", p2: 25, a3: "Group study at friend's house", p3: 15, a4: "Internship", p4: 10, a5: "Teacher cut my marks", p5: 10, a6: "Train was late", p6: 5 },
+            { q: "When planning a college trip, where do students usually want to go (but it cancels)?", a1: "Goa", p1: 35, a2: "Villa / Resort", p2: 25, a3: "Manali", p3: 15, a4: "Lonavala", p4: 10, a5: "Matheran", p5: 10, a6: "Kokan", p6: 5 },
+            { q: "Name a skill or software every engineer fakes on their resume.", a1: "MS Excel / Word", p1: 35, a2: "Programming (C++/Python)", p2: 25, a3: "Leadership Skills", p3: 15, a4: "AutoCAD", p4: 10, a5: "Hobbies (Reading Books)", p5: 10, a6: "Foreign Language", p6: 5 },
+            { q: "What is the most important survival tool in a college hostel/PG?", a1: "Extension Board", p1: 35, a2: "Electric Kettle", p2: 25, a3: "Instant Maggi", p3: 15, a4: "Headphones", p4: 10, a5: "Iron (Press)", p5: 10, a6: "Deo / Perfume (No Bath)", p6: 5 }
+        ];
+
+        let currentQIndex = 0;
+        let timerIntervalA = null;
+        let timerIntervalB = null;
+        let timeLeftA = 20;
+        let timeLeftB = 20;
+
+        let scoreA = 0;
+        let scoreB = 0;
+        let strikesA = 0;
+        let strikesB = 0;
+        let lastRevealedPoints = 0; 
+        
+        let flipHistory = [];
+
+        const suspenseSfx = document.getElementById('suspenseSfx');
+        const strikeSfx = document.getElementById('strikeSfx');
+        const tickSfx = document.getElementById('tickSfx');
+        const revealAllSfx = document.getElementById('revealAllSfx');
+        const coinSfx = document.getElementById('coinSfx');
+        
+        const revealSounds = {
+            1: document.getElementById('ans1Sfx'), 2: document.getElementById('ans2Sfx'),
+            3: document.getElementById('ans3Sfx'), 4: document.getElementById('ans4Sfx'),
+            5: document.getElementById('ans5Sfx'), 6: document.getElementById('ans6Sfx')
+        };
+
+        const strikeOverlay = document.getElementById('strikeOverlay');
+
+        function playSfx(audioElement) {
+            if(audioElement) { audioElement.currentTime = 0; audioElement.play().catch(e => {}); }
+        }
+
+        function updateTimerUI(team) {
+            let t = team === 'A' ? timeLeftA : timeLeftB;
+            let el = document.getElementById(`timer-${team.toLowerCase()}`);
+            el.innerText = t < 10 ? `0${t}` : t;
+            if(t <= 5 && t > 0) { el.classList.add('danger'); playSfx(tickSfx); } 
+            else { el.classList.remove('danger'); }
+        }
+
+        function startTimer(team) {
+            stopTimer('ALL'); 
+            let el = document.getElementById(`timer-${team.toLowerCase()}`);
+            el.classList.add('active'); 
+
+            if (team === 'A') {
+                timeLeftA = 20; updateTimerUI('A');
+                timerIntervalA = setInterval(() => {
+                    timeLeftA--; updateTimerUI('A');
+                    if(timeLeftA <= 0) { stopTimer('A'); giveStrike('A'); }
+                }, 1000);
+            } else {
+                timeLeftB = 20; updateTimerUI('B');
+                timerIntervalB = setInterval(() => {
+                    timeLeftB--; updateTimerUI('B');
+                    if(timeLeftB <= 0) { stopTimer('B'); giveStrike('B'); }
+                }, 1000);
+            }
+        }
+
+        function stopTimer(team) {
+            if (team === 'A' || team === 'ALL') { clearInterval(timerIntervalA); document.getElementById('timer-a').classList.remove('active', 'danger'); }
+            if (team === 'B' || team === 'ALL') { clearInterval(timerIntervalB); document.getElementById('timer-b').classList.remove('active', 'danger'); }
+        }
+
+        function giveStrike(team) {
+            stopTimer('ALL'); 
+            playSfx(strikeSfx);
+            strikeOverlay.classList.add('active');
+            setTimeout(() => { strikeOverlay.classList.remove('active'); }, 1500);
+
+            if(team === 'A') {
+                if(strikesA < 3) { strikesA++; document.getElementById(`a-strike-${strikesA}`).classList.add('active'); }
+            } else if (team === 'B') {
+                if(strikesB < 3) { strikesB++; document.getElementById(`b-strike-${strikesB}`).classList.add('active'); }
+            }
+        }
+
+        function resetMatch() {
+            strikesA = 0; strikesB = 0;
+            for(let i=1; i<=3; i++) {
+                document.getElementById(`a-strike-${i}`).classList.remove('active');
+                document.getElementById(`b-strike-${i}`).classList.remove('active');
+            }
+            scoreA = 0; scoreB = 0; lastRevealedPoints = 0;
+            document.getElementById('score-a').innerText = scoreA;
+            document.getElementById('score-b').innerText = scoreB;
+            flipHistory = []; 
+        }
+
+        function toggleCard(cardElement, boxNumber, points) {
+            if(!cardElement.classList.contains('flipped')) {
+                stopTimer('ALL'); 
+                playSfx(revealSounds[boxNumber]); 
+                lastRevealedPoints = points; 
+                cardElement.classList.add('flipped');
+                flipHistory.push(cardElement); 
+            }
+        }
+
+        function undoLastCard() {
+            if(flipHistory.length > 0) {
+                let lastCard = flipHistory.pop();
+                lastCard.classList.remove('flipped');
+                lastRevealedPoints = 0; 
+            }
+        }
+
+        function revealAllRemaining() {
+            let revealedAny = false;
+            for(let i=1; i<=6; i++) {
+                const card = document.getElementById(`card-${i}`);
+                if(card && !card.classList.contains('flipped')) {
+                    card.classList.add('flipped'); revealedAny = true;
+                }
+            }
+            if(revealedAny) { stopTimer('ALL'); playSfx(revealAllSfx); lastRevealedPoints = 0; }
+        }
+
+        function loadQuestion() {
+            stopTimer('ALL'); lastRevealedPoints = 0; flipHistory = [];
+            const data = quizData[currentQIndex];
+            document.getElementById('questionDisplay').innerText = data.q;
+            
+            const board = document.getElementById('boardGrid');
+            board.innerHTML = ""; 
+
+            for(let i=1; i<=6; i++) {
+                const answerText = data[`a${i}`];
+                const answerPts = data[`p${i}`];
+                if(!answerText) continue; 
+
+                const cardHTML = `
+                    <div class="card-container" id="card-${i}">
+                        <div class="card-inner">
+                            <div class="card-front"><span class="number">${i}</span></div>
+                            <div class="card-back">
+                                <span class="answer">${answerText}</span>
+                                <div class="points">${answerPts}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                board.innerHTML += cardHTML;
+            }
+        }
+
+        function nextQuestion() {
+            if(currentQIndex < quizData.length - 1) { playSfx(suspenseSfx); currentQIndex++; loadQuestion(); resetMatch(); }
+        }
+        function prevQuestion() {
+            if(currentQIndex > 0) { playSfx(suspenseSfx); currentQIndex--; loadQuestion(); resetMatch(); }
+        }
+
+        async function syncMatchState() {
+            try {
+                await fetch(`${API_BASE}/api/round1/match`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        teamA: { score: scoreA, strikes: strikesA },
+                        teamB: { score: scoreB, strikes: strikesB },
+                        currentQuestionIndex: currentQIndex
+                    })
+                });
+            } catch (err) {
+                // Ignore background sync errors
+            }
+        }
+
+        async function fetchQuestionsFromBackend() {
+            try {
+                updateDbBadge(false, 'Connecting to MongoDB...');
+                const res = await fetch(`${API_BASE}/api/round1/questions?format=game`);
+                if (res.ok) {
+                    const json = await res.json();
+                    if (json.success && json.data && json.data.length > 0) {
+                        quizData = json.data;
+                        updateDbBadge(true, `MongoDB (${quizData.length} Qs)`);
+                        loadQuestion();
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.warn('Backend server unreachable, using offline fallback', err);
+            }
+            updateDbBadge(false, 'Local Mode');
+            loadQuestion();
+        }
+
+        document.addEventListener('keydown', function(event) {
+            const key = event.key.toLowerCase();
+            
+            if (key >= '1' && key <= '6') {
+                const card = document.getElementById(`card-${key}`);
+                if(card) {
+                    const pts = quizData[currentQIndex][`p${key}`];
+                    toggleCard(card, parseInt(key), pts);
+                }
+            } 
+            else if (event.key === 'Backspace') { undoLastCard(); }
+            else if (key === 'a') {
+                if(lastRevealedPoints > 0) {
+                    scoreA += lastRevealedPoints;
+                    document.getElementById('score-a').innerText = scoreA;
+                    playSfx(coinSfx); lastRevealedPoints = 0; 
+                    syncMatchState();
+                }
+            }
+            else if (key === 'b') {
+                if(lastRevealedPoints > 0) {
+                    scoreB += lastRevealedPoints;
+                    document.getElementById('score-b').innerText = scoreB;
+                    playSfx(coinSfx); lastRevealedPoints = 0; 
+                    syncMatchState();
+                }
+            }
+            else if (key === 'q') { giveStrike('A'); syncMatchState(); } 
+            else if (key === 'w') { giveStrike('B'); syncMatchState(); } 
+            else if (key === 'z') { startTimer('A'); }
+            else if (key === 'x') { startTimer('B'); }
+            else if (event.key === 'ArrowRight') { nextQuestion(); syncMatchState(); }
+            else if (event.key === 'ArrowLeft') { prevQuestion(); syncMatchState(); }
+            else if (event.key === 'Enter') { revealAllRemaining(); }
+        });
+
+        // Initialize question display and sync with backend
+        fetchQuestionsFromBackend();
+        document.body.addEventListener('click', () => { document.getElementById('suspenseSfx').load(); }, {once:true});
+    </script>
+</body>
+</html>
