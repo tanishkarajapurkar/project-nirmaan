@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jugaad Gauntlet: Ultimate Face-Off</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Round 1: Jugaad Feud - Ultimate Face-Off</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@500;700&family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
     <style>
         body {
@@ -17,48 +17,180 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 10px 20px 20px 20px;
             box-sizing: border-box;
             overflow: hidden;
+            user-select: none;
         }
 
+        /* TOP NAVIGATION & TURN CONTROLLER BAR */
+        .top-bar {
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 50;
+            margin-top: 5px;
+        }
+
+        .nav-controls, .right-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: rgba(16, 50, 100, 0.85);
+            border: 2px solid #f6d148;
+            color: #f6d148;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .control-btn:hover {
+            background: #f6d148;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(246, 209, 72, 0.8);
+        }
+        .control-btn.btn-report {
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+        .control-btn.btn-report:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        /* TURN SELECTION BANNER */
+        .turn-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #334466;
+            border-radius: 30px;
+            padding: 4px;
+            gap: 6px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .turn-btn {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 8px 22px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            transition: 0.25s all ease;
+            color: #aaa;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .turn-btn.active-a {
+            background: linear-gradient(90deg, #00ffff, #0088cc);
+            color: #000;
+            box-shadow: 0 0 20px #00ffff;
+            animation: pulse-turn-a 1.2s infinite alternate;
+        }
+        .turn-btn.active-b {
+            background: linear-gradient(90deg, #ff00ff, #cc0088);
+            color: #fff;
+            box-shadow: 0 0 20px #ff00ff;
+            animation: pulse-turn-b 1.2s infinite alternate;
+        }
+
+        @keyframes pulse-turn-a {
+            0% { box-shadow: 0 0 10px #00ffff; }
+            100% { box-shadow: 0 0 25px #00ffff; }
+        }
+        @keyframes pulse-turn-b {
+            0% { box-shadow: 0 0 10px #ff00ff; }
+            100% { box-shadow: 0 0 25px #ff00ff; }
+        }
+
+        .turn-status-text {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            color: #f6d148;
+            padding: 0 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* QUESTION HEADER */
         .header {
             background: linear-gradient(180deg, #103264 0%, #06142e 100%);
-            border: 5px solid #f6d148;
+            border: 4px solid #f6d148;
             border-radius: 20px;
-            padding: 15px 30px;
-            margin-top: 2vh; 
-            margin-bottom: 3vh;
+            padding: 12px 30px;
+            margin-top: 1.5vh; 
+            margin-bottom: 2.5vh;
             text-align: center;
-            width: 70%;
+            width: 72%;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(246, 209, 72, 0.3);
             z-index: 10;
         }
 
         .question-text {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.7rem;
             letter-spacing: 2px;
             margin: 0;
             color: #ffffff;
             text-shadow: 3px 3px 6px #000;
+            line-height: 1.15;
+        }
+        .q-number-badge {
+            color: #f6d148;
+            margin-right: 12px;
+            text-shadow: 0 0 15px rgba(246, 209, 72, 0.8);
+            display: inline-block;
         }
 
+        /* BOARD GRID & CARDS */
         .board {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: repeat(3, 1fr);
-            gap: 20px 40px;
-            width: 55%; 
+            gap: 18px 40px;
+            width: 56%; 
             flex-grow: 1;
             z-index: 10;
-            margin-bottom: 5vh;
+            margin-bottom: 4vh;
         }
 
         .card-container {
             perspective: 1500px;
             height: 11vh;
             min-height: 80px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .card-container:hover {
+            transform: scale(1.025);
+        }
+
+        /* Active team cursor hover glow */
+        body.turn-a .card-container:not(.flipped):hover .card-front {
+            border-color: #00ffff;
+            box-shadow: 0 0 25px #00ffff;
+        }
+        body.turn-b .card-container:not(.flipped):hover .card-front {
+            border-color: #ff00ff;
+            box-shadow: 0 0 25px #ff00ff;
         }
 
         .card-inner {
@@ -87,6 +219,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+        }
+        .card-front::after {
+            content: "CLICK TO REVEAL";
+            position: absolute;
+            bottom: 6px;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 2px;
+            font-family: 'Share Tech Mono', monospace;
         }
 
         .number {
@@ -109,16 +251,15 @@
             overflow: hidden;
         }
 
-        /* Fixed the overflowing answer text */
         .answer {
-            font-size: 1.3vw; /* Responsive font size */
+            font-size: 1.3vw;
             font-weight: 700;
             text-transform: uppercase;
             color: #000000;
             padding: 5px 15px 5px 25px;
             flex-grow: 1;
             display: flex;
-            align-items: center; /* Vertically center the text */
+            align-items: center;
             line-height: 1.1;
         }
 
@@ -135,11 +276,12 @@
             border-left: 4px solid #f6d148;
         }
 
+        /* STRIKE OVERLAY */
         .strike-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100vw; height: 100vh;
-            background: rgba(255, 0, 0, 0.3); 
+            background: rgba(255, 0, 0, 0.35); 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -152,7 +294,7 @@
 
         .strike-x {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 40rem;
+            font-size: 38rem;
             color: #ff0000;
             line-height: 1;
             text-shadow: -5px -5px 0 #fff, 5px -5px 0 #fff, -5px 5px 0 #fff, 5px 5px 0 #fff, 0 0 50px #000;
@@ -161,38 +303,65 @@
         }
         .strike-overlay.active .strike-x { transform: scale(1); }
 
+        /* FLOATING POINTS ANIMATION */
+        .floating-points {
+            position: fixed;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 900;
+            pointer-events: none;
+            z-index: 2000;
+            animation: floatUp 1.2s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+        .floating-points.pts-a { color: #00ffff; text-shadow: 0 0 25px #00ffff; }
+        .floating-points.pts-b { color: #ff00ff; text-shadow: 0 0 25px #ff00ff; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.6); opacity: 0; }
+            30% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+            100% { transform: translateY(-80px) scale(1); opacity: 0; }
+        }
+
         /* FIXED SCOREBOARDS: BOTTOM CORNERS */
         .team-tracker {
             position: fixed;
-            bottom: 4vh; 
+            bottom: 3.5vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             border: 3px solid #00ffff;
-            padding: 15px 20px;
+            padding: 14px 18px;
             border-radius: 20px;
             box-shadow: 0 0 20px rgba(0,255,255,0.4);
             z-index: 100; 
             width: 15vw;
-            max-width: 220px;
+            max-width: 230px;
+            cursor: pointer;
+            transition: all 0.25s ease;
         }
         .team-tracker.left { left: 2vw; border-color: #00ffff; }
         .team-tracker.right { right: 2vw; border-color: #ff00ff; }
         
+        .team-tracker.current-active {
+            box-shadow: 0 0 35px #f6d148, inset 0 0 20px rgba(246, 209, 72, 0.3);
+            border-color: #f6d148 !important;
+            transform: translateY(-4px);
+        }
+
         .team-timer {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             color: #fff;
             background: #111;
             border: 3px solid #555;
             border-radius: 15px;
             padding: 0 15px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
             width: 90%;
             box-sizing: border-box;
-            opacity: 0.3;
+            opacity: 0.4;
             transition: 0.3s;
         }
         .team-timer.active { opacity: 1; border-color: #f6d148; color: #f6d148; text-shadow: 0 0 15px #f6d148;}
@@ -200,17 +369,17 @@
 
         .team-name {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #fff;
             letter-spacing: 2px;
-            margin-bottom: 0px;
+            margin-bottom: 2px;
         }
         .team-tracker.left .team-name { color: #00ffff; text-shadow: 0 0 10px #00ffff;}
         .team-tracker.right .team-name { color: #ff00ff; text-shadow: 0 0 10px #ff00ff;}
 
         .team-score {
             font-family: 'Share Tech Mono', monospace;
-            font-size: 5rem;
+            font-size: 4.8rem;
             color: #f6d148;
             text-shadow: 0 0 15px rgba(246, 209, 72, 0.8);
             margin: 0;
@@ -219,20 +388,212 @@
 
         .strike-indicators {
             display: flex;
-            gap: 15px;
-            margin-top: 10px;
-            background: rgba(255,255,255,0.1);
-            padding: 5px 15px;
+            gap: 12px;
+            margin-top: 8px;
+            background: rgba(255,255,255,0.08);
+            padding: 4px 14px;
             border-radius: 10px;
         }
         .small-strike {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3rem;
+            font-size: 2.6rem;
             color: #333; 
             line-height: 0.8;
             transition: 0.3s;
         }
         .small-strike.active { color: #ff0000; text-shadow: 0 0 15px #ff0000; }
+
+        .team-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        .team-action-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+        }
+        .team-action-btn:hover {
+            background: #ff0000;
+            color: #fff;
+            border-color: #ff0000;
+            box-shadow: 0 0 10px #ff0000;
+        }
+        .team-action-btn.timer-btn:hover {
+            background: #f6d148;
+            color: #000;
+            border-color: #f6d148;
+            box-shadow: 0 0 10px #f6d148;
+        }
+
+        /* QUESTION PROGRESS HINT */
+        .round-status-banner {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: #aaa;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            z-index: 10;
+        }
+        .round-status-banner span { color: #00ffff; font-weight: bold; }
+
+        /* ================= MODAL / LEADERBOARD & REPORT ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(3, 8, 20, 0.95);
+            backdrop-filter: blur(8px);
+            z-index: 99999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            width: 90vw;
+            max-width: 1200px;
+            max-height: 88vh;
+            background: linear-gradient(180deg, #0e1d3d 0%, #060c1d 100%);
+            border: 3px solid #f6d148;
+            border-radius: 20px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(246, 209, 72, 0.4);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            background: rgba(0,0,0,0.4);
+            border-bottom: 2px solid #334466;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: #f6d148;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(246, 209, 72, 0.7);
+        }
+
+        .modal-body {
+            padding: 25px 30px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        /* WINNER SHOWCASE */
+        .winner-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid #00ffff;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            text-align: center;
+        }
+        .team-podium {
+            flex: 1;
+        }
+        .podium-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        .team-podium.podium-a .podium-title { color: #00ffff; text-shadow: 0 0 10px #00ffff; }
+        .team-podium.podium-b .podium-title { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+        .podium-score {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #f6d148;
+            line-height: 1;
+        }
+        .champion-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            color: #f6d148;
+            background: rgba(246, 209, 72, 0.15);
+            border: 2px solid #f6d148;
+            padding: 10px 25px;
+            border-radius: 30px;
+            box-shadow: 0 0 20px rgba(246, 209, 72, 0.5);
+            animation: pulse-turn-a 1.5s infinite alternate;
+        }
+
+        /* BREAKDOWN TABLE */
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.15rem;
+            text-align: left;
+        }
+        .report-table th {
+            background: rgba(16, 50, 100, 0.9);
+            color: #f6d148;
+            font-family: 'Orbitron', sans-serif;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            border-bottom: 2px solid #f6d148;
+            text-transform: uppercase;
+        }
+        .report-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #eee;
+        }
+        .report-table tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .team-a-cell { color: #00ffff !important; font-weight: 700; }
+        .team-b-cell { color: #ff00ff !important; font-weight: 700; }
+        .pts-tag {
+            display: inline-block;
+            background: rgba(246, 209, 72, 0.2);
+            color: #f6d148;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.95rem;
+            margin-left: 6px;
+        }
+        .pts-zero {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff5555;
+        }
+
+        .modal-footer {
+            padding: 15px 30px;
+            background: rgba(0,0,0,0.4);
+            border-top: 2px solid #334466;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
 
         @keyframes pulse {
             0% { transform: scale(1); box-shadow: 0 0 10px #ff0000; }
@@ -240,7 +601,7 @@
         }
     </style>
 </head>
-<body>
+<body class="turn-a">
 
     <!-- AUDIO FILES -->
     <audio id="suspenseSfx" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
@@ -258,8 +619,33 @@
 
     <div class="strike-overlay" id="strikeOverlay"><div class="strike-x">X</div></div>
 
+    <!-- TOP NAVIGATION & TURN CONTROLLER -->
+    <div class="top-bar">
+        <div class="nav-controls">
+            <button class="control-btn" onclick="prevQuestion()" title="Shortcut: Left Arrow">⬅ PREV Q</button>
+            <button class="control-btn" onclick="nextQuestion()" title="Shortcut: Right Arrow">NEXT Q ➡</button>
+            <button class="control-btn" onclick="resetRoundTimer()" title="Reset 20s timers">⏱️ RESET TIMERS</button>
+        </div>
+
+        <!-- ACTIVE TURN SELECTOR -->
+        <div class="turn-bar">
+            <button id="turnBtnA" class="turn-btn active-a" onclick="setActiveTeam('A')" title="Shortcut: Key A">
+                🔵 TEAM A TURN
+            </button>
+            <div class="turn-status-text" id="turnStatusText">Click Card To Award</div>
+            <button id="turnBtnB" class="turn-btn" onclick="setActiveTeam('B')" title="Shortcut: Key B">
+                🟣 TEAM B TURN
+            </button>
+        </div>
+
+        <div class="right-controls">
+            <button class="control-btn" onclick="revealAllRemaining()" title="Shortcut: Enter Key">👁️ REVEAL REST</button>
+            <button class="control-btn btn-report" onclick="toggleReportModal()" title="Shortcut: Key L">📊 LEADERBOARD & REPORT</button>
+        </div>
+    </div>
+
     <!-- LEFT TRACKER (TEAM A) -->
-    <div class="team-tracker left">
+    <div class="team-tracker left current-active" id="tracker-a" onclick="setActiveTeam('A')">
         <div class="team-timer" id="timer-a">20</div>
         <div class="team-name">TEAM A</div>
         <div class="team-score" id="score-a">0</div>
@@ -268,10 +654,14 @@
             <div class="small-strike" id="a-strike-2">X</div>
             <div class="small-strike" id="a-strike-3">X</div>
         </div>
+        <div class="team-actions">
+            <button class="team-action-btn timer-btn" onclick="event.stopPropagation(); startTimer('A');" title="Shortcut: Z">START (Z)</button>
+            <button class="team-action-btn" onclick="event.stopPropagation(); recordStrikeOrWrong('A');" title="Shortcut: Q">WRONG (Q)</button>
+        </div>
     </div>
 
     <!-- RIGHT TRACKER (TEAM B) -->
-    <div class="team-tracker right">
+    <div class="team-tracker right" id="tracker-b" onclick="setActiveTeam('B')">
         <div class="team-timer" id="timer-b">20</div>
         <div class="team-name">TEAM B</div>
         <div class="team-score" id="score-b">0</div>
@@ -280,18 +670,76 @@
             <div class="small-strike" id="b-strike-2">X</div>
             <div class="small-strike" id="b-strike-3">X</div>
         </div>
+        <div class="team-actions">
+            <button class="team-action-btn timer-btn" onclick="event.stopPropagation(); startTimer('B');" title="Shortcut: X">START (X)</button>
+            <button class="team-action-btn" onclick="event.stopPropagation(); recordStrikeOrWrong('B');" title="Shortcut: W">WRONG (W)</button>
+        </div>
     </div>
 
+    <!-- QUESTION HEADER WITH NUMBER -->
     <div class="header">
         <h1 class="question-text" id="questionDisplay">Initializing Arena...</h1>
     </div>
 
+    <div class="round-status-banner" id="roundStatusBanner">
+        QUESTION 1 OF 19 &nbsp;|&nbsp; CLICK ANY CARD TO DIRECTLY AWARD POINTS TO ACTIVE TEAM
+    </div>
+
+    <!-- MAIN 6-BOX BOARD -->
     <div class="board" id="boardGrid"></div>
 
-    <!-- BACKEND STATUS BADGE -->
-    <div id="backend-status" style="position:fixed; top:15px; right:15px; font-size:13px; font-family:'Share Tech Mono', monospace; background:rgba(0,0,0,0.8); border:1px solid #00ff80; color:#00ff80; padding:6px 14px; border-radius:20px; z-index:9999; display:flex; align-items:center; gap:8px;">
-        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00ff80; box-shadow:0 0 8px #00ff80;"></span>
-        <span id="backend-status-text">Connecting to MongoDB...</span>
+    <!-- ================= REPORT & LEADERBOARD MODAL ================= -->
+    <div class="modal-overlay" id="reportModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title">🏆 JUGAAD FEUD: MATCH REPORT & LEADERBOARD</h2>
+                <button class="control-btn" onclick="toggleReportModal()">✖ CLOSE</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- WINNER BANNER -->
+                <div class="winner-card" id="winnerBanner">
+                    <div class="team-podium podium-a">
+                        <div class="podium-title">TEAM A</div>
+                        <div class="podium-score" id="modalScoreA">0</div>
+                    </div>
+                    <div>
+                        <div class="champion-badge" id="championText">MATCH IN PROGRESS</div>
+                    </div>
+                    <div class="team-podium podium-b">
+                        <div class="podium-title">TEAM B</div>
+                        <div class="podium-score" id="modalScoreB">0</div>
+                    </div>
+                </div>
+
+                <!-- QUESTION BREAKDOWN TABLE -->
+                <h3 style="font-family:'Orbitron'; color:#f6d148; margin-bottom:12px; font-size:1.3rem;">
+                    📋 QUESTION-BY-QUESTION BREAKDOWN
+                </h3>
+                <div style="overflow-x:auto;">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th style="width:60px;">Q#</th>
+                                <th>Question Prompt</th>
+                                <th style="width:250px;">Team A Selection</th>
+                                <th style="width:250px;">Team B Selection</th>
+                                <th style="width:120px;">Q Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reportTableBody">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="control-btn" onclick="window.print()">🖨️ PRINT REPORT</button>
+                <button class="control-btn" style="border-color:#ff003c; color:#ff003c;" onclick="fullResetMatch()">🔄 RESET MATCH</button>
+                <button class="control-btn btn-report" onclick="toggleReportModal()">RETURN TO ARENA</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -299,46 +747,51 @@
             ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
             : 'http://localhost:5000';
 
-        function updateDbBadge(isOnline, text) {
-            const badge = document.getElementById('backend-status');
-            const txt = document.getElementById('backend-status-text');
-            if (badge && txt) {
-                badge.style.borderColor = isOnline ? '#00ff80' : '#f6d148';
-                badge.style.color = isOnline ? '#00ff80' : '#f6d148';
-                badge.firstElementChild.style.background = isOnline ? '#00ff80' : '#f6d148';
-                badge.firstElementChild.style.boxShadow = isOnline ? '0 0 8px #00ff80' : '0 0 8px #f6d148';
-                txt.innerText = text;
-            }
-        }
-
-        // DEFAULT 10 COLLEGE-LIFE QUESTIONS (Fallback & Seed source)
+        // MASTER 19 QUESTIONS FROM OFFICIAL QUESTION BANK
         let quizData = [
-            { q: "Name something an engineering student loses in the first year.", a1: "Friends Circle", p1: 35, a2: "Love Interest", p2: 25, a3: "Sleep / Motivation", p3: 20, a4: "Books", p4: 10, a5: "Pen / Stationery", p5: 5, a6: "ID Card", p6: 5 },
-            { q: "What is the most common excuse for submitting an assignment late?", a1: "Printer not working (Shop Closed)", p1: 35, a2: "Laptop Crashed / File Corrupt", p2: 25, a3: "Was Sick / Medical", p3: 15, a4: "Forgot it at home", p4: 10, a5: "Partner didn't do it", p5: 10, a6: "Train Traffic", p6: 5 },
-            { q: "Which app do college students use the most during a boring lecture?", a1: "Instagram (Reels)", p1: 35, a2: "WhatsApp", p2: 25, a3: "Spotify", p3: 15, a4: "YouTube", p4: 10, a5: "Snapchat", p5: 10, a6: "Games (BGMI/Free Fire)", p6: 5 },
-            { q: "What do students mostly eat during the recess in our college?", a1: "Mendu Vada / Idli (Anna)", p1: 20, a2: "Manchurian (Chinese)", p2: 20, a3: "Vada Pav / Bhaji Pav", p3: 20, a4: "Chips / Lays", p4: 20, a5: "Burger / Pizza / Wrap", p5: 10, a6: "Tea / Coffee", p6: 10 },
-            { q: "What is the first thing students do when they get free high-speed campus Wi-Fi?", a1: "Download Movies/Series", p1: 35, a2: "Update Large Apps", p2: 25, a3: "Download Big Games", p3: 15, a4: "Scroll Instagram Reels", p4: 10, a5: "Sending Larger Files", p5: 10, a6: "Watch YouTube 1080p", p6: 5 },
-            { q: "Name a place where students go to bunk classes.", a1: "Washroom", p1: 35, a2: "Ground", p2: 25, a3: "Canteen / Cafe / Tapri", p3: 15, a4: "Home / Friend's Room", p4: 10, a5: "Committee Work", p5: 10, a6: "Library", p6: 5 },
-            { q: "What is the most common lie told to parents by engineering students?", a1: "Need money for Books/Print", p1: 35, a2: "Extra classes are going on", p2: 25, a3: "Group study at friend's house", p3: 15, a4: "Internship", p4: 10, a5: "Teacher cut my marks", p5: 10, a6: "Train was late", p6: 5 },
-            { q: "When planning a college trip, where do students usually want to go (but it cancels)?", a1: "Goa", p1: 35, a2: "Villa / Resort", p2: 25, a3: "Manali", p3: 15, a4: "Lonavala", p4: 10, a5: "Matheran", p5: 10, a6: "Kokan", p6: 5 },
-            { q: "Name a skill or software every engineer fakes on their resume.", a1: "MS Excel / Word", p1: 35, a2: "Programming (C++/Python)", p2: 25, a3: "Leadership Skills", p3: 15, a4: "AutoCAD", p4: 10, a5: "Hobbies (Reading Books)", p5: 10, a6: "Foreign Language", p6: 5 },
-            { q: "What is the most important survival tool in a college hostel/PG?", a1: "Extension Board", p1: 35, a2: "Electric Kettle", p2: 25, a3: "Instant Maggi", p3: 15, a4: "Headphones", p4: 10, a5: "Iron (Press)", p5: 10, a6: "Deo / Perfume (No Bath)", p6: 5 }
+            { q: "Which app do college students use the most during a boring lecture?", a1: "Instagram (Reels)", p1: 35, a2: "WhatsApp", p2: 25, a3: "Games (BGMI/Free Fire)", p3: 15, a4: "YouTube", p4: 10, a5: "Snapchat", p5: 10, a6: "Spotify", p6: 5 },
+            { q: "Name a place where students go to bunk classes.", a1: "Washroom", p1: 35, a2: "Committee Work", p2: 25, a3: "Canteen / Café / Tapri", p3: 15, a4: "Home / Friend's Room", p4: 10, a5: "Library", p5: 10, a6: "Ground", p6: 5 },
+            { q: "What is the most common lie told to parents by engineering students?", a1: "Need money for books/print", p1: 35, a2: "Extra classes are going on", p2: 25, a3: "Group study at friend's house", p3: 15, a4: "Internship", p4: 10, a5: "Teacher cut my marks", p5: 10, a6: "Train was late", p6: 5 },
+            { q: "When planning a college trip, where do students usually want to go (but it cancels)?", a1: "Goa", p1: 35, a2: "Villa / Resort", p2: 25, a3: "Manali", p3: 15, a4: "Lonavala", p4: 10, a5: "Matheran", p5: 10, a6: "Beach", p6: 5 },
+            { q: "Name a skill or software every engineer fakes on their resume.", a1: "Programming (C++/Python)", p1: 35, a2: "Leadership Skills", p2: 25, a3: "Reading Books", p3: 15, a4: "CAD", p4: 10, a5: "AutoCAD", p5: 10, a6: "MS Excel / Word", p6: 5 },
+            { q: "What is the most important survival tool in a college hostel/PG?", a1: "Instant Maggi", p1: 35, a2: "Electric Kettle", p2: 25, a3: "Perfume", p3: 15, a4: "Iron", p4: 10, a5: "Extension Board", p4: 10, a6: "Lamp", p6: 5 },
+            { q: "Name something an engineering student loses in the first year.", a1: "Friends Circle", p1: 35, a2: "ID Card", p2: 25, a3: "Sleep / Motivation", p3: 15, a4: "Pen / Stationery", p4: 10, a5: "Love Interest", p5: 10, a6: "Books", p6: 5 },
+            { q: "What is the most common excuse for submitting an assignment late?", a1: "Printer not working (shop closed)", p1: 35, a2: "Laptop crashed / file corrupt", p2: 25, a3: "Was sick / medical", p3: 15, a4: "Forgot it at home", p4: 10, a5: "Partner didn't do it", p5: 10, a6: "Train traffic", p6: 5 },
+            { q: "What is the final contribution of the laziest member (free-rider) in a project group?", a1: "Printing and binding the final project report", p1: 35, a2: "Making the \"Thank You\" and \"Title\" slide of the PPT", p2: 25, a3: "Buying snacks or coffee for the group", p3: 15, a4: "Carrying the laptop/hardware to the venue", p4: 10, a5: "Clicking group photos for social media", p5: 10, a6: "Giving moral support (\"We can do it guys\")", p6: 5 },
+            { q: "During a Viva (oral exam), what is the most common cross-question the external asks that nobody knows?", a1: "\"Did you actually write this code yourself?\"", p1: 35, a2: "What is its real-world practical application?", p2: 25, a3: "Asking for a basic definition or formula from 1st year", p3: 15, a4: "What was the total cost/budget of this project?", p4: 10, a5: "Why did you choose this specific topic?", p5: 10, a6: "Can you explain the block diagram/flowchart?", p6: 5 },
+            { q: "Name the most common way students secretly communicate in an exam hall.", a1: "Coughing or clearing their throat to get attention", p1: 35, a2: "Tapping the pen or desk continuously", p2: 25, a3: "Showing hand signs / finger numbers for MCQ options", p3: 15, a4: "Throwing a crushed piece of paper / eraser", p4: 10, a5: "Whispering when the invigilator turns around", p5: 10, a6: "Kicking the chair of the person sitting ahead", p6: 5 },
+            { q: "What is the MAIN reason students volunteer to organize college fests?", a1: "To get official attendance / bunk classes legally", p1: 35, a2: "To impress a crush or socialize with seniors/juniors", p2: 25, a3: "For the Free Food / Committee T-shirts", p3: 15, a4: "To get a certificate for their resume", p4: 10, a5: "To boss around the juniors", p5: 10, a6: "Because they actually care about the event", p6: 5 },
+            { q: "Name a thought every engineering student has during an 8 AM morning lecture.", a1: "\"Why did I even choose Engineering?\"", p1: 35, a2: "Is the professor taking attendance today? Can I leave?", p2: 25, a3: "If I sleep right now, will anyone notice?", p3: 15, a4: "Can I just pack my bag and leave at the break?", p4: 10, a5: "What is for breakfast in the canteen?", p5: 10, a6: "I should drop out and start a startup.", p6: 5 },
+            { q: "What is the biggest struggle of traveling to college via public transport (train/bus)?", a1: "Getting a place to sit", p1: 35, a2: "Standing with a heavy laptop bag breaking your shoulders", p2: 25, a3: "The crowd crushing your freshly ironed clothes", p3: 15, a4: "Sweating before the day has even started", p4: 10, a5: "Running for your life to catch it at the exact minute", p5: 10, a6: "Smelling other people's armpits", p6: 5 },
+            { q: "What is the biggest lie students tell their parents to get extra pocket money?", a1: "\"I need to buy a new reference book.\"", p1: 35, a2: "The college is asking for an extra exam/practical fee.", p2: 25, a3: "I need to buy hardware components for my project.", p3: 15, a4: "Mess food is terrible, need money for outside food.", p4: 10, a5: "I need to upgrade my laptop RAM for coding.", p5: 10, a6: "Need money for an official Industrial Visit .", p6: 5 },
+            { q: "What ACTUALLY happens during a night-out \"Group Study\" session?", a1: "Gossiping about classmates and professors", p1: 35, a2: "Ordering fast food / Making midnight Maggi", p2: 25, a3: "Watching a movie or random YouTube videos", p3: 15, a4: "Playing multiplayer games (BGMI/FIFA/Valorant)", p4: 10, a5: "Everyone falling asleep one by one", p5: 10, a6: "Actually studying the syllabus", p6: 5 },
+            { q: "What is the most common reason a student suddenly starts attending ALL lectures?", a1: "Received a defaulter / low attendance warning", p1: 35, a2: "The professor threatened to fail them in internals", p2: 25, a3: "Their crush attends that specific lecture", p3: 15, a4: "Internal assessment/Unit tests are next week", p4: 10, a5: "Parents were called by the HOD", p5: 10, a6: "They genuinely want to learn", p6: 5 },
+            { q: "Name something you will ALWAYS find written or carved on a college last bench.", a1: "Random names with a heart / Crush's name", p1: 35, a2: "Answers or formulas for cheating in exams", p2: 25, a3: "Instagram handles / Snapchat IDs", p3: 15, a4: "Abusive words for the college or strict professors", p4: 10, a5: "Tick-Tack-Toe (Zero Kata) games", p5: 10, a6: "Abstract art / Random scribbling", p6: 5 },
+            { q: "Name a subject students often find difficult.", a1: "Mathematics", p1: 35, a2: "Science", p2: 25, a3: "Physics", p3: 15, a4: "Chemistry", p4: 10, a5: "History", p5: 10, a6: "English grammar", p6: 5 }
         ];
 
         let currentQIndex = 0;
+        let activeTeam = 'A'; // 'A' or 'B'
+        
+        // Track whether Team A and Team B have chosen their 1 option for the current question
+        let playedThisQuestion = { A: false, B: false };
+
+        // Match Scores & Strikes
+        let scoreA = 0;
+        let scoreB = 0;
+        let strikesA = 0;
+        let strikesB = 0;
+
+        // Timers
         let timerIntervalA = null;
         let timerIntervalB = null;
         let timeLeftA = 20;
         let timeLeftB = 20;
 
-        let scoreA = 0;
-        let scoreB = 0;
-        let strikesA = 0;
-        let strikesB = 0;
-        let lastRevealedPoints = 0; 
-        
-        let flipHistory = [];
+        // Question-by-Question Detailed Report Data
+        let questionReports = {};
 
+        // Audio Elements
         const suspenseSfx = document.getElementById('suspenseSfx');
         const strikeSfx = document.getElementById('strikeSfx');
         const tickSfx = document.getElementById('tickSfx');
@@ -357,6 +810,39 @@
             if(audioElement) { audioElement.currentTime = 0; audioElement.play().catch(e => {}); }
         }
 
+        // ================= ACTIVE TEAM CONTROLLER =================
+        function setActiveTeam(team) {
+            activeTeam = team;
+            document.body.className = team === 'A' ? 'turn-a' : 'turn-b';
+            
+            const btnA = document.getElementById('turnBtnA');
+            const btnB = document.getElementById('turnBtnB');
+            const trackerA = document.getElementById('tracker-a');
+            const trackerB = document.getElementById('tracker-b');
+            const statusTxt = document.getElementById('turnStatusText');
+
+            if (team === 'A') {
+                btnA.className = 'turn-btn active-a';
+                btnB.className = 'turn-btn';
+                trackerA.classList.add('current-active');
+                trackerB.classList.remove('current-active');
+                statusTxt.innerText = "TEAM A SELECTING...";
+                statusTxt.style.color = "#00ffff";
+            } else {
+                btnA.className = 'turn-btn';
+                btnB.className = 'turn-btn active-b';
+                trackerA.classList.remove('current-active');
+                trackerB.classList.add('current-active');
+                statusTxt.innerText = "TEAM B SELECTING...";
+                statusTxt.style.color = "#ff00ff";
+            }
+        }
+
+        function toggleActiveTeam() {
+            setActiveTeam(activeTeam === 'A' ? 'B' : 'A');
+        }
+
+        // ================= TIMER MANAGEMENT =================
         function updateTimerUI(team) {
             let t = team === 'A' ? timeLeftA : timeLeftB;
             let el = document.getElementById(`timer-${team.toLowerCase()}`);
@@ -366,35 +852,58 @@
         }
 
         function startTimer(team) {
-            stopTimer('ALL'); 
+            stopTimer('ALL');
             let el = document.getElementById(`timer-${team.toLowerCase()}`);
             el.classList.add('active'); 
 
             if (team === 'A') {
-                timeLeftA = 20; updateTimerUI('A');
+                updateTimerUI('A');
                 timerIntervalA = setInterval(() => {
                     timeLeftA--; updateTimerUI('A');
-                    if(timeLeftA <= 0) { stopTimer('A'); giveStrike('A'); }
+                    if(timeLeftA <= 0) { 
+                        stopTimer('A'); 
+                        giveStrike('A');
+                        recordStrikeOrWrong('A');
+                    }
                 }, 1000);
             } else {
-                timeLeftB = 20; updateTimerUI('B');
+                updateTimerUI('B');
                 timerIntervalB = setInterval(() => {
                     timeLeftB--; updateTimerUI('B');
-                    if(timeLeftB <= 0) { stopTimer('B'); giveStrike('B'); }
+                    if(timeLeftB <= 0) { 
+                        stopTimer('B'); 
+                        giveStrike('B');
+                        recordStrikeOrWrong('B');
+                    }
                 }, 1000);
             }
         }
 
         function stopTimer(team) {
-            if (team === 'A' || team === 'ALL') { clearInterval(timerIntervalA); document.getElementById('timer-a').classList.remove('active', 'danger'); }
-            if (team === 'B' || team === 'ALL') { clearInterval(timerIntervalB); document.getElementById('timer-b').classList.remove('active', 'danger'); }
+            if (team === 'A' || team === 'ALL') { 
+                clearInterval(timerIntervalA); 
+                document.getElementById('timer-a').classList.remove('active', 'danger'); 
+            }
+            if (team === 'B' || team === 'ALL') { 
+                clearInterval(timerIntervalB); 
+                document.getElementById('timer-b').classList.remove('active', 'danger'); 
+            }
         }
 
+        function resetRoundTimer() {
+            stopTimer('ALL');
+            timeLeftA = 20;
+            timeLeftB = 20;
+            updateTimerUI('A');
+            updateTimerUI('B');
+        }
+
+        // ================= STRIKE MANAGEMENT =================
         function giveStrike(team) {
             stopTimer('ALL'); 
             playSfx(strikeSfx);
             strikeOverlay.classList.add('active');
-            setTimeout(() => { strikeOverlay.classList.remove('active'); }, 1500);
+            setTimeout(() => { strikeOverlay.classList.remove('active'); }, 1200);
 
             if(team === 'A') {
                 if(strikesA < 3) { strikesA++; document.getElementById(`a-strike-${strikesA}`).classList.add('active'); }
@@ -403,62 +912,151 @@
             }
         }
 
-        function resetMatch() {
-            strikesA = 0; strikesB = 0;
-            for(let i=1; i<=3; i++) {
-                document.getElementById(`a-strike-${i}`).classList.remove('active');
-                document.getElementById(`b-strike-${i}`).classList.remove('active');
+        function recordStrikeOrWrong(team) {
+            giveStrike(team);
+            
+            // Record 0 points / Wrong for this question
+            if (!questionReports[currentQIndex]) {
+                questionReports[currentQIndex] = { qText: quizData[currentQIndex].q, teamA: null, teamB: null };
             }
-            scoreA = 0; scoreB = 0; lastRevealedPoints = 0;
-            document.getElementById('score-a').innerText = scoreA;
-            document.getElementById('score-b').innerText = scoreB;
-            flipHistory = []; 
+            questionReports[currentQIndex][team === 'A' ? 'teamA' : 'teamB'] = {
+                answer: "Wrong Answer / Not on Board",
+                points: 0
+            };
+            playedThisQuestion[team] = true;
+
+            // Switch to the other team if they haven't played
+            const otherTeam = team === 'A' ? 'B' : 'A';
+            if (!playedThisQuestion[otherTeam]) {
+                setTimeout(() => {
+                    setActiveTeam(otherTeam);
+                    resetRoundTimer();
+                    startTimer(otherTeam);
+                }, 1300);
+            } else {
+                checkBothTeamsDone();
+            }
+            syncMatchState();
         }
 
-        function toggleCard(cardElement, boxNumber, points) {
-            if(!cardElement.classList.contains('flipped')) {
-                stopTimer('ALL'); 
-                playSfx(revealSounds[boxNumber]); 
-                lastRevealedPoints = points; 
-                cardElement.classList.add('flipped');
-                flipHistory.push(cardElement); 
+        // ================= FLOATING POINTS VISUAL =================
+        function showFloatingPoints(team, points) {
+            const tracker = document.getElementById(`tracker-${team.toLowerCase()}`);
+            const rect = tracker.getBoundingClientRect();
+
+            const floatEl = document.createElement('div');
+            floatEl.className = `floating-points ${team === 'A' ? 'pts-a' : 'pts-b'}`;
+            floatEl.innerText = `+${points}`;
+            floatEl.style.left = `${rect.left + 40}px`;
+            floatEl.style.top = `${rect.top - 20}px`;
+
+            document.body.appendChild(floatEl);
+            setTimeout(() => { floatEl.remove(); }, 1200);
+        }
+
+        // ================= CLICK OPTION TO AWARD POINTS DIRECTLY =================
+        function handleOptionClick(cardElement, boxNumber, points, answerText) {
+            // If already flipped, don't allow double points
+            if (cardElement.classList.contains('flipped')) {
+                return;
+            }
+
+            stopTimer('ALL');
+            playSfx(revealSounds[boxNumber]);
+
+            // Flip the card
+            cardElement.classList.add('flipped');
+
+            // DIRECTLY ADD POINTS TO THE CURRENT ACTIVE TEAM
+            const awardingTeam = activeTeam;
+            if (awardingTeam === 'A') {
+                scoreA += points;
+                document.getElementById('score-a').innerText = scoreA;
+            } else {
+                scoreB += points;
+                document.getElementById('score-b').innerText = scoreB;
+            }
+
+            playSfx(coinSfx);
+            showFloatingPoints(awardingTeam, points);
+
+            // Save choice in question report
+            if (!questionReports[currentQIndex]) {
+                questionReports[currentQIndex] = { qText: quizData[currentQIndex].q, teamA: null, teamB: null };
+            }
+            questionReports[currentQIndex][awardingTeam === 'A' ? 'teamA' : 'teamB'] = {
+                answer: answerText,
+                points: points
+            };
+            playedThisQuestion[awardingTeam] = true;
+
+            // Automatically switch turn to other team if other team hasn't answered
+            const otherTeam = awardingTeam === 'A' ? 'B' : 'A';
+            if (!playedThisQuestion[otherTeam]) {
+                setTimeout(() => {
+                    setActiveTeam(otherTeam);
+                    resetRoundTimer();
+                    startTimer(otherTeam);
+                }, 800);
+            } else {
+                checkBothTeamsDone();
+            }
+
+            syncMatchState();
+        }
+
+        function checkBothTeamsDone() {
+            const banner = document.getElementById('roundStatusBanner');
+            if (playedThisQuestion.A && playedThisQuestion.B) {
+                banner.innerHTML = `✅ <b style="color:#f6d148;">BOTH TEAMS PLAYED!</b> Press <span style="color:#00ffff;">[NEXT Q ➡]</span> or <span style="color:#f6d148;">[REVEAL REST]</span>`;
             }
         }
 
-        function undoLastCard() {
-            if(flipHistory.length > 0) {
-                let lastCard = flipHistory.pop();
-                lastCard.classList.remove('flipped');
-                lastRevealedPoints = 0; 
-            }
-        }
-
+        // Reveal remaining unflipped cards (for audience curiosity, awards no points)
         function revealAllRemaining() {
+            stopTimer('ALL');
             let revealedAny = false;
             for(let i=1; i<=6; i++) {
                 const card = document.getElementById(`card-${i}`);
                 if(card && !card.classList.contains('flipped')) {
-                    card.classList.add('flipped'); revealedAny = true;
+                    card.classList.add('flipped');
+                    revealedAny = true;
                 }
             }
-            if(revealedAny) { stopTimer('ALL'); playSfx(revealAllSfx); lastRevealedPoints = 0; }
+            if(revealedAny) { playSfx(revealAllSfx); }
         }
 
+        // ================= LOAD QUESTION =================
         function loadQuestion() {
-            stopTimer('ALL'); lastRevealedPoints = 0; flipHistory = [];
+            stopTimer('ALL');
+            resetRoundTimer();
+            playedThisQuestion = { A: false, B: false };
+            setActiveTeam('A'); // Team A starts each question by default
+
             const data = quizData[currentQIndex];
-            document.getElementById('questionDisplay').innerText = data.q;
+            const qNum = currentQIndex + 1;
             
+            // Set Question Header with bold Question Number
+            document.getElementById('questionDisplay').innerHTML = `
+                <span class="q-number-badge">Question ${qNum}:</span>${data.q}
+            `;
+
+            // Status Banner
+            document.getElementById('roundStatusBanner').innerHTML = `
+                QUESTION ${qNum} OF ${quizData.length} &nbsp;|&nbsp; EACH TEAM CHOOSES 1 OPTION DIRECTLY BY CLICKING
+            `;
+
+            // Build the 6-Box Board
             const board = document.getElementById('boardGrid');
             board.innerHTML = ""; 
 
             for(let i=1; i<=6; i++) {
                 const answerText = data[`a${i}`];
                 const answerPts = data[`p${i}`];
-                if(!answerText) continue; 
+                if(!answerText) continue;
 
                 const cardHTML = `
-                    <div class="card-container" id="card-${i}">
+                    <div class="card-container" id="card-${i}" onclick="handleOptionClick(this, ${i}, ${answerPts}, '${answerText.replace(/'/g, "\\'")}')">
                         <div class="card-inner">
                             <div class="card-front"><span class="number">${i}</span></div>
                             <div class="card-back">
@@ -473,12 +1071,114 @@
         }
 
         function nextQuestion() {
-            if(currentQIndex < quizData.length - 1) { playSfx(suspenseSfx); currentQIndex++; loadQuestion(); resetMatch(); }
-        }
-        function prevQuestion() {
-            if(currentQIndex > 0) { playSfx(suspenseSfx); currentQIndex--; loadQuestion(); resetMatch(); }
+            if(currentQIndex < quizData.length - 1) { 
+                playSfx(suspenseSfx); 
+                currentQIndex++; 
+                loadQuestion(); 
+            } else {
+                // If past question 18/19, automatically open Leaderboard & Report!
+                toggleReportModal(true);
+            }
         }
 
+        function prevQuestion() {
+            if(currentQIndex > 0) { 
+                playSfx(suspenseSfx); 
+                currentQIndex--; 
+                loadQuestion(); 
+            }
+        }
+
+        // ================= LEADERBOARD & DETAILED REPORT =================
+        function toggleReportModal(forceOpen = false) {
+            const modal = document.getElementById('reportModal');
+            if (forceOpen) {
+                modal.classList.add('active');
+            } else {
+                modal.classList.toggle('active');
+            }
+            if (modal.classList.contains('active')) {
+                renderMatchReport();
+            }
+        }
+
+        function renderMatchReport() {
+            document.getElementById('modalScoreA').innerText = scoreA;
+            document.getElementById('modalScoreB').innerText = scoreB;
+
+            const champEl = document.getElementById('championText');
+            if (scoreA > scoreB) {
+                champEl.innerHTML = `🏆 TEAM A WINS BY ${scoreA - scoreB} POINTS!`;
+                champEl.style.color = '#00ffff';
+                champEl.style.borderColor = '#00ffff';
+            } else if (scoreB > scoreA) {
+                champEl.innerHTML = `🏆 TEAM B WINS BY ${scoreB - scoreA} POINTS!`;
+                champEl.style.color = '#ff00ff';
+                champEl.style.borderColor = '#ff00ff';
+            } else {
+                champEl.innerHTML = `🤝 PERFECT TIE (${scoreA} - ${scoreB})!`;
+                champEl.style.color = '#f6d148';
+                champEl.style.borderColor = '#f6d148';
+            }
+
+            const tbody = document.getElementById('reportTableBody');
+            let rowsHtml = '';
+
+            for (let i = 0; i < quizData.length; i++) {
+                const qNum = i + 1;
+                const prompt = quizData[i].q;
+                const rep = questionReports[i] || {};
+
+                const ansA = rep.teamA ? `${rep.teamA.answer} <span class="pts-tag ${rep.teamA.points === 0 ? 'pts-zero':''}">+${rep.teamA.points}</span>` : `<span style="color:#666;">Not Played</span>`;
+                const ansB = rep.teamB ? `${rep.teamB.answer} <span class="pts-tag ${rep.teamB.points === 0 ? 'pts-zero':''}">+${rep.teamB.points}</span>` : `<span style="color:#666;">Not Played</span>`;
+
+                let qWinner = `<span style="color:#666;">-</span>`;
+                const ptsA = rep.teamA ? rep.teamA.points : 0;
+                const ptsB = rep.teamB ? rep.teamB.points : 0;
+
+                if (ptsA > ptsB) {
+                    qWinner = `<b style="color:#00ffff;">TEAM A</b>`;
+                } else if (ptsB > ptsA) {
+                    qWinner = `<b style="color:#ff00ff;">TEAM B</b>`;
+                } else if (ptsA > 0 && ptsA === ptsB) {
+                    qWinner = `<b style="color:#f6d148;">TIE</b>`;
+                }
+
+                rowsHtml += `
+                    <tr>
+                        <td style="font-family:'Orbitron'; color:#f6d148; font-weight:bold;">Q${qNum}</td>
+                        <td style="font-weight:600;">${prompt}</td>
+                        <td class="team-a-cell">${ansA}</td>
+                        <td class="team-b-cell">${ansB}</td>
+                        <td>${qWinner}</td>
+                    </tr>
+                `;
+            }
+
+            tbody.innerHTML = rowsHtml;
+        }
+
+        function fullResetMatch() {
+            if(confirm("Are you sure you want to reset all scores, strikes, and question records?")) {
+                scoreA = 0;
+                scoreB = 0;
+                strikesA = 0;
+                strikesB = 0;
+                currentQIndex = 0;
+                questionReports = {};
+                for(let i=1; i<=3; i++) {
+                    document.getElementById(`a-strike-${i}`).classList.remove('active');
+                    document.getElementById(`b-strike-${i}`).classList.remove('active');
+                }
+                document.getElementById('score-a').innerText = "0";
+                document.getElementById('score-b').innerText = "0";
+                loadQuestion();
+                toggleReportModal(false);
+                syncMatchState();
+            }
+        }
+
+        // ================= BACKGROUND BACKEND SYNC =================
         async function syncMatchState() {
             try {
                 await fetch(`${API_BASE}/api/round1/match`, {
@@ -491,67 +1191,65 @@
                     })
                 });
             } catch (err) {
-                // Ignore background sync errors
+                // Background sync silently
             }
         }
 
         async function fetchQuestionsFromBackend() {
             try {
-                updateDbBadge(false, 'Connecting to MongoDB...');
                 const res = await fetch(`${API_BASE}/api/round1/questions?format=game`);
                 if (res.ok) {
                     const json = await res.json();
-                    if (json.success && json.data && json.data.length > 0) {
+                    if (json.success && json.data && json.data.length >= 18) {
                         quizData = json.data;
-                        updateDbBadge(true, `MongoDB (${quizData.length} Qs)`);
-                        loadQuestion();
-                        return;
                     }
                 }
             } catch (err) {
-                console.warn('Backend server unreachable, using offline fallback', err);
+                console.log('Running questions in offline mode');
             }
-            updateDbBadge(false, 'Local Mode');
             loadQuestion();
         }
 
+        // ================= KEYBOARD SHORTCUTS =================
         document.addEventListener('keydown', function(event) {
+            // Ignore if report modal is open unless Escape
+            const modal = document.getElementById('reportModal');
+            if (modal.classList.contains('active')) {
+                if (event.key === 'Escape' || event.key.toLowerCase() === 'l') {
+                    toggleReportModal();
+                }
+                return;
+            }
+
             const key = event.key.toLowerCase();
             
-            if (key >= '1' && key <= '6') {
-                const card = document.getElementById(`card-${key}`);
-                if(card) {
-                    const pts = quizData[currentQIndex][`p${key}`];
-                    toggleCard(card, parseInt(key), pts);
-                }
-            } 
-            else if (event.key === 'Backspace') { undoLastCard(); }
-            else if (key === 'a') {
-                if(lastRevealedPoints > 0) {
-                    scoreA += lastRevealedPoints;
-                    document.getElementById('score-a').innerText = scoreA;
-                    playSfx(coinSfx); lastRevealedPoints = 0; 
-                    syncMatchState();
-                }
-            }
-            else if (key === 'b') {
-                if(lastRevealedPoints > 0) {
-                    scoreB += lastRevealedPoints;
-                    document.getElementById('score-b').innerText = scoreB;
-                    playSfx(coinSfx); lastRevealedPoints = 0; 
-                    syncMatchState();
-                }
-            }
-            else if (key === 'q') { giveStrike('A'); syncMatchState(); } 
-            else if (key === 'w') { giveStrike('B'); syncMatchState(); } 
+            // Switch Active Team
+            if (key === 'a') { setActiveTeam('A'); }
+            else if (key === 'b') { setActiveTeam('B'); }
+            
+            // Start Timers
             else if (key === 'z') { startTimer('A'); }
             else if (key === 'x') { startTimer('B'); }
-            else if (event.key === 'ArrowRight') { nextQuestion(); syncMatchState(); }
-            else if (event.key === 'ArrowLeft') { prevQuestion(); syncMatchState(); }
+            
+            // Wrong Answer / Strike
+            else if (key === 'q') { recordStrikeOrWrong('A'); }
+            else if (key === 'w') { recordStrikeOrWrong('B'); }
+            
+            // Reset Round Timers
+            else if (key === 't') { resetRoundTimer(); }
+            
+            // Navigation
+            else if (event.key === 'ArrowRight') { nextQuestion(); }
+            else if (event.key === 'ArrowLeft') { prevQuestion(); }
+            
+            // Reveal Remaining
             else if (event.key === 'Enter') { revealAllRemaining(); }
+            
+            // Leaderboard / Report Modal
+            else if (key === 'l') { toggleReportModal(); }
         });
 
-        // Initialize question display and sync with backend
+        // Initialize question bank & load
         fetchQuestionsFromBackend();
         document.body.addEventListener('click', () => { document.getElementById('suspenseSfx').load(); }, {once:true});
     </script>

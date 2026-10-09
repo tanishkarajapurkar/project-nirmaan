@@ -11,89 +11,37 @@ const connectDB = require('../config/db');
 
 const round1Questions = [
     {
-        question: "Name something an engineering student loses in the first year.",
-        order: 1,
-        category: "College Life",
-        answers: [
-            { rank: 1, text: "Friends Circle", points: 35 },
-            { rank: 2, text: "Love Interest", points: 25 },
-            { rank: 3, text: "Sleep / Motivation", points: 20 },
-            { rank: 4, text: "Books", points: 10 },
-            { rank: 5, text: "Pen / Stationery", points: 5 },
-            { rank: 6, text: "ID Card", points: 5 }
-        ]
-    },
-    {
-        question: "What is the most common excuse for submitting an assignment late?",
-        order: 2,
-        category: "College Life",
-        answers: [
-            { rank: 1, text: "Printer not working (Shop Closed)", points: 35 },
-            { rank: 2, text: "Laptop Crashed / File Corrupt", points: 25 },
-            { rank: 3, text: "Was Sick / Medical", points: 15 },
-            { rank: 4, text: "Forgot it at home", points: 10 },
-            { rank: 5, text: "Partner didn't do it", points: 10 },
-            { rank: 6, text: "Train Traffic", points: 5 }
-        ]
-    },
-    {
         question: "Which app do college students use the most during a boring lecture?",
-        order: 3,
+        order: 1,
         category: "College Life",
         answers: [
             { rank: 1, text: "Instagram (Reels)", points: 35 },
             { rank: 2, text: "WhatsApp", points: 25 },
-            { rank: 3, text: "Spotify", points: 15 },
+            { rank: 3, text: "Games (BGMI/Free Fire)", points: 15 },
             { rank: 4, text: "YouTube", points: 10 },
             { rank: 5, text: "Snapchat", points: 10 },
-            { rank: 6, text: "Games (BGMI/Free Fire)", points: 5 }
-        ]
-    },
-    {
-        question: "What do students mostly eat during the recess in our college?",
-        order: 4,
-        category: "College Life",
-        answers: [
-            { rank: 1, text: "Mendu Vada / Idli (Anna)", points: 20 },
-            { rank: 2, text: "Manchurian (Chinese)", points: 20 },
-            { rank: 3, text: "Vada Pav / Bhaji Pav", points: 20 },
-            { rank: 4, text: "Chips / Lays", points: 20 },
-            { rank: 5, text: "Burger / Pizza / Wrap", points: 10 },
-            { rank: 6, text: "Tea / Coffee", points: 10 }
-        ]
-    },
-    {
-        question: "What is the first thing students do when they get free high-speed campus Wi-Fi?",
-        order: 5,
-        category: "College Life",
-        answers: [
-            { rank: 1, text: "Download Movies/Series", points: 35 },
-            { rank: 2, text: "Update Large Apps", points: 25 },
-            { rank: 3, text: "Download Big Games", points: 15 },
-            { rank: 4, text: "Scroll Instagram Reels", points: 10 },
-            { rank: 5, text: "Sending Larger Files", points: 10 },
-            { rank: 6, text: "Watch YouTube 1080p", points: 5 }
+            { rank: 6, text: "Spotify", points: 5 }
         ]
     },
     {
         question: "Name a place where students go to bunk classes.",
-        order: 6,
+        order: 2,
         category: "College Life",
         answers: [
             { rank: 1, text: "Washroom", points: 35 },
-            { rank: 2, text: "Ground", points: 25 },
-            { rank: 3, text: "Canteen / Cafe / Tapri", points: 15 },
+            { rank: 2, text: "Committee Work", points: 25 },
+            { rank: 3, text: "Canteen / Café / Tapri", points: 15 },
             { rank: 4, text: "Home / Friend's Room", points: 10 },
-            { rank: 5, text: "Committee Work", points: 10 },
-            { rank: 6, text: "Library", points: 5 }
+            { rank: 5, text: "Library", points: 10 },
+            { rank: 6, text: "Ground", points: 5 }
         ]
     },
     {
         question: "What is the most common lie told to parents by engineering students?",
-        order: 7,
+        order: 3,
         category: "College Life",
         answers: [
-            { rank: 1, text: "Need money for Books/Print", points: 35 },
+            { rank: 1, text: "Need money for books/print", points: 35 },
             { rank: 2, text: "Extra classes are going on", points: 25 },
             { rank: 3, text: "Group study at friend's house", points: 15 },
             { rank: 4, text: "Internship", points: 10 },
@@ -103,7 +51,7 @@ const round1Questions = [
     },
     {
         question: "When planning a college trip, where do students usually want to go (but it cancels)?",
-        order: 8,
+        order: 4,
         category: "College Life",
         answers: [
             { rank: 1, text: "Goa", points: 35 },
@@ -111,33 +59,202 @@ const round1Questions = [
             { rank: 3, text: "Manali", points: 15 },
             { rank: 4, text: "Lonavala", points: 10 },
             { rank: 5, text: "Matheran", points: 10 },
-            { rank: 6, text: "Kokan", points: 5 }
+            { rank: 6, text: "Beach", points: 5 }
         ]
     },
     {
         question: "Name a skill or software every engineer fakes on their resume.",
-        order: 9,
+        order: 5,
         category: "College Life",
         answers: [
-            { rank: 1, text: "MS Excel / Word", points: 35 },
-            { rank: 2, text: "Programming (C++/Python)", points: 25 },
-            { rank: 3, text: "Leadership Skills", points: 15 },
-            { rank: 4, text: "AutoCAD", points: 10 },
-            { rank: 5, text: "Hobbies (Reading Books)", points: 10 },
-            { rank: 6, text: "Foreign Language", points: 5 }
+            { rank: 1, text: "Programming (C++/Python)", points: 35 },
+            { rank: 2, text: "Leadership Skills", points: 25 },
+            { rank: 3, text: "Reading Books", points: 15 },
+            { rank: 4, text: "CAD", points: 10 },
+            { rank: 5, text: "AutoCAD", points: 10 },
+            { rank: 6, text: "MS Excel / Word", points: 5 }
         ]
     },
     {
         question: "What is the most important survival tool in a college hostel/PG?",
+        order: 6,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Instant Maggi", points: 35 },
+            { rank: 2, text: "Electric Kettle", points: 25 },
+            { rank: 3, text: "Perfume", points: 15 },
+            { rank: 4, text: "Iron", points: 10 },
+            { rank: 5, text: "Extension Board", points: 10 },
+            { rank: 6, text: "Lamp", points: 5 }
+        ]
+    },
+    {
+        question: "Name something an engineering student loses in the first year.",
+        order: 7,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Friends Circle", points: 35 },
+            { rank: 2, text: "ID Card", points: 25 },
+            { rank: 3, text: "Sleep / Motivation", points: 15 },
+            { rank: 4, text: "Pen / Stationery", points: 10 },
+            { rank: 5, text: "Love Interest", points: 10 },
+            { rank: 6, text: "Books", points: 5 }
+        ]
+    },
+    {
+        question: "What is the most common excuse for submitting an assignment late?",
+        order: 8,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Printer not working (shop closed)", points: 35 },
+            { rank: 2, text: "Laptop crashed / file corrupt", points: 25 },
+            { rank: 3, text: "Was sick / medical", points: 15 },
+            { rank: 4, text: "Forgot it at home", points: 10 },
+            { rank: 5, text: "Partner didn't do it", points: 10 },
+            { rank: 6, text: "Train traffic", points: 5 }
+        ]
+    },
+    {
+        question: "What is the final contribution of the laziest member (free-rider) in a project group?",
+        order: 9,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Printing and binding the final project report", points: 35 },
+            { rank: 2, text: "Making the \"Thank You\" and \"Title\" slide of the PPT", points: 25 },
+            { rank: 3, text: "Buying snacks or coffee for the group", points: 15 },
+            { rank: 4, text: "Carrying the laptop/hardware to the venue", points: 10 },
+            { rank: 5, text: "Clicking group photos for social media", points: 10 },
+            { rank: 6, text: "Giving moral support (\"We can do it guys\")", points: 5 }
+        ]
+    },
+    {
+        question: "During a Viva (oral exam), what is the most common cross-question the external asks that nobody knows?",
         order: 10,
         category: "College Life",
         answers: [
-            { rank: 1, text: "Extension Board", points: 35 },
-            { rank: 2, text: "Electric Kettle", points: 25 },
-            { rank: 3, text: "Instant Maggi", points: 15 },
-            { rank: 4, text: "Headphones", points: 10 },
-            { rank: 5, text: "Iron (Press)", points: 10 },
-            { rank: 6, text: "Deo / Perfume (No Bath)", points: 5 }
+            { rank: 1, text: "\"Did you actually write this code yourself?\"", points: 35 },
+            { rank: 2, text: "What is its real-world practical application?", points: 25 },
+            { rank: 3, text: "Asking for a basic definition or formula from 1st year", points: 15 },
+            { rank: 4, text: "What was the total cost/budget of this project?", points: 10 },
+            { rank: 5, text: "Why did you choose this specific topic?", points: 10 },
+            { rank: 6, text: "Can you explain the block diagram/flowchart?", points: 5 }
+        ]
+    },
+    {
+        question: "Name the most common way students secretly communicate in an exam hall.",
+        order: 11,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Coughing or clearing their throat to get attention", points: 35 },
+            { rank: 2, text: "Tapping the pen or desk continuously", points: 25 },
+            { rank: 3, text: "Showing hand signs / finger numbers for MCQ options", points: 15 },
+            { rank: 4, text: "Throwing a crushed piece of paper / eraser", points: 10 },
+            { rank: 5, text: "Whispering when the invigilator turns around", points: 10 },
+            { rank: 6, text: "Kicking the chair of the person sitting ahead", points: 5 }
+        ]
+    },
+    {
+        question: "What is the MAIN reason students volunteer to organize college fests?",
+        order: 12,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "To get official attendance / bunk classes legally", points: 35 },
+            { rank: 2, text: "To impress a crush or socialize with seniors/juniors", points: 25 },
+            { rank: 3, text: "For the Free Food / Committee T-shirts", points: 15 },
+            { rank: 4, text: "To get a certificate for their resume", points: 10 },
+            { rank: 5, text: "To boss around the juniors", points: 10 },
+            { rank: 6, text: "Because they actually care about the event", points: 5 }
+        ]
+    },
+    {
+        question: "Name a thought every engineering student has during an 8 AM morning lecture.",
+        order: 13,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "\"Why did I even choose Engineering?\"", points: 35 },
+            { rank: 2, text: "Is the professor taking attendance today? Can I leave?", points: 25 },
+            { rank: 3, text: "If I sleep right now, will anyone notice?", points: 15 },
+            { rank: 4, text: "Can I just pack my bag and leave at the break?", points: 10 },
+            { rank: 5, text: "What is for breakfast in the canteen?", points: 10 },
+            { rank: 6, text: "I should drop out and start a startup.", points: 5 }
+        ]
+    },
+    {
+        question: "What is the biggest struggle of traveling to college via public transport (train/bus)?",
+        order: 14,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Getting a place to sit", points: 35 },
+            { rank: 2, text: "Standing with a heavy laptop bag breaking your shoulders", points: 25 },
+            { rank: 3, text: "The crowd crushing your freshly ironed clothes", points: 15 },
+            { rank: 4, text: "Sweating before the day has even started", points: 10 },
+            { rank: 5, text: "Running for your life to catch it at the exact minute", points: 10 },
+            { rank: 6, text: "Smelling other people's armpits", points: 5 }
+        ]
+    },
+    {
+        question: "What is the biggest lie students tell their parents to get extra pocket money?",
+        order: 15,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "\"I need to buy a new reference book.\"", points: 35 },
+            { rank: 2, text: "The college is asking for an extra exam/practical fee.", points: 25 },
+            { rank: 3, text: "I need to buy hardware components for my project.", points: 15 },
+            { rank: 4, text: "Mess food is terrible, need money for outside food.", points: 10 },
+            { rank: 5, text: "I need to upgrade my laptop RAM for coding.", points: 10 },
+            { rank: 6, text: "Need money for an official Industrial Visit .", points: 5 }
+        ]
+    },
+    {
+        question: "What ACTUALLY happens during a night-out \"Group Study\" session?",
+        order: 16,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Gossiping about classmates and professors", points: 35 },
+            { rank: 2, text: "Ordering fast food / Making midnight Maggi", points: 25 },
+            { rank: 3, text: "Watching a movie or random YouTube videos", points: 15 },
+            { rank: 4, text: "Playing multiplayer games (BGMI/FIFA/Valorant)", points: 10 },
+            { rank: 5, text: "Everyone falling asleep one by one", points: 10 },
+            { rank: 6, text: "Actually studying the syllabus", points: 5 }
+        ]
+    },
+    {
+        question: "What is the most common reason a student suddenly starts attending ALL lectures?",
+        order: 17,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Received a defaulter / low attendance warning", points: 35 },
+            { rank: 2, text: "The professor threatened to fail them in internals", points: 25 },
+            { rank: 3, text: "Their crush attends that specific lecture", points: 15 },
+            { rank: 4, text: "Internal assessment/Unit tests are next week", points: 10 },
+            { rank: 5, text: "Parents were called by the HOD", points: 10 },
+            { rank: 6, text: "They genuinely want to learn", points: 5 }
+        ]
+    },
+    {
+        question: "Name something you will ALWAYS find written or carved on a college last bench.",
+        order: 18,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Random names with a heart / Crush's name", points: 35 },
+            { rank: 2, text: "Answers or formulas for cheating in exams", points: 25 },
+            { rank: 3, text: "Instagram handles / Snapchat IDs", points: 15 },
+            { rank: 4, text: "Abusive words for the college or strict professors", points: 10 },
+            { rank: 5, text: "Tick-Tack-Toe (Zero Kata) games", points: 10 },
+            { rank: 6, text: "Abstract art / Random scribbling", points: 5 }
+        ]
+    },
+    {
+        question: "Name a subject students often find difficult.",
+        order: 19,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Mathematics", points: 35 },
+            { rank: 2, text: "Science", points: 25 },
+            { rank: 3, text: "Physics", points: 15 },
+            { rank: 4, text: "Chemistry", points: 10 },
+            { rank: 5, text: "History", points: 10 },
+            { rank: 6, text: "English grammar", points: 5 }
         ]
     }
 ];
@@ -157,15 +274,7 @@ const round2Options = [
     { category: "role", text: "The VIP", img: "🕴️", desc: "[Gets absolute immunity from the first Doom Wheel disaster in Round 3]", sfxId: "sfx-vip" },
     { category: "role", text: "The Architect", img: "📐", desc: "[Given 2 extra sticky notes of any color for advanced zoning logic]", sfxId: "sfx-architect" },
     { category: "role", text: "The Corrupt Builder", img: "🏗️", desc: "[Gets extra ₹20 Cr budget, but takes double damage during Earthquakes]", sfxId: "sfx-corrupt" },
-    { category: "role", text: "The Auditor", img: "🕵️", desc: "[Can pause the timer for 30s to inspect and copy a rival's map idea]", sfxId: "sfx-auditor" },
-
-    // Budgets
-    { category: "budget", text: "₹ 50 Crores", img: "🪙", desc: "[Tight Budget: Focus on low-cost survival]" },
-    { category: "budget", text: "₹ 100 Crores", img: "💵", desc: "[Balanced: Standard urban planning]" },
-    { category: "budget", text: "₹ 150 Crores", img: "💰", desc: "[Rich: Can afford advanced tech & defenses]" },
-    { category: "budget", text: "₹ 75 Crores", img: "📉", desc: "[Low Budget: Requires extreme Jugaad]" },
-    { category: "budget", text: "₹ 200 Crores", img: "🏦", desc: "[Luxury: Build premium eco-friendly infra]" },
-    { category: "budget", text: "₹ 80 Cr + Loan", img: "💳", desc: "[Takes ₹20 Cr loan, must pay back 5 points later]" }
+    { category: "role", text: "The Auditor", img: "🕵️", desc: "[Can pause the timer for 30s to inspect and copy a rival's map idea]", sfxId: "sfx-auditor" }
 ];
 
 const round3Puzzles = [
@@ -227,13 +336,14 @@ const seedDatabase = async () => {
             }
         }
 
-        // Round 1
+        // Round 1 - Always synchronize to match the complete 19 questions
         const r1Count = await Round1Question.countDocuments();
-        if (r1Count === 0) {
+        if (r1Count !== round1Questions.length) {
+            await Round1Question.deleteMany({});
             await Round1Question.insertMany(round1Questions);
-            console.log(`✅ Seeded ${round1Questions.length} Round 1 Questions`);
+            console.log(`✅ Seeded ${round1Questions.length} Round 1 Questions from master bank`);
         } else {
-            console.log(`ℹ️ Round 1 Questions already exist (${r1Count} found)`);
+            console.log(`ℹ️ Round 1 Questions already up to date (${r1Count} found)`);
         }
 
         // Round 2
