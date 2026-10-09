@@ -121,32 +121,25 @@
             100% { box-shadow: 0 0 25px #ff00ff; }
         }
 
-        .turn-status-text {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.9rem;
-            color: #f6d148;
-            padding: 0 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
         /* QUESTION HEADER */
         .header {
             background: linear-gradient(180deg, #103264 0%, #06142e 100%);
             border: 4px solid #f6d148;
             border-radius: 20px;
-            padding: 12px 30px;
+            padding: 12px 28px;
             margin-top: 1.5vh; 
-            margin-bottom: 2.5vh;
+            margin-bottom: 3.5vh;
             text-align: center;
             width: 72%;
+            max-width: 1050px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(246, 209, 72, 0.3);
             z-index: 10;
+            box-sizing: border-box;
         }
 
         .question-text {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.7rem;
+            font-size: 2.6rem;
             letter-spacing: 2px;
             margin: 0;
             color: #ffffff;
@@ -160,120 +153,114 @@
             display: inline-block;
         }
 
-        /* BOARD GRID & CARDS */
+        /* BOARD GRID & DIRECT REVEAL CARDS (NO 3D FLIP) */
         .board {
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: repeat(3, 1fr);
             gap: 18px 40px;
-            width: 56%; 
+            width: 58%; 
+            max-width: 950px;
             flex-grow: 1;
             z-index: 10;
             margin-bottom: 4vh;
         }
 
-        .card-container {
-            perspective: 1500px;
-            height: 11vh;
-            min-height: 80px;
+        .card-item {
+            height: 75px;
+            min-height: 70px;
+            border-radius: 40px;
+            border: 4px solid #f6d148;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.6);
             cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-        .card-container:hover {
-            transform: scale(1.025);
+            overflow: hidden;
+            position: relative;
+            box-sizing: border-box;
+            transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
-        /* Active team cursor hover glow */
-        body.turn-a .card-container:not(.flipped):hover .card-front {
+        .card-item:hover {
+            transform: scale(1.02);
+        }
+
+        /* Hover glows in active team's color */
+        body.turn-a .card-item:not(.revealed):hover {
             border-color: #00ffff;
             box-shadow: 0 0 25px #00ffff;
         }
-        body.turn-b .card-container:not(.flipped):hover .card-front {
+        body.turn-b .card-item:not(.revealed):hover {
             border-color: #ff00ff;
             box-shadow: 0 0 25px #ff00ff;
         }
 
-        .card-inner {
+        /* UNREVEALED VIEW: SAYS "OPTION 1", "OPTION 2", ETC */
+        .unrevealed-content {
             width: 100%;
             height: 100%;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            transform-style: preserve-3d;
-            position: relative;
-        }
-
-        .card-container.flipped .card-inner { transform: rotateX(180deg); }
-
-        .card-front, .card-back {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            backface-visibility: hidden;
-            border-radius: 60px; 
-            box-sizing: border-box;
-            border: 4px solid #f6d148; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
-        }
-
-        .card-front {
             background: linear-gradient(180deg, #103264 0%, #06142e 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-        }
-        .card-front::after {
-            content: "CLICK TO REVEAL";
-            position: absolute;
-            bottom: 6px;
-            font-size: 0.7rem;
-            color: rgba(255,255,255,0.4);
-            letter-spacing: 2px;
-            font-family: 'Share Tech Mono', monospace;
         }
 
-        .number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 4rem;
+        .option-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.1rem;
+            font-weight: 800;
             color: #f6d148;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.8);
-            background: rgba(0, 0, 0, 0.4);
-            padding: 0 35px;
-            border-radius: 50%;
-            border: 2px solid rgba(246, 209, 72, 0.5);
-            line-height: 1.2;
+            letter-spacing: 3px;
+            text-shadow: 0 0 12px rgba(246, 209, 72, 0.7), 2px 2px 4px #000;
         }
 
-        .card-back {
-            background: #ffffff; 
-            transform: rotateX(180deg);
-            display: flex;
+        /* REVEALED VIEW: DIRECT ANSWER & POINTS DISPLAY (NO FLIP) */
+        .revealed-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            align-items: center;
             justify-content: space-between;
-            overflow: hidden;
         }
 
-        .answer {
-            font-size: 1.3vw;
+        .card-item.revealed {
+            border-color: #f6d148;
+            box-shadow: 0 0 20px rgba(246, 209, 72, 0.4);
+            cursor: default;
+        }
+
+        .card-item.revealed .unrevealed-content {
+            display: none;
+        }
+
+        .card-item.revealed .revealed-content {
+            display: flex;
+        }
+
+        .answer-text {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.45vw;
             font-weight: 700;
             text-transform: uppercase;
             color: #000000;
-            padding: 5px 15px 5px 25px;
+            padding: 0 25px;
             flex-grow: 1;
+            line-height: 1.15;
             display: flex;
             align-items: center;
-            line-height: 1.1;
         }
 
-        .points {
-            background: #103264; 
-            color: #f6d148; 
+        .points-badge {
+            background: #103264;
+            color: #f6d148;
             font-family: 'Bebas Neue', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3.4rem;
             height: 100%;
-            min-width: 90px;
+            min-width: 95px;
             display: flex;
             align-items: center;
             justify-content: center;
             border-left: 4px solid #f6d148;
+            box-sizing: border-box;
         }
 
         /* STRIKE OVERLAY */
@@ -435,17 +422,6 @@
             border-color: #f6d148;
             box-shadow: 0 0 10px #f6d148;
         }
-
-        /* QUESTION PROGRESS HINT */
-        .round-status-banner {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1rem;
-            color: #aaa;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
-            z-index: 10;
-        }
-        .round-status-banner span { color: #00ffff; font-weight: bold; }
 
         /* ================= MODAL / LEADERBOARD & REPORT ================= */
         .modal-overlay {
@@ -632,7 +608,6 @@
             <button id="turnBtnA" class="turn-btn active-a" onclick="setActiveTeam('A')" title="Shortcut: Key A">
                 🔵 TEAM A TURN
             </button>
-            <div class="turn-status-text" id="turnStatusText">Click Card To Award</div>
             <button id="turnBtnB" class="turn-btn" onclick="setActiveTeam('B')" title="Shortcut: Key B">
                 🟣 TEAM B TURN
             </button>
@@ -679,10 +654,6 @@
     <!-- QUESTION HEADER WITH NUMBER -->
     <div class="header">
         <h1 class="question-text" id="questionDisplay">Initializing Arena...</h1>
-    </div>
-
-    <div class="round-status-banner" id="roundStatusBanner">
-        QUESTION 1 OF 19 &nbsp;|&nbsp; CLICK ANY CARD TO DIRECTLY AWARD POINTS TO ACTIVE TEAM
     </div>
 
     <!-- MAIN 6-BOX BOARD -->
@@ -819,22 +790,17 @@
             const btnB = document.getElementById('turnBtnB');
             const trackerA = document.getElementById('tracker-a');
             const trackerB = document.getElementById('tracker-b');
-            const statusTxt = document.getElementById('turnStatusText');
 
             if (team === 'A') {
                 btnA.className = 'turn-btn active-a';
                 btnB.className = 'turn-btn';
                 trackerA.classList.add('current-active');
                 trackerB.classList.remove('current-active');
-                statusTxt.innerText = "TEAM A SELECTING...";
-                statusTxt.style.color = "#00ffff";
             } else {
                 btnA.className = 'turn-btn';
                 btnB.className = 'turn-btn active-b';
                 trackerA.classList.remove('current-active');
                 trackerB.classList.add('current-active');
-                statusTxt.innerText = "TEAM B SELECTING...";
-                statusTxt.style.color = "#ff00ff";
             }
         }
 
@@ -932,9 +898,7 @@
                     setActiveTeam(otherTeam);
                     resetRoundTimer();
                     startTimer(otherTeam);
-                }, 1300);
-            } else {
-                checkBothTeamsDone();
+                }, 1200);
             }
             syncMatchState();
         }
@@ -954,18 +918,18 @@
             setTimeout(() => { floatEl.remove(); }, 1200);
         }
 
-        // ================= CLICK OPTION TO AWARD POINTS DIRECTLY =================
+        // ================= CLICK OPTION TO DIRECTLY REVEAL ANSWER & AWARD POINTS =================
         function handleOptionClick(cardElement, boxNumber, points, answerText) {
-            // If already flipped, don't allow double points
-            if (cardElement.classList.contains('flipped')) {
+            // If already revealed, do nothing
+            if (cardElement.classList.contains('revealed')) {
                 return;
             }
 
             stopTimer('ALL');
             playSfx(revealSounds[boxNumber]);
 
-            // Flip the card
-            cardElement.classList.add('flipped');
+            // Instantly reveal the answer (NO 3D FLIP)
+            cardElement.classList.add('revealed');
 
             // DIRECTLY ADD POINTS TO THE CURRENT ACTIVE TEAM
             const awardingTeam = activeTeam;
@@ -990,36 +954,27 @@
             };
             playedThisQuestion[awardingTeam] = true;
 
-            // Automatically switch turn to other team if other team hasn't answered
+            // Automatically switch turn to other team if other team hasn't answered yet
             const otherTeam = awardingTeam === 'A' ? 'B' : 'A';
             if (!playedThisQuestion[otherTeam]) {
                 setTimeout(() => {
                     setActiveTeam(otherTeam);
                     resetRoundTimer();
                     startTimer(otherTeam);
-                }, 800);
-            } else {
-                checkBothTeamsDone();
+                }, 700);
             }
 
             syncMatchState();
         }
 
-        function checkBothTeamsDone() {
-            const banner = document.getElementById('roundStatusBanner');
-            if (playedThisQuestion.A && playedThisQuestion.B) {
-                banner.innerHTML = `✅ <b style="color:#f6d148;">BOTH TEAMS PLAYED!</b> Press <span style="color:#00ffff;">[NEXT Q ➡]</span> or <span style="color:#f6d148;">[REVEAL REST]</span>`;
-            }
-        }
-
-        // Reveal remaining unflipped cards (for audience curiosity, awards no points)
+        // Reveal remaining unrevealed cards directly (no points awarded)
         function revealAllRemaining() {
             stopTimer('ALL');
             let revealedAny = false;
             for(let i=1; i<=6; i++) {
                 const card = document.getElementById(`card-${i}`);
-                if(card && !card.classList.contains('flipped')) {
-                    card.classList.add('flipped');
+                if(card && !card.classList.contains('revealed')) {
+                    card.classList.add('revealed');
                     revealedAny = true;
                 }
             }
@@ -1041,12 +996,7 @@
                 <span class="q-number-badge">Question ${qNum}:</span>${data.q}
             `;
 
-            // Status Banner
-            document.getElementById('roundStatusBanner').innerHTML = `
-                QUESTION ${qNum} OF ${quizData.length} &nbsp;|&nbsp; EACH TEAM CHOOSES 1 OPTION DIRECTLY BY CLICKING
-            `;
-
-            // Build the 6-Box Board
+            // Build the 6 Direct Cards (NO 3D Flip)
             const board = document.getElementById('boardGrid');
             board.innerHTML = ""; 
 
@@ -1056,13 +1006,13 @@
                 if(!answerText) continue;
 
                 const cardHTML = `
-                    <div class="card-container" id="card-${i}" onclick="handleOptionClick(this, ${i}, ${answerPts}, '${answerText.replace(/'/g, "\\'")}')">
-                        <div class="card-inner">
-                            <div class="card-front"><span class="number">${i}</span></div>
-                            <div class="card-back">
-                                <span class="answer">${answerText}</span>
-                                <div class="points">${answerPts}</div>
-                            </div>
+                    <div class="card-item" id="card-${i}" onclick="handleOptionClick(this, ${i}, ${answerPts}, '${answerText.replace(/'/g, "\\'")}')">
+                        <div class="unrevealed-content">
+                            <span class="option-text">OPTION ${i}</span>
+                        </div>
+                        <div class="revealed-content">
+                            <span class="answer-text">${answerText}</span>
+                            <div class="points-badge">${answerPts}</div>
                         </div>
                     </div>
                 `;
@@ -1076,7 +1026,7 @@
                 currentQIndex++; 
                 loadQuestion(); 
             } else {
-                // If past question 18/19, automatically open Leaderboard & Report!
+                // If past question 18/19, open Leaderboard & Report!
                 toggleReportModal(true);
             }
         }
@@ -1212,7 +1162,6 @@
 
         // ================= KEYBOARD SHORTCUTS =================
         document.addEventListener('keydown', function(event) {
-            // Ignore if report modal is open unless Escape
             const modal = document.getElementById('reportModal');
             if (modal.classList.contains('active')) {
                 if (event.key === 'Escape' || event.key.toLowerCase() === 'l') {
