@@ -60,7 +60,22 @@ exports.getSessions = async (req, res) => {
 // Record or update session for a team
 exports.recordSession = async (req, res) => {
     try {
-        const { teamNumber, teamName, currentLevel, wiresCut, timeLeftMs, timeTakenSeconds, penaltiesCount, status, score } = req.body;
+        const { 
+            teamNumber, 
+            teamName, 
+            setNumber, 
+            currentLevel, 
+            correctCount, 
+            totalQuestions, 
+            wiresCut, 
+            wiresDefused, 
+            questionResults, 
+            timeLeftMs, 
+            timeTakenSeconds, 
+            penaltiesCount, 
+            status, 
+            score 
+        } = req.body;
         
         if (!teamNumber) {
             return res.status(400).json({ success: false, message: 'teamNumber is required' });
@@ -71,13 +86,18 @@ exports.recordSession = async (req, res) => {
             {
                 teamNumber,
                 teamName: teamName || `TEAM ${teamNumber}`,
+                setNumber: setNumber || 1,
                 currentLevel: currentLevel || 1,
+                correctCount: correctCount || 0,
+                totalQuestions: totalQuestions || 5,
                 wiresCut: wiresCut || [],
+                wiresDefused: wiresDefused || [],
+                questionResults: questionResults || [],
                 timeLeftMs: timeLeftMs !== undefined ? timeLeftMs : 90000,
                 timeTakenSeconds: timeTakenSeconds || (90 - Math.round((timeLeftMs || 0) / 1000)),
                 penaltiesCount: penaltiesCount || 0,
                 status: status || 'in-progress',
-                score: score || (status === 'defused' ? Math.max(10, Math.round((timeLeftMs || 0) / 1000)) : 0)
+                score: score || 0
             },
             { upsert: true, new: true, setDefaultsOnInsert: true }
         );
@@ -88,11 +108,11 @@ exports.recordSession = async (req, res) => {
     }
 };
 
-// Get leaderboard
+// Get leaderboard and teams report
 exports.getLeaderboard = async (req, res) => {
     try {
         const sessions = await Round3Session.find()
-            .sort({ status: 1, timeTakenSeconds: 1, penaltiesCount: 1 });
+            .sort({ correctCount: -1, status: 1, timeTakenSeconds: 1, penaltiesCount: 1 });
         res.json({ success: true, count: sessions.length, data: sessions });
     } catch (error) {
         res.status(500).json({ success: false, message: error.message });

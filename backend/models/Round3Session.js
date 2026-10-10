@@ -11,12 +11,32 @@ const round3SessionSchema = new mongoose.Schema({
             return `TEAM ${this.teamNumber}`;
         }
     },
+    setNumber: {
+        type: Number,
+        default: 1
+    },
     currentLevel: {
         type: Number,
         default: 1
     },
+    correctCount: {
+        type: Number,
+        default: 0
+    },
+    totalQuestions: {
+        type: Number,
+        default: 5
+    },
     wiresCut: {
         type: [Number], // array of cut wire numbers e.g. [1, 2, 3]
+        default: []
+    },
+    wiresDefused: {
+        type: [Number], // array of defused wire numbers e.g. [1, 2]
+        default: []
+    },
+    questionResults: {
+        type: Array,
         default: []
     },
     timeLeftMs: {

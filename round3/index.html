@@ -44,39 +44,39 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 30px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             border-bottom: 2px solid #331118;
             z-index: 50;
         }
 
-        .set-selector-wrap {
+        .nav-left, .nav-right {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .set-label {
+        .nav-label {
             color: #f6d148;
             font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: 1px;
         }
 
-        .set-select {
+        .nav-select {
             background: #111;
             color: #00ffff;
             border: 2px solid #00ffff;
             font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 8px;
             cursor: pointer;
             outline: none;
-            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.25);
         }
-        .set-select option {
+        .nav-select option {
             background: #111;
             color: #fff;
         }
@@ -98,11 +98,12 @@
             color: #f6d148;
             box-shadow: 0 0 10px rgba(246, 209, 72, 0.4);
         }
-        .nav-btn.btn-leaderboard {
+        .nav-btn.btn-report {
             border-color: #00ffff;
             color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
         }
-        .nav-btn.btn-leaderboard:hover {
+        .nav-btn.btn-report:hover {
             background: #00ffff;
             color: #000;
             box-shadow: 0 0 15px #00ffff;
@@ -111,8 +112,8 @@
         .header {
             text-align: center;
             color: #ff003c;
-            font-size: 32px;
-            margin: 5px 0;
+            font-size: 30px;
+            margin: 4px 0;
             font-weight: 900;
             text-shadow: 0 0 15px #ff003c;
             letter-spacing: 2px;
@@ -125,14 +126,14 @@
             display: flex;
             justify-content: space-between;
             align-items: stretch;
-            padding: 5px 40px;
+            padding: 5px 35px;
             gap: 25px;
             flex-grow: 1;
         }
 
         /* SIDE PANELS */
         .side-panel {
-            width: 220px;
+            width: 230px;
             background: rgba(17, 17, 24, 0.9);
             border: 2px solid #2a2a38;
             padding: 20px 15px;
@@ -147,38 +148,40 @@
 
         .team-name {
             color: #00ffff;
-            font-size: 32px;
-            margin-bottom: 12px;
+            font-size: 30px;
+            margin-bottom: 8px;
             font-family: 'Orbitron', sans-serif;
             text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
         }
 
         .level-text {
             color: #888;
-            font-size: 16px;
+            font-size: 15px;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .level-number {
-            font-size: 52px;
+            font-size: 50px;
             color: white;
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             line-height: 1.1;
-            margin: 6px 0;
+            margin: 4px 0;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        .set-badge-side {
-            background: rgba(246, 209, 72, 0.15);
-            border: 1px solid #f6d148;
-            color: #f6d148;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 13px;
+        .team-score-badge {
+            background: rgba(0, 255, 128, 0.15);
+            border: 1px solid #00ff80;
+            color: #00ff80;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 15px;
             margin-top: 10px;
             font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(0, 255, 128, 0.2);
         }
 
         .warning-panel {
@@ -190,7 +193,7 @@
         .warning-text {
             color: #ff003c;
             font-size: 24px;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 800;
         }
@@ -205,7 +208,7 @@
 
         .penalties-count {
             color: #f6d148;
-            font-size: 16px;
+            font-size: 15px;
             margin-top: 15px;
             border-top: 1px dashed rgba(255, 0, 60, 0.4);
             padding-top: 10px;
@@ -227,16 +230,16 @@
 
         .timer-box {
             border: 4px solid #ff003c;
-            padding: 8px 35px;
+            padding: 6px 35px;
             background: rgba(25, 0, 8, 0.95);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             border-radius: 14px;
             box-shadow: 0 0 30px rgba(255, 0, 60, 0.4), inset 0 0 20px rgba(255, 0, 60, 0.3);
             text-align: center;
         }
 
         #timer {
-            font-size: 78px;
+            font-size: 74px;
             color: #ff3366;
             text-shadow: 0 0 25px #ff003c;
             margin: 0;
@@ -248,7 +251,7 @@
         /* PUZZLE & QUESTION BOX */
         .puzzle-box {
             border: 2px dashed #00ffff;
-            background: rgba(10, 20, 35, 0.92);
+            background: rgba(10, 20, 35, 0.94);
             display: flex;
             flex-direction: column;
             position: relative;
@@ -257,7 +260,7 @@
             width: 100%;
             max-width: 900px;
             box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), inset 0 0 25px rgba(0, 0, 0, 0.8);
-            min-height: 270px;
+            min-height: 280px;
             justify-content: space-between;
         }
 
@@ -266,13 +269,13 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid rgba(0, 255, 255, 0.3);
-            padding-bottom: 10px;
+            padding-bottom: 8px;
             margin-bottom: 12px;
         }
 
         #puzzle-title {
             color: #00ffff;
-            font-size: 20px;
+            font-size: 19px;
             text-shadow: 0 0 10px #00ffff;
             margin: 0;
             font-family: 'Orbitron', sans-serif;
@@ -283,7 +286,7 @@
         .wire-target-tag {
             color: #f6d148;
             font-family: 'Orbitron', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             background: rgba(246, 209, 72, 0.15);
             padding: 4px 12px;
             border-radius: 6px;
@@ -292,16 +295,16 @@
 
         #puzzle-question {
             color: #ffffff;
-            font-size: 22px;
+            font-size: 23px;
             font-family: 'Rajdhani', sans-serif;
             font-weight: 700;
             line-height: 1.35;
-            margin: 8px 0 16px 0;
+            margin: 6px 0 16px 0;
             letter-spacing: 0.5px;
             text-align: left;
         }
 
-        /* OPTIONS LIST (NO POINTS) */
+        /* CLICKABLE OPTIONS GRID (NO POINTS) */
         .options-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -312,26 +315,51 @@
 
         .option-item {
             background: rgba(255, 255, 255, 0.05);
-            border: 1.5px solid #335577;
+            border: 2px solid #335577;
             border-radius: 8px;
-            padding: 8px 14px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             gap: 12px;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 19px;
+            font-weight: 700;
             color: #e0f0ff;
+            cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
         }
 
         .option-item:hover {
             border-color: #00ffff;
-            background: rgba(0, 255, 255, 0.08);
+            background: rgba(0, 255, 255, 0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
 
         .option-item.full-width {
             grid-column: span 2;
+        }
+
+        /* FEEDBACK STATES ON CLICK */
+        .option-item.correct-picked {
+            border-color: #00ff80 !important;
+            background: rgba(0, 255, 128, 0.3) !important;
+            color: #fff !important;
+            box-shadow: 0 0 25px #00ff80 !important;
+            transform: scale(1.02);
+        }
+        .option-item.wrong-picked {
+            border-color: #ff003c !important;
+            background: rgba(255, 0, 60, 0.35) !important;
+            color: #fff !important;
+            box-shadow: 0 0 25px #ff003c !important;
+            animation: shake 0.4s;
+        }
+        .option-item.correct-reveal {
+            border-color: #00ff80 !important;
+            background: rgba(0, 255, 128, 0.2) !important;
+            box-shadow: 0 0 15px #00ff80 !important;
         }
 
         .opt-letter {
@@ -340,9 +368,19 @@
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
             font-size: 14px;
-            padding: 2px 8px;
+            padding: 3px 9px;
             border-radius: 4px;
             box-shadow: 0 0 8px #00ffff;
+        }
+
+        .option-item.correct-picked .opt-letter {
+            background: #00ff80;
+            box-shadow: 0 0 10px #00ff80;
+        }
+        .option-item.wrong-picked .opt-letter {
+            background: #ff003c;
+            color: #fff;
+            box-shadow: 0 0 10px #ff003c;
         }
 
         .opt-text {
@@ -351,21 +389,21 @@
             letter-spacing: 0.5px;
         }
 
-        /* CONTROLS BAR UNDER QUESTION */
+        /* ACTION SHORTCUT CONTROLS BAR */
         .action-controls-bar {
             display: flex;
             justify-content: center;
             gap: 18px;
             width: 100%;
             margin-top: 5px;
-            padding-top: 12px;
+            padding-top: 10px;
             border-top: 1px dashed rgba(255, 255, 255, 0.15);
         }
 
         .arena-btn {
-            padding: 10px 22px;
+            padding: 9px 20px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 800;
             border-radius: 8px;
             cursor: pointer;
@@ -419,9 +457,9 @@
 
         /* WIRES SECTION */
         .wires-section {
-            background: rgba(10, 8, 15, 0.9);
+            background: rgba(10, 8, 15, 0.92);
             border-top: 2px solid #331118;
-            padding: 10px 20px 15px 20px;
+            padding: 10px 20px 14px 20px;
             text-align: center;
             position: relative;
         }
@@ -431,18 +469,21 @@
             font-size: 13px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
         .wires-instruction span {
-            color: #ff003c;
+            color: #00ffff;
             font-weight: bold;
+        }
+        .wires-instruction b {
+            color: #ff003c;
         }
 
         .wires-container {
             display: flex;
             justify-content: center;
             gap: 40px;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
         .wire-wrap {
@@ -461,8 +502,8 @@
 
         .wire {
             width: 24px;
-            height: 95px;
-            margin: 8px auto;
+            height: 90px;
+            margin: 6px auto;
             border-radius: 12px;
             transition: all 0.3s ease;
             position: relative;
@@ -478,7 +519,7 @@
         .wire.cut {
             background: #222 !important;
             box-shadow: none !important;
-            border-color: #444 !important;
+            border-color: #555 !important;
             position: relative;
         }
         .wire.cut::after {
@@ -499,7 +540,7 @@
 
         .status {
             color: #888;
-            font-size: 16px;
+            font-size: 15px;
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             letter-spacing: 1px;
@@ -533,57 +574,88 @@
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
-        /* LEADERBOARD PANEL (DRAWER) */
-        .leaderboard-panel {
+        /* TEAM REPORT & LEADERBOARD DRAWER */
+        .report-modal {
             position: fixed;
             top: 0;
-            right: -450px;
-            width: 420px;
+            right: -600px;
+            width: 580px;
             height: 100vh;
             background: rgba(10, 5, 20, 0.98);
             border-left: 3px solid #00ffff;
-            box-shadow: -10px 0 35px rgba(0,0,0,0.9);
-            z-index: 100;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.95);
+            z-index: 150;
             transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 80px 25px 25px 25px;
+            padding: 70px 25px 25px 25px;
             overflow-y: auto;
             box-sizing: border-box;
         }
-        .leaderboard-panel.active { right: 0; }
+        .report-modal.active { right: 0; }
 
-        .leaderboard-close-btn {
+        .report-close-btn {
             position: absolute;
             top: 20px;
             right: 20px;
             background: transparent;
             border: 1px solid #ff003c;
             color: #ff003c;
-            padding: 4px 10px;
-            border-radius: 4px;
+            padding: 6px 14px;
+            border-radius: 6px;
             cursor: pointer;
             font-family: 'Orbitron';
+            font-size: 13px;
+            transition: 0.2s;
+        }
+        .report-close-btn:hover {
+            background: #ff003c;
+            color: #fff;
         }
 
-        .leaderboard-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid #ff003c;
-            padding: 14px;
-            margin-bottom: 12px;
-            border-radius: 8px;
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 16px;
         }
-        .leaderboard-card.defused {
-            border-color: #00ff80;
-            box-shadow: 0 0 10px rgba(0, 255, 128, 0.2);
+        .report-table th {
+            background: rgba(0, 255, 255, 0.15);
+            color: #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            padding: 10px 12px;
+            font-size: 13px;
+            text-align: left;
+            border-bottom: 2px solid #00ffff;
+        }
+        .report-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ddd;
+        }
+        .report-table tr:hover td {
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        /* VICTORY / DETONATION OVERLAY */
+        .score-pill {
+            display: inline-block;
+            background: rgba(0, 255, 128, 0.18);
+            color: #00ff80;
+            border: 1px solid #00ff80;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+        }
+
+        /* SET TRANSITION / RESULT MODAL */
         .result-modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             z-index: 200;
             display: none;
             justify-content: center;
@@ -600,7 +672,7 @@
             padding: 35px 50px;
             text-align: center;
             box-shadow: 0 0 50px rgba(0, 255, 128, 0.5);
-            max-width: 600px;
+            max-width: 620px;
             width: 90%;
             animation: popup 0.3s ease-out;
         }
@@ -611,34 +683,53 @@
         }
 
         @keyframes popup {
-            from { transform: scale(0.8); opacity: 0; }
+            from { transform: scale(0.85); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
         }
 
         .result-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 38px;
+            font-size: 34px;
             font-weight: 900;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .result-desc {
             font-family: 'Rajdhani', sans-serif;
             font-size: 22px;
             color: #ddd;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             line-height: 1.4;
         }
 
         .result-stats {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 16px;
             border-radius: 10px;
             margin-bottom: 25px;
             display: flex;
             justify-content: space-around;
             font-size: 18px;
             color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .q-breakdown-list {
+            text-align: left;
+            margin-top: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 8px;
+            padding: 10px 15px;
+            border: 1px solid #334455;
+        }
+        .q-breakdown-item {
+            font-size: 15px;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
         }
     </style>
 </head>
@@ -648,9 +739,23 @@
 
     <!-- TOP NAVIGATION -->
     <div class="top-navbar">
-        <div class="set-selector-wrap">
-            <span class="set-label">QUESTION SET:</span>
-            <select class="set-select" id="setSelect" onchange="changeSet(this.value)">
+        <div class="nav-left">
+            <span class="nav-label">ACTIVE TEAM:</span>
+            <select class="nav-select" id="teamSelect" onchange="changeTeam(this.value)">
+                <option value="1">TEAM 1 (SET 1)</option>
+                <option value="2">TEAM 2 (SET 2)</option>
+                <option value="3">TEAM 3 (SET 3)</option>
+                <option value="4">TEAM 4 (SET 4)</option>
+                <option value="5">TEAM 5 (SET 5)</option>
+                <option value="6">TEAM 6 (SET 6)</option>
+                <option value="7">TEAM 7 (SET 7)</option>
+                <option value="8">TEAM 8 (SET 8)</option>
+                <option value="9">TEAM 9 (SET 9)</option>
+                <option value="10">TEAM 10 (SET 10)</option>
+            </select>
+
+            <span class="nav-label" style="margin-left:15px;">SET:</span>
+            <select class="nav-select" id="setSelect" onchange="changeSet(this.value)">
                 <option value="1">SET 1 (Q1 - Q5)</option>
                 <option value="2">SET 2 (Q6 - Q10)</option>
                 <option value="3">SET 3 (Q11 - Q15)</option>
@@ -664,9 +769,9 @@
             </select>
         </div>
 
-        <div style="display:flex; gap:10px;">
-            <button class="nav-btn" onclick="resetTimerOnly()">🔄 RESET TIMER (R)</button>
-            <button class="nav-btn btn-leaderboard" onclick="toggleLeaderboard()">🏆 LEADERBOARD (L)</button>
+        <div class="nav-right">
+            <button class="nav-btn" onclick="resetCurrentSetTimer()">🔄 RESET TIMER (R)</button>
+            <button class="nav-btn btn-report" onclick="toggleReportDrawer()">📊 ALL TEAMS REPORT (L)</button>
         </div>
     </div>
 
@@ -680,7 +785,7 @@
             <div class="team-name" id="team-name">TEAM 1</div>
             <div class="level-text">PROGRESS</div>
             <div class="level-number"><span id="current-level">1</span> / 5</div>
-            <div class="set-badge-side" id="set-badge">SET 1 ACTIVE</div>
+            <div class="team-score-badge" id="team-score-badge">CORRECT: 0 / 5</div>
         </div>
 
         <!-- Center Panel: Timer & Puzzle -->
@@ -692,25 +797,26 @@
             <div class="puzzle-box">
                 <div class="puzzle-header">
                     <h2 id="puzzle-title">[ LEVEL 1 / 5 • QUESTION 1 ]</h2>
-                    <div class="wire-target-tag" id="wire-target-tag">DEFUSING WIRE 1</div>
+                    <div class="wire-target-tag" id="wire-target-tag">WIRE 1 ACTIVE</div>
                 </div>
 
                 <div id="puzzle-question">Loading defusal question...</div>
                 
+                <!-- CLICKABLE OPTIONS (AUTOMATIC DEFUSE ON CORRECT, CUT WIRE ON WRONG) -->
                 <div class="options-grid" id="options-grid">
-                    <!-- Populated dynamically (No points) -->
+                    <!-- Populated dynamically -->
                 </div>
 
-                <!-- CONTROLS BAR: ENTER FOR DEFUSE, X FOR WRONG, SPACE FOR TIMER -->
+                <!-- ACTION SHORTCUT BAR -->
                 <div class="action-controls-bar">
-                    <button class="arena-btn btn-correct" onclick="correctAnswer()">
+                    <button class="arena-btn btn-correct" onclick="overrideCorrect()">
                         ✔ DEFUSE WIRE (ENTER)
                     </button>
-                    <button class="arena-btn btn-wrong" onclick="wrongAnswer()">
-                        ❌ WRONG ANSWER (CUT WIRE / X)
+                    <button class="arena-btn btn-wrong" onclick="overrideWrong()">
+                        ❌ CUT WIRE (X)
                     </button>
                     <button class="arena-btn btn-timer" onclick="toggleTimer()">
-                        ⏯ START/PAUSE (SPACE)
+                        ⏯ TIMER (SPACE)
                     </button>
                 </div>
             </div>
@@ -729,26 +835,26 @@
     <!-- WIRES SECTION (Clicking on wire cuts it = Wrong answer) -->
     <div class="wires-section">
         <div class="wires-instruction">
-            <span>DEFUSAL INTERFACE:</span> Press <b>[ENTER]</b> for Correct Defusal &nbsp;|&nbsp; <span>Click any Wire or [X] for Wrong Answer (-10s)</span>
+            <span>CLICK ANY OPTION TO ANSWER:</span> Correct Defuses Wire &nbsp;|&nbsp; <b>Wrong Cuts Wire (-10s)</b> &nbsp;|&nbsp; <span>Clicking Wire Cuts Directly</span>
         </div>
         <div class="wires-container">
-            <div class="wire-wrap" onclick="handleWireClick(1)" title="Click to Cut (Wrong Answer)">
+            <div class="wire-wrap" onclick="handleWireClick(1)" title="Click to Cut Wire 1">
                 <div class="status" id="stat-1">WIRE 1</div>
                 <div class="wire intact" id="wire-1"></div>
             </div>
-            <div class="wire-wrap" onclick="handleWireClick(2)" title="Click to Cut (Wrong Answer)">
+            <div class="wire-wrap" onclick="handleWireClick(2)" title="Click to Cut Wire 2">
                 <div class="status" id="stat-2">WIRE 2</div>
                 <div class="wire intact" id="wire-2"></div>
             </div>
-            <div class="wire-wrap" onclick="handleWireClick(3)" title="Click to Cut (Wrong Answer)">
+            <div class="wire-wrap" onclick="handleWireClick(3)" title="Click to Cut Wire 3">
                 <div class="status" id="stat-3">WIRE 3</div>
                 <div class="wire intact" id="wire-3"></div>
             </div>
-            <div class="wire-wrap" onclick="handleWireClick(4)" title="Click to Cut (Wrong Answer)">
+            <div class="wire-wrap" onclick="handleWireClick(4)" title="Click to Cut Wire 4">
                 <div class="status" id="stat-4">WIRE 4</div>
                 <div class="wire intact" id="wire-4"></div>
             </div>
-            <div class="wire-wrap" onclick="handleWireClick(5)" title="Click to Cut (Wrong Answer)">
+            <div class="wire-wrap" onclick="handleWireClick(5)" title="Click to Cut Wire 5">
                 <div class="status" id="stat-5">WIRE 5</div>
                 <div class="wire intact" id="wire-5"></div>
             </div>
@@ -757,25 +863,48 @@
 
     <div class="hazard-stripes"></div>
 
-    <!-- LEADERBOARD DRAWER -->
-    <div class="leaderboard-panel" id="leaderboardPanel">
-        <button class="leaderboard-close-btn" onclick="toggleLeaderboard()">✕ CLOSE</button>
-        <div id="leaderboardContent"></div>
-    </div>
-
-    <!-- RESULT MODAL (VICTORY OR DETONATION) -->
+    <!-- SET TRANSITION MODAL (APPEARS AFTER 5 QUESTIONS) -->
     <div class="result-modal" id="resultModal">
         <div class="result-content" id="resultModalContent">
-            <div class="result-title" id="resultTitle">BOMB DEFUSED!</div>
-            <div class="result-desc" id="resultDesc">All 5 circuits neutralized safely in record time!</div>
+            <div class="result-title" id="resultTitle">SET 1 COMPLETED!</div>
+            <div class="result-desc" id="resultDesc">Team 1 has completed their 5 defusal questions.</div>
+            
             <div class="result-stats" id="resultStats">
-                <div>Time Taken: <b id="stat-time-taken" style="color:#00ffff;">24s</b></div>
-                <div>Penalties: <b id="stat-penalties" style="color:#ff003c;">0</b></div>
+                <div>Correct: <b id="stat-correct-count" style="color:#00ff80;">4 / 5</b></div>
+                <div>Time Taken: <b id="stat-time-taken" style="color:#00ffff;">34s</b></div>
+                <div>Penalties: <b id="stat-penalties" style="color:#ff003c;">1</b></div>
             </div>
-            <div style="display:flex; justify-content:center; gap:15px;">
-                <button class="arena-btn btn-timer" onclick="nextSetAndReset()">NEXT SET & RESET (R)</button>
-                <button class="arena-btn" style="border:2px solid #888; color:#fff;" onclick="closeResultModal()">CLOSE</button>
+
+            <div class="q-breakdown-list" id="qBreakdownList">
+                <!-- Question by question breakdown -->
             </div>
+
+            <div style="display:flex; justify-content:center; gap:15px; margin-top:20px;">
+                <button class="arena-btn btn-timer" id="btnNextTeamSet" onclick="advanceToNextTeamAndSet()">
+                    🚀 START NEXT TEAM (SET 2)
+                </button>
+                <button class="arena-btn btn-correct" onclick="toggleReportDrawer(); closeResultModal();">
+                    📊 VIEW ALL TEAMS REPORT
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ALL TEAMS REPORT DRAWER (ACCESSIBLE VIA BUTTON OR L) -->
+    <div class="report-modal" id="reportDrawer">
+        <button class="report-close-btn" onclick="toggleReportDrawer()">✕ CLOSE</button>
+        <h2 style="color:#00ffff; font-family:'Orbitron'; text-align:center; margin-bottom:10px;">🏆 ALL TEAMS REPORT</h2>
+        <div style="color:#aaa; font-size:14px; text-align:center; margin-bottom:20px;">
+            Round 3 Defusal Scores • 5 Questions per Team Set
+        </div>
+        
+        <div id="reportDrawerContent">
+            <!-- Populated dynamically -->
+        </div>
+
+        <div style="display:flex; justify-content:space-between; margin-top:25px; border-top:1px solid #334455; padding-top:15px;">
+            <button class="nav-btn" onclick="window.print()">🖨️ PRINT REPORT</button>
+            <button class="nav-btn" style="border-color:#ff003c; color:#ff003c;" onclick="clearAllTeamsData()">🗑️ CLEAR RECORDS</button>
         </div>
     </div>
 
@@ -790,12 +919,13 @@
             ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
             : 'http://localhost:5000';
 
-        // ================= COMPLETE 10 SETS QUESTION BANK (50 QUESTIONS, NO POINTS) =================
+        // ================= COMPLETE 10 SETS QUESTION BANK (50 QUESTIONS, WITH VERIFIED CORRECT ANSWERS) =================
         const questionBank = {
             1: [
                 {
                     qNum: 1,
                     question: "Which component is known as the brain of a computer?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "RAM" },
                         { key: "B", text: "CPU" },
@@ -807,6 +937,7 @@
                 {
                     qNum: 2,
                     question: "Which protocol is used to securely access websites?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "HTTP" },
                         { key: "B", text: "FTP" },
@@ -818,6 +949,7 @@
                 {
                     qNum: 3,
                     question: "Which data structure follows the LIFO principle?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Queue" },
                         { key: "B", text: "Graph" },
@@ -829,6 +961,7 @@
                 {
                     qNum: 4,
                     question: "Which country has the largest population in the world as of recent estimates?",
+                    correctKey: "A",
                     options: [
                         { key: "A", text: "India" },
                         { key: "B", text: "China" },
@@ -840,6 +973,7 @@
                 {
                     qNum: 5,
                     question: "A team completes 3 tasks in 12 minutes at a constant rate. How long will it take to complete 8 tasks?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "24 minutes" },
                         { key: "B", text: "28 minutes" },
@@ -853,6 +987,7 @@
                 {
                     qNum: 6,
                     question: "Which language is primarily used to structure web pages?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Python" },
                         { key: "B", text: "SQL" },
@@ -864,6 +999,7 @@
                 {
                     qNum: 7,
                     question: "Which device forwards data packets between different networks?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Switch" },
                         { key: "B", text: "Router" },
@@ -875,6 +1011,7 @@
                 {
                     qNum: 8,
                     question: "What is the time complexity of binary search on a sorted array?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "O(n)" },
                         { key: "B", text: "O(n²)" },
@@ -886,6 +1023,7 @@
                 {
                     qNum: 9,
                     question: "Which Indian state is the largest by area?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Maharashtra" },
                         { key: "B", text: "Madhya Pradesh" },
@@ -897,6 +1035,7 @@
                 {
                     qNum: 10,
                     question: "What is the next number in the sequence: 5, 11, 19, 29, 41, __?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "49" },
                         { key: "B", text: "53" },
@@ -910,6 +1049,7 @@
                 {
                     qNum: 11,
                     question: "Which SQL command retrieves records from a database?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "INSERT" },
                         { key: "B", text: "DELETE" },
@@ -921,6 +1061,7 @@
                 {
                     qNum: 12,
                     question: "Which MongoDB format is used to represent documents internally?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "CSV" },
                         { key: "B", text: "BSON" },
@@ -932,6 +1073,7 @@
                 {
                     qNum: 13,
                     question: "Which MongoDB update operator increments a numeric field?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "$set" },
                         { key: "B", text: "$push" },
@@ -943,6 +1085,7 @@
                 {
                     qNum: 14,
                     question: "Which organization publishes the Human Development Report?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "UNESCO" },
                         { key: "B", text: "World Trade Organization" },
@@ -954,6 +1097,7 @@
                 {
                     qNum: 15,
                     question: "A number is increased by 20% and becomes 360. What was the original number?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "280" },
                         { key: "B", text: "290" },
@@ -967,6 +1111,7 @@
                 {
                     qNum: 16,
                     question: "Which tool is widely used for version control?",
+                    correctKey: "A",
                     options: [
                         { key: "A", text: "Git" },
                         { key: "B", text: "Docker" },
@@ -978,6 +1123,7 @@
                 {
                     qNum: 17,
                     question: "Which security technique converts readable information into an encoded form that requires a key to decrypt?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Debugging" },
                         { key: "B", text: "Encryption" },
@@ -989,6 +1135,7 @@
                 {
                     qNum: 18,
                     question: "Which type of attack attempts to make a service unavailable by overwhelming it with traffic?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "Phishing" },
                         { key: "B", text: "SQL injection" },
@@ -1000,6 +1147,7 @@
                 {
                     qNum: 19,
                     question: "Which Indian institution is responsible for monetary policy decisions through its Monetary Policy Committee?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "SEBI" },
                         { key: "B", text: "NITI Aayog" },
@@ -1011,6 +1159,7 @@
                 {
                     qNum: 20,
                     question: "A product costs ₹800 after a 20% discount. What was its original price?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "₹900" },
                         { key: "B", text: "₹960" },
@@ -1024,6 +1173,7 @@
                 {
                     qNum: 21,
                     question: "Which command downloads a Git repository to your local machine?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "git push" },
                         { key: "B", text: "git clone" },
@@ -1035,6 +1185,7 @@
                 {
                     qNum: 22,
                     question: "What is the main purpose of a CI/CD pipeline?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Design hardware" },
                         { key: "B", text: "Replace databases" },
@@ -1046,6 +1197,7 @@
                 {
                     qNum: 23,
                     question: "In Kubernetes, what is the smallest deployable unit?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "Cluster" },
                         { key: "B", text: "Node" },
@@ -1057,6 +1209,7 @@
                 {
                     qNum: 24,
                     question: "Which country hosted the 2024 Summer Olympics?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Japan" },
                         { key: "B", text: "France" },
@@ -1068,6 +1221,7 @@
                 {
                     qNum: 25,
                     question: "The average of five numbers is 24. Four numbers are 18, 20, 25, and 27. What is the fifth number?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "28" },
                         { key: "B", text: "29" },
@@ -1081,6 +1235,7 @@
                 {
                     qNum: 26,
                     question: "Which of these is an open-source operating system?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Windows" },
                         { key: "B", text: "Linux" },
@@ -1092,6 +1247,7 @@
                 {
                     qNum: 27,
                     question: "Which protocol translates domain names into IP addresses?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "FTP" },
                         { key: "B", text: "SSH" },
@@ -1103,6 +1259,7 @@
                 {
                     qNum: 28,
                     question: "Which scheduling algorithm allocates a fixed time slice to each process in turn?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "First Come, First Served" },
                         { key: "B", text: "Shortest Job First" },
@@ -1114,6 +1271,7 @@
                 {
                     qNum: 29,
                     question: "Which is the headquarters city of the United Nations?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Geneva" },
                         { key: "B", text: "Paris" },
@@ -1125,6 +1283,7 @@
                 {
                     qNum: 30,
                     question: "If 3x - 7 = 32, what is the value of x?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "9" },
                         { key: "B", text: "11" },
@@ -1138,6 +1297,7 @@
                 {
                     qNum: 31,
                     question: "What does API stand for?",
+                    correctKey: "A",
                     options: [
                         { key: "A", text: "Application Programming Interface" },
                         { key: "B", text: "Automated Program Internet" },
@@ -1149,6 +1309,7 @@
                 {
                     qNum: 32,
                     question: "Which HTTP method is generally used to retrieve a resource?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "POST" },
                         { key: "B", text: "DELETE" },
@@ -1160,6 +1321,7 @@
                 {
                     qNum: 33,
                     question: "What does HTTP status code 404 usually indicate?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Request succeeded" },
                         { key: "B", text: "Unauthorized access" },
@@ -1171,6 +1333,7 @@
                 {
                     qNum: 34,
                     question: "Which Indian state is famous for the classical dance form Kathakali?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Tamil Nadu" },
                         { key: "B", text: "Kerala" },
@@ -1182,6 +1345,7 @@
                 {
                     qNum: 35,
                     question: "Two numbers are in the ratio 3:5, and their sum is 64. What is the smaller number?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "18" },
                         { key: "B", text: "21" },
@@ -1195,6 +1359,7 @@
                 {
                     qNum: 36,
                     question: "What does AWS stand for?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Advanced Web Software" },
                         { key: "B", text: "Amazon Web Services" },
@@ -1206,6 +1371,7 @@
                 {
                     qNum: 37,
                     question: "In cloud computing, what does auto-scaling do?",
+                    correctKey: "A",
                     options: [
                         { key: "A", text: "Automatically adjusts computing resources to demand" },
                         { key: "B", text: "Deletes all inactive users" },
@@ -1217,6 +1383,7 @@
                 {
                     qNum: 38,
                     question: "Which container platform is commonly used to package and run applications?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "Git" },
                         { key: "B", text: "Jenkins" },
@@ -1228,6 +1395,7 @@
                 {
                     qNum: 39,
                     question: "Which is the world's largest democracy by population?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "United States" },
                         { key: "B", text: "Indonesia" },
@@ -1239,6 +1407,7 @@
                 {
                     qNum: 40,
                     question: "A server processes 1,200 requests in 4 minutes. At the same rate, how many requests can it process in 7 minutes?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "1,800" },
                         { key: "B", text: "2,000" },
@@ -1252,6 +1421,7 @@
                 {
                     qNum: 41,
                     question: "Which of the following is a NoSQL database?",
+                    correctKey: "A",
                     options: [
                         { key: "A", text: "MongoDB" },
                         { key: "B", text: "Microsoft Word" },
@@ -1263,6 +1433,7 @@
                 {
                     qNum: 42,
                     question: "What is the purpose of a database index?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Increase screen resolution" },
                         { key: "B", text: "Improve data retrieval speed" },
@@ -1274,6 +1445,7 @@
                 {
                     qNum: 43,
                     question: "Which ACID property ensures that a transaction is completed entirely or not at all?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "Consistency" },
                         { key: "B", text: "Isolation" },
@@ -1285,6 +1457,7 @@
                 {
                     qNum: 44,
                     question: "Which international organization primarily coordinates global public health efforts?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "WTO" },
                         { key: "B", text: "WHO" },
@@ -1296,6 +1469,7 @@
                 {
                     qNum: 45,
                     question: "A value increases from 80 to 100. What is the percentage increase?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "15%" },
                         { key: "B", text: "20%" },
@@ -1309,6 +1483,7 @@
                 {
                     qNum: 46,
                     question: "Which language is commonly used for data analysis and scripting?",
+                    correctKey: "A",
                     options: [
                         { key: "A", text: "Python" },
                         { key: "B", text: "HTML" },
@@ -1320,6 +1495,7 @@
                 {
                     qNum: 47,
                     question: "Which security method verifies a user's identity using two different authentication factors?",
+                    correctKey: "B",
                     options: [
                         { key: "A", text: "Data compression" },
                         { key: "B", text: "Two-factor authentication" },
@@ -1331,6 +1507,7 @@
                 {
                     qNum: 48,
                     question: "Which SQL clause filters grouped results after aggregation?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "WHERE" },
                         { key: "B", text: "ORDER BY" },
@@ -1342,6 +1519,7 @@
                 {
                     qNum: 49,
                     question: "Which Indian space mission successfully landed near the Moon's south polar region in 2023?",
+                    correctKey: "D",
                     options: [
                         { key: "A", text: "Chandrayaan-1" },
                         { key: "B", text: "Mangalyaan" },
@@ -1353,6 +1531,7 @@
                 {
                     qNum: 50,
                     question: "A team scores 72, 84, 91, and 77 points in four rounds. What is its average score?",
+                    correctKey: "C",
                     options: [
                         { key: "A", text: "78" },
                         { key: "B", text: "80" },
@@ -1364,29 +1543,37 @@
             ]
         };
 
-        // GAME STATE
+        // ================= GAME & SESSION STATE =================
+        let currentTeamNum = 1;
         let activeSetNumber = 1;
-        let currentLevel = 1; // 1 to 5
+        let currentLevel = 1; // 1 to 5 within current set
         let timeLeft = 90000; // 90.00 seconds
         let timerInterval = null;
         let isRunning = false;
         let penaltiesCount = 0;
-        let selectedTeamNum = 1;
-        let wiresCutArray = []; // List of cut wire indices
+        let currentTeamCorrectCount = 0;
+        let isTransitioning = false; // prevents double click during fast transitions
+
+        // Track per-team history
+        let currentTeamAnswers = []; // [{ qNum, qText, chosen, correctKey, isCorrect }]
+        let allTeamReports = [];    // [{ teamNumber, teamName, setNumber, correctCount, totalQuestions, penaltiesCount, timeTakenSeconds, status, answers }]
 
         // DOM Elements
         const timerDisplay = document.getElementById('timer');
         const levelDisplay = document.getElementById('current-level');
         const teamNameDisplay = document.getElementById('team-name');
-        const setBadge = document.getElementById('set-badge');
+        const teamScoreBadge = document.getElementById('team-score-badge');
+        const teamSelect = document.getElementById('teamSelect');
+        const setSelect = document.getElementById('setSelect');
         const puzzleTitle = document.getElementById('puzzle-title');
         const wireTargetTag = document.getElementById('wire-target-tag');
         const puzzleQuestion = document.getElementById('puzzle-question');
         const optionsGrid = document.getElementById('options-grid');
         const penaltiesDisplay = document.getElementById('penalties-display');
         const bodyElement = document.getElementById('main-body');
-        const leaderboardPanel = document.getElementById('leaderboardPanel');
         const resultModal = document.getElementById('resultModal');
+        const reportDrawer = document.getElementById('reportDrawer');
+        const reportDrawerContent = document.getElementById('reportDrawerContent');
 
         function playSfx(id) {
             const el = document.getElementById(id);
@@ -1404,22 +1591,170 @@
             if (!qData) return;
 
             puzzleTitle.innerText = `[ LEVEL ${currentLevel} / 5 • QUESTION ${qData.qNum} ]`;
-            wireTargetTag.innerText = `DEFUSING WIRE ${currentLevel}`;
+            wireTargetTag.innerText = `WIRE ${currentLevel} ACTIVE`;
             puzzleQuestion.innerText = qData.question;
+            levelDisplay.innerText = currentLevel;
+            teamScoreBadge.innerText = `CORRECT: ${currentTeamCorrectCount} / 5`;
 
-            // Render options without points
+            // Render options without points, with click listener
             let optionsHTML = '';
             qData.options.forEach((opt, idx) => {
                 const isFull = (idx === 4 && qData.options.length === 5);
                 optionsHTML += `
-                    <div class="option-item ${isFull ? 'full-width' : ''}">
+                    <div class="option-item ${isFull ? 'full-width' : ''}" id="opt-${opt.key}" onclick="handleOptionClick('${opt.key}')">
                         <span class="opt-letter">${opt.key}</span>
                         <span class="opt-text">${opt.text}</span>
                     </div>
                 `;
             });
             optionsGrid.innerHTML = optionsHTML;
-            levelDisplay.innerText = currentLevel;
+            isTransitioning = false;
+        }
+
+        // ================= OPTION CLICK INTERACTION =================
+        // "clicking the correct option diffue and wrong then cut wire automatically only"
+        // "either the answer will be right or wrong after that directly bring the next question"
+        function handleOptionClick(selectedKey) {
+            if (isTransitioning) return;
+            if (timeLeft <= 0) return;
+
+            // Auto-start timer on first answer click if not already ticking
+            if (!isRunning) {
+                toggleTimer();
+            }
+
+            isTransitioning = true;
+            const currentSetQuestions = questionBank[activeSetNumber] || questionBank[1];
+            const qData = currentSetQuestions[currentLevel - 1];
+            if (!qData) return;
+
+            const isCorrect = (selectedKey === qData.correctKey);
+            const clickedEl = document.getElementById(`opt-${selectedKey}`);
+            const correctEl = document.getElementById(`opt-${qData.correctKey}`);
+
+            // Wire element for this level
+            const wireEl = document.getElementById(`wire-${currentLevel}`);
+            const statText = document.getElementById(`stat-${currentLevel}`);
+
+            // Record question result
+            currentTeamAnswers.push({
+                level: currentLevel,
+                qNum: qData.qNum,
+                question: qData.question,
+                chosen: selectedKey,
+                correctKey: qData.correctKey,
+                isCorrect: isCorrect
+            });
+
+            if (isCorrect) {
+                // --- CORRECT ANSWER FLOW ---
+                if (clickedEl) clickedEl.classList.add('correct-picked');
+                playSfx('successSfx');
+
+                // Defuse wire
+                if (wireEl) {
+                    wireEl.className = 'wire defused';
+                }
+                if (statText) {
+                    statText.innerText = "DEFUSED";
+                    statText.className = 'status defused-text';
+                }
+
+                currentTeamCorrectCount++;
+                teamScoreBadge.innerText = `CORRECT: ${currentTeamCorrectCount} / 5`;
+            } else {
+                // --- WRONG ANSWER FLOW ---
+                if (clickedEl) clickedEl.classList.add('wrong-picked');
+                if (correctEl) correctEl.classList.add('correct-reveal');
+                playSfx('sparkSfx');
+
+                // Cut wire automatically
+                if (wireEl) {
+                    wireEl.className = 'wire cut';
+                }
+                if (statText) {
+                    statText.innerText = "CUT";
+                    statText.className = 'status cut-text';
+                }
+
+                // Apply penalty
+                timeLeft -= 10000;
+                if (timeLeft < 0) timeLeft = 0;
+                penaltiesCount++;
+                penaltiesDisplay.innerText = `⚠️ ${penaltiesCount} PENALTIES`;
+
+                // Screen shake
+                bodyElement.classList.remove('shake');
+                void bodyElement.offsetWidth;
+                bodyElement.classList.add('shake');
+
+                updateDisplay();
+            }
+
+            // DIRECTLY BRING THE NEXT QUESTION AFTER BRIEF FEEDBACK
+            setTimeout(() => {
+                advanceToNextQuestionOrComplete();
+            }, 650);
+        }
+
+        // Advance to next question or complete set
+        function advanceToNextQuestionOrComplete() {
+            if (currentLevel < 5 && timeLeft > 0) {
+                currentLevel++;
+                updateQuestionUI();
+            } else {
+                // ALL 5 QUESTIONS IN THIS SET COMPLETED!
+                finishCurrentSet();
+            }
+        }
+
+        // ================= MANUAL OVERRIDES =================
+        function overrideCorrect() {
+            const currentSetQuestions = questionBank[activeSetNumber] || questionBank[1];
+            const qData = currentSetQuestions[currentLevel - 1];
+            if (qData) {
+                handleOptionClick(qData.correctKey);
+            }
+        }
+
+        function overrideWrong() {
+            const currentSetQuestions = questionBank[activeSetNumber] || questionBank[1];
+            const qData = currentSetQuestions[currentLevel - 1];
+            if (qData) {
+                // Pick a wrong key
+                const wrongOpt = qData.options.find(o => o.key !== qData.correctKey) || qData.options[0];
+                handleOptionClick(wrongOpt.key);
+            }
+        }
+
+        function handleWireClick(wireNum) {
+            // Clicking wire cuts it = wrong answer penalty
+            wrongAnswerWireDirect(wireNum);
+        }
+
+        function wrongAnswerWireDirect(targetWireNum) {
+            if (timeLeft <= 0) return;
+            const wireEl = document.getElementById(`wire-${targetWireNum}`);
+            const statText = document.getElementById(`stat-${targetWireNum}`);
+
+            playSfx('sparkSfx');
+            timeLeft -= 10000;
+            if (timeLeft < 0) timeLeft = 0;
+            penaltiesCount++;
+            penaltiesDisplay.innerText = `⚠️ ${penaltiesCount} PENALTIES`;
+
+            if (wireEl && !wireEl.classList.contains('defused')) {
+                wireEl.className = 'wire cut';
+            }
+            if (statText && !statText.classList.contains('defused-text')) {
+                statText.innerText = "CUT";
+                statText.className = 'status cut-text';
+            }
+
+            bodyElement.classList.remove('shake');
+            void bodyElement.offsetWidth;
+            bodyElement.classList.add('shake');
+            updateDisplay();
         }
 
         // ================= TIMER CONTROLS =================
@@ -1430,15 +1765,8 @@
                 timerDisplay.style.color = "#ff003c";
                 clearInterval(timerInterval);
                 isRunning = false;
-
-                // Play explosion SFX
                 playSfx('explosionSfx');
-
-                // Show detonation modal
-                showResultModal(false);
-
-                // Save session to backend
-                saveSessionToBackend('detonated');
+                finishCurrentSet('detonated');
                 return;
             }
 
@@ -1457,7 +1785,7 @@
                 clearInterval(timerInterval);
                 isRunning = false;
             } else {
-                if (timeLeft > 0 && currentLevel <= 5) {
+                if (timeLeft > 0) {
                     isRunning = true;
                     playSfx('beepSfx');
                     timerInterval = setInterval(() => {
@@ -1468,107 +1796,139 @@
             }
         }
 
-        // ================= RIGHT ANSWER / DEFUSE LOGIC (ENTER) =================
-        function correctAnswer() {
-            if (timeLeft <= 0) return;
-            if (currentLevel > 5) return;
+        // ================= FINISH CURRENT SET & TRANSITION =================
+        // "and see each team has 1 set like 5 questions in 1 set so after first set bring next set and reset timer and also make a report of how many correct options are selected in 5 questions for each team like 1 2 3 teams and all"
+        function finishCurrentSet(forcedStatus = null) {
+            clearInterval(timerInterval);
+            isRunning = false;
 
-            // If timer wasn't started, auto-start it for convenience
-            if (!isRunning) {
-                toggleTimer();
+            const timeTakenSec = Math.max(0, 90 - Math.round(timeLeft / 1000));
+            const status = forcedStatus || (timeLeft > 0 ? 'defused' : 'detonated');
+
+            // Collect wires defused and cut
+            let wiresCut = [];
+            let wiresDefused = [];
+            for (let i = 1; i <= 5; i++) {
+                const w = document.getElementById(`wire-${i}`);
+                if (w && w.classList.contains('cut')) wiresCut.push(i);
+                if (w && w.classList.contains('defused')) wiresDefused.push(i);
             }
 
-            playSfx('successSfx');
+            // Save team report record
+            const teamRecord = {
+                teamNumber: currentTeamNum,
+                teamName: `TEAM ${currentTeamNum}`,
+                setNumber: activeSetNumber,
+                correctCount: currentTeamCorrectCount,
+                totalQuestions: 5,
+                wiresCut: wiresCut,
+                wiresDefused: wiresDefused,
+                timeTakenSeconds: timeTakenSec,
+                timeLeftMs: timeLeft,
+                penaltiesCount: penaltiesCount,
+                status: status,
+                answers: [...currentTeamAnswers]
+            };
 
-            // Neutralize / defuse the active wire
-            const currentWire = document.getElementById(`wire-${currentLevel}`);
-            const statText = document.getElementById(`stat-${currentLevel}`);
-            
-            if (currentWire) {
-                currentWire.classList.remove('intact');
-                currentWire.classList.add('defused');
-            }
-            if (statText) {
-                statText.innerText = "DEFUSED";
-                statText.classList.add('defused-text');
-            }
-
-            // Check if level 5 is completed (Bomb defused!)
-            if (currentLevel === 5) {
-                clearInterval(timerInterval);
-                isRunning = false;
-                timerDisplay.style.color = "#00ff80";
-                
-                showResultModal(true);
-                saveSessionToBackend('defused');
+            // Update or push into local reports array
+            const existingIdx = allTeamReports.findIndex(r => r.teamNumber === currentTeamNum);
+            if (existingIdx >= 0) {
+                allTeamReports[existingIdx] = teamRecord;
             } else {
-                // Advance to next question in the set
-                currentLevel++;
-                updateQuestionUI();
-            }
-        }
-
-        // ================= WRONG ANSWER / CUT WIRE (CLICK WIRE OR X) =================
-        function wrongAnswer(wireIdx = null) {
-            if (timeLeft <= 0) return;
-
-            // Target wire is either the clicked wire, or the current level wire
-            const targetWireNum = wireIdx || currentLevel;
-            const wireEl = document.getElementById(`wire-${targetWireNum}`);
-            const statText = document.getElementById(`stat-${targetWireNum}`);
-
-            playSfx('sparkSfx');
-
-            // Penalty: -10 Seconds
-            timeLeft -= 10000;
-            if (timeLeft < 0) timeLeft = 0;
-            penaltiesCount++;
-            penaltiesDisplay.innerText = `⚠️ ${penaltiesCount} PENALTIES`;
-
-            // Visual cut
-            if (wireEl && !wireEl.classList.contains('defused')) {
-                wireEl.classList.remove('intact');
-                wireEl.classList.add('cut');
-                if (!wiresCutArray.includes(targetWireNum)) {
-                    wiresCutArray.push(targetWireNum);
-                }
-            }
-            if (statText && !statText.classList.contains('defused-text')) {
-                statText.innerText = `CUT`;
-                statText.classList.add('cut-text');
+                allTeamReports.push(teamRecord);
             }
 
-            // Screen shake
-            bodyElement.classList.remove('shake');
-            void bodyElement.offsetWidth; // trigger reflow
-            bodyElement.classList.add('shake');
+            // Persist to backend MongoDB
+            saveSessionToBackend(teamRecord);
 
-            updateDisplay();
+            // Show Set Finished Modal
+            showSetCompletionModal(teamRecord);
         }
 
-        function handleWireClick(wireNumber) {
-            // User requested: "for wrong click on the wire to cut it"
-            wrongAnswer(wireNumber);
+        function showSetCompletionModal(rec) {
+            const content = document.getElementById('resultModalContent');
+            const title = document.getElementById('resultTitle');
+            const desc = document.getElementById('resultDesc');
+            const breakdownList = document.getElementById('qBreakdownList');
+            const nextBtn = document.getElementById('btnNextTeamSet');
+
+            document.getElementById('stat-correct-count').innerText = `${rec.correctCount} / 5`;
+            document.getElementById('stat-time-taken').innerText = `${rec.timeTakenSeconds}s`;
+            document.getElementById('stat-penalties').innerText = `${rec.penaltiesCount}`;
+
+            const isWin = rec.status === 'defused';
+            if (isWin) {
+                content.className = 'result-content';
+                title.innerText = `TEAM ${rec.teamNumber} COMPLETED SET ${rec.setNumber}!`;
+                title.style.color = '#00ff80';
+                desc.innerText = `Great run! Correctly answered ${rec.correctCount} out of 5 questions with ${rec.wiresDefused.length} wires defused!`;
+            } else {
+                content.className = 'result-content detonated';
+                title.innerText = `BOMB DETONATED FOR TEAM ${rec.teamNumber}!`;
+                title.style.color = '#ff003c';
+                desc.innerText = `Time ran out on SET ${rec.setNumber}. Final score: ${rec.correctCount} / 5 correct options.`;
+            }
+
+            // Render 5-question breakdown
+            let breakdownHTML = '';
+            rec.answers.forEach((ans, i) => {
+                breakdownHTML += `
+                    <div class="q-breakdown-item">
+                        <span><b>Q${ans.qNum}:</b> ${ans.question.length > 40 ? ans.question.slice(0, 40) + '...' : ans.question}</span>
+                        <span style="color:${ans.isCorrect ? '#00ff80' : '#ff003c'}; font-weight:bold;">
+                            ${ans.isCorrect ? '✔ CORRECT' : `❌ CHOSE ${ans.chosen} (ANS: ${ans.correctKey})`}
+                        </span>
+                    </div>
+                `;
+            });
+            breakdownList.innerHTML = breakdownHTML;
+
+            const nextTeam = rec.teamNumber + 1;
+            nextBtn.innerText = `🚀 START TEAM ${nextTeam} (SET ${nextTeam <= 10 ? nextTeam : 1})`;
+
+            resultModal.classList.add('active');
         }
 
-        // ================= RESET CONTROLS =================
-        function resetTimerOnly() {
+        function closeResultModal() {
+            resultModal.classList.remove('active');
+        }
+
+        // ================= BRING NEXT SET AND RESET TIMER =================
+        // "after first set bring next set and reset timer"
+        function advanceToNextTeamAndSet() {
+            closeResultModal();
+            let nextTeam = currentTeamNum + 1;
+            if (nextTeam > 10) nextTeam = 1;
+
+            currentTeamNum = nextTeam;
+            activeSetNumber = nextTeam;
+
+            teamSelect.value = currentTeamNum;
+            setSelect.value = activeSetNumber;
+            teamNameDisplay.innerText = `TEAM ${currentTeamNum}`;
+
+            resetForNewSet();
+        }
+
+        function resetForNewSet() {
             clearInterval(timerInterval);
             isRunning = false;
             timeLeft = 90000;
             currentLevel = 1;
             penaltiesCount = 0;
-            wiresCutArray = [];
+            currentTeamCorrectCount = 0;
+            currentTeamAnswers = [];
+            isTransitioning = false;
+
             penaltiesDisplay.innerText = `⚠️ 0 PENALTIES`;
+            teamScoreBadge.innerText = `CORRECT: 0 / 5`;
             timerDisplay.style.color = "#ff3366";
 
-            // Reset wires visuals
+            // Reset all 5 wires
             for (let i = 1; i <= 5; i++) {
                 const wire = document.getElementById(`wire-${i}`);
                 const statText = document.getElementById(`stat-${i}`);
-                if (wire) {
-                    wire.className = 'wire intact';
-                }
+                if (wire) wire.className = 'wire intact';
                 if (statText) {
                     statText.innerText = `WIRE ${i}`;
                     statText.className = 'status';
@@ -1579,151 +1939,193 @@
             updateDisplay();
         }
 
+        function resetCurrentSetTimer() {
+            resetForNewSet();
+        }
+
+        function changeTeam(teamNum) {
+            currentTeamNum = parseInt(teamNum);
+            activeSetNumber = currentTeamNum;
+            setSelect.value = activeSetNumber;
+            teamNameDisplay.innerText = `TEAM ${currentTeamNum}`;
+            resetForNewSet();
+        }
+
         function changeSet(setNum) {
             activeSetNumber = parseInt(setNum);
-            setBadge.innerText = `SET ${activeSetNumber} ACTIVE`;
-            resetTimerOnly();
+            resetForNewSet();
         }
 
-        function nextSetAndReset() {
-            closeResultModal();
-            let nextSet = activeSetNumber + 1;
-            if (nextSet > 10) nextSet = 1;
-            document.getElementById('setSelect').value = nextSet;
-            changeSet(nextSet);
+        // ================= ALL TEAMS REPORT & LEADERBOARD =================
+        // "and also make a report of how many correct options are selected in 5 questions for each team like 1 2 3 teams and all"
+        function toggleReportDrawer() {
+            reportDrawer.classList.toggle('active');
+            if (reportDrawer.classList.contains('active')) {
+                renderAllTeamsReport();
+            }
         }
 
-        // ================= RESULT MODAL =================
-        function showResultModal(isDefused) {
-            const timeTakenSec = Math.max(0, 90 - Math.round(timeLeft / 1000));
-            const content = document.getElementById('resultModalContent');
-            const title = document.getElementById('resultTitle');
-            const desc = document.getElementById('resultDesc');
-            
-            document.getElementById('stat-time-taken').innerText = `${timeTakenSec}s`;
-            document.getElementById('stat-penalties').innerText = `${penaltiesCount}`;
-
-            if (isDefused) {
-                content.className = 'result-content';
-                title.innerText = 'BOMB DEFUSED! SET COMPLETE!';
-                title.style.color = '#00ff80';
-                desc.innerText = `Excellent work! TEAM ${selectedTeamNum} cleared SET ${activeSetNumber} safely!`;
-            } else {
-                content.className = 'result-content detonated';
-                title.innerText = 'BOMB DETONATED!';
-                title.style.color = '#ff003c';
-                desc.innerText = `Time expired! SET ${activeSetNumber} was not neutralized in time.`;
+        function renderAllTeamsReport() {
+            if (allTeamReports.length === 0) {
+                reportDrawerContent.innerHTML = `
+                    <div style="text-align:center; padding:40px 10px; color:#888;">
+                        <div style="font-size:40px; margin-bottom:10px;">📋</div>
+                        <div>No team sets completed yet.</div>
+                        <div style="font-size:13px; margin-top:5px; color:#666;">Complete 5 questions for a team to see their score report here.</div>
+                    </div>
+                `;
+                return;
             }
 
-            resultModal.classList.add('active');
+            // Sort teams by correctCount desc, then timeTaken asc
+            const sorted = [...allTeamReports].sort((a, b) => {
+                if (b.correctCount !== a.correctCount) return b.correctCount - a.correctCount;
+                return a.timeTakenSeconds - b.timeTakenSeconds;
+            });
+
+            let html = `
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>TEAM</th>
+                            <th>SET</th>
+                            <th>CORRECT</th>
+                            <th>WIRES</th>
+                            <th>TIME</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            sorted.forEach((rec, idx) => {
+                const isWin = rec.status === 'defused';
+                html += `
+                    <tr>
+                        <td style="font-family:'Orbitron'; font-weight:bold; color:#00ffff;">
+                            #${idx+1} ${rec.teamName}
+                        </td>
+                        <td style="color:#f6d148; font-weight:bold;">SET ${rec.setNumber}</td>
+                        <td>
+                            <span class="score-pill">${rec.correctCount} / 5 (${rec.correctCount * 20}%)</span>
+                        </td>
+                        <td style="font-size:13px;">
+                            <span style="color:#00ff80;">${rec.wiresDefused ? rec.wiresDefused.length : 0}✔</span> / 
+                            <span style="color:#ff003c;">${rec.wiresCut ? rec.wiresCut.length : 0}✂</span>
+                        </td>
+                        <td style="color:#fff;">${rec.timeTakenSeconds}s</td>
+                        <td style="color:${isWin ? '#00ff80' : '#ff003c'}; font-weight:bold; font-family:'Orbitron'; font-size:13px;">
+                            ${rec.status.toUpperCase()}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            reportDrawerContent.innerHTML = html;
         }
 
-        function closeResultModal() {
-            resultModal.classList.remove('active');
+        function clearAllTeamsData() {
+            if (confirm("Reset all stored team reports?")) {
+                allTeamReports = [];
+                renderAllTeamsReport();
+            }
         }
 
-        // ================= BACKEND INTEGRATION (SILENT MONGODB) =================
-        async function saveSessionToBackend(status) {
-            const timeTakenSec = Math.max(0, 90 - Math.round(timeLeft / 1000));
-            const sessionData = {
-                teamNumber: selectedTeamNum,
-                teamName: `TEAM ${selectedTeamNum}`,
-                currentLevel: currentLevel,
-                wiresCut: wiresCutArray,
-                timeLeftMs: timeLeft,
-                timeTakenSeconds: timeTakenSec,
-                penaltiesCount: penaltiesCount,
-                status: status,
-                score: 0 // No points per user instruction
-            };
-
+        // ================= BACKEND PERSISTENCE (SILENT MONGODB) =================
+        async function saveSessionToBackend(rec) {
             try {
                 await fetch(`${API_BASE}/api/round3/session`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(sessionData)
+                    body: JSON.stringify({
+                        teamNumber: rec.teamNumber,
+                        teamName: rec.teamName,
+                        setNumber: rec.setNumber,
+                        currentLevel: 5,
+                        correctCount: rec.correctCount,
+                        totalQuestions: 5,
+                        wiresCut: rec.wiresCut,
+                        wiresDefused: rec.wiresDefused,
+                        questionResults: rec.answers,
+                        timeLeftMs: rec.timeLeftMs,
+                        timeTakenSeconds: rec.timeTakenSeconds,
+                        penaltiesCount: rec.penaltiesCount,
+                        status: rec.status,
+                        score: 0
+                    })
                 });
             } catch (err) {
-                console.warn('Backend session save skipped:', err);
+                console.warn('Backend save skipped:', err);
             }
         }
 
-        // ================= LEADERBOARD =================
-        async function toggleLeaderboard() {
-            leaderboardPanel.classList.toggle('active');
-            if (leaderboardPanel.classList.contains('active')) {
-                renderLeaderboard();
-            }
-        }
-
-        async function renderLeaderboard() {
-            const container = document.getElementById('leaderboardContent');
+        async function loadPreviousReportsFromBackend() {
             try {
-                const res = await fetch(`${API_BASE}/api/round3/leaderboard`);
+                const res = await fetch(`${API_BASE}/api/round3/sessions`);
                 if (res.ok) {
                     const json = await res.json();
-                    if (json.success && json.data.length > 0) {
-                        let html = `<h2 style="color:#00ffff; font-family:'Orbitron'; text-align:center; margin-bottom:20px;">ROUND 3 RECORDS</h2>`;
-                        json.data.forEach((rec, idx) => {
-                            const isWin = rec.status === 'defused';
-                            html += `
-                                <div class="leaderboard-card ${isWin ? 'defused' : ''}">
-                                    <div style="display:flex; justify-content:space-between; align-items:center;">
-                                        <span style="color:#ff00ff; font-weight:bold; font-size:18px; font-family:'Orbitron';">#${idx+1} ${rec.teamName}</span>
-                                        <span style="color:${isWin ? '#00ff80':'#ff003c'}; font-weight:bold; font-family:'Orbitron';">${rec.status.toUpperCase()}</span>
-                                    </div>
-                                    <div style="font-size:14px; color:#aaa; margin-top:8px;">
-                                        ⏱️ Time Taken: <b style="color:#fff;">${rec.timeTakenSeconds}s</b> &nbsp;|&nbsp; 
-                                        ⚠️ Penalties: <b style="color:#ff003c;">${rec.penaltiesCount}</b><br>
-                                        ⚡ Wires Cut: <b style="color:#f6d148;">${rec.wiresCut ? rec.wiresCut.length : 0}</b>
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        container.innerHTML = html;
-                        return;
+                    if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+                        allTeamReports = json.data.map(item => ({
+                            teamNumber: item.teamNumber,
+                            teamName: item.teamName || `TEAM ${item.teamNumber}`,
+                            setNumber: item.setNumber || item.teamNumber,
+                            correctCount: item.correctCount || (item.status === 'defused' ? 5 : 0),
+                            totalQuestions: item.totalQuestions || 5,
+                            wiresCut: item.wiresCut || [],
+                            wiresDefused: item.wiresDefused || [],
+                            timeTakenSeconds: item.timeTakenSeconds || 0,
+                            timeLeftMs: item.timeLeftMs || 0,
+                            penaltiesCount: item.penaltiesCount || 0,
+                            status: item.status || 'in-progress',
+                            answers: item.questionResults || []
+                        }));
                     }
                 }
             } catch (err) {
-                console.warn('Leaderboard fetch skipped:', err);
+                console.warn('Could not load backend sessions:', err);
             }
-            container.innerHTML = `<h3 style="color:#fff; text-align:center; margin-top:40px;">No attempts recorded yet.</h3>`;
         }
 
-        // ================= KEYBOARD CONTROLS =================
+        // ================= KEYBOARD SHORTCUTS =================
         document.addEventListener('keydown', (e) => {
             // Space: Toggle timer
             if (e.code === 'Space') {
                 e.preventDefault();
                 toggleTimer();
             }
-            // Enter: Correct answer / Defuse wire
+            // Enter: Override correct defusal
             else if (e.code === 'Enter') {
                 e.preventDefault();
-                correctAnswer();
+                overrideCorrect();
             }
-            // X: Wrong answer / Cut wire
+            // X: Override wrong answer / cut wire
             else if (e.code === 'KeyX') {
-                wrongAnswer();
+                overrideWrong();
             }
-            // R: Reset game / timer
+            // R: Reset set
             else if (e.code === 'KeyR') {
-                resetTimerOnly();
+                resetCurrentSetTimer();
             }
-            // L: Leaderboard toggle
+            // L: Leaderboard / All teams report
             else if (e.code === 'KeyL') {
-                toggleLeaderboard();
+                toggleReportDrawer();
             }
-            // 1-9: Select team number
-            else if (e.key >= '1' && e.key <= '9') {
-                selectedTeamNum = parseInt(e.key);
-                teamNameDisplay.innerText = "TEAM " + selectedTeamNum;
+            // A, B, C, D, E keys select options directly
+            else if (['KeyA', 'KeyB', 'KeyC', 'KeyD', 'KeyE'].includes(e.code)) {
+                const keyLetter = e.code.replace('Key', '');
+                handleOptionClick(keyLetter);
             }
         });
 
         // Initialize display and question
         updateQuestionUI();
         updateDisplay();
+        loadPreviousReportsFromBackend();
     </script>
 </body>
 </html>
