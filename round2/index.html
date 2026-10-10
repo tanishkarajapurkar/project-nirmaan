@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round 2: Cinematic Blueprint Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: radial-gradient(circle at center, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            color: #fff;
+            font-family: 'Rajdhani', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3vh;
+            z-index: 10;
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5vw; 
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.5vw;
+            color: #ff00ff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .slot-machine {
+            display: flex;
+            gap: 2vw;
+            background: rgba(10, 5, 20, 0.85);
+            padding: 3vh 3vw;
+            border: 3px solid #ff00ff;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 255, 0.4);
+            z-index: 10;
+            width: 90vw;
+            max-width: 1400px;
+            justify-content: center;
+        }
+
+        .slot {
+            flex: 1;
+            aspect-ratio: 3/4; 
+            max-height: 55vh;
+            background: linear-gradient(180deg, #130a2b 0%, #05020d 100%);
+            border: 3px solid #00ffff;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.9);
+            position: relative;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .slot-title {
+            position: absolute;
+            top: 2vh;
+            font-family: 'Orbitron', sans-serif;
+            color: #ff00ff;
+            font-size: 1.2vw;
+            text-shadow: 0 0 10px #ff00ff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slot-img {
+            font-size: 5vw;
+            margin-top: 1vh;
+            filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.8));
+        }
+
+        .slot-text {
+            font-size: 1.8vw;
+            font-weight: 700;
+            color: #ffffff;
+            margin-top: 1.5vh;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            line-height: 1.1;
+        }
+
+        .slot-desc {
+            font-size: 1.1vw;
+            color: #f6d148; 
+            margin-top: 1.5vh;
+            font-style: italic;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        .controls-hint {
+            margin-top: 4vh;
+            font-size: 1.2vw;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+            z-index: 10;
+        }
+        .controls-hint span { color: #00ffff; font-weight: bold; }
+
+        /* ================= HISTORY PANEL ================= */
+        .history-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #f6d148;
+            color: #f6d148;
+            padding: 10px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1vw;
+            cursor: pointer;
+            border-radius: 8px;
+            z-index: 100;
+            transition: 0.3s;
+        }
+        .history-btn:hover { background: #f6d148; color: #000; }
+
+        .history-panel {
+            position: fixed;
+            top: 0; right: -400px; 
+            width: 350px; height: 100vh;
+            background: rgba(10, 5, 25, 0.95);
+            border-left: 3px solid #ff00ff;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+            z-index: 99;
+            transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 80px 20px 20px 20px;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        .history-panel.active { right: 0; } 
+
+        .record-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #00ffff;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
+        .record-team { color: #ff00ff; font-weight: bold; font-size: 1.2rem; font-family: 'Orbitron'; margin-bottom: 5px;}
+        .record-details { font-size: 1rem; color: #ddd; line-height: 1.4; }
+        .record-details span { color: #00ffff; }
+
+    </style>
+</head>
+<body>
+
+    <!-- AUDIO FILES -->
+    <audio id="spinSfx" src="https://assets.mixkit.co/active_storage/sfx/2020/2020-preview.mp3" loop></audio>
+    <audio id="sfx-thief" src="https://assets.mixkit.co/active_storage/sfx/1460/1460-preview.mp3"></audio> 
+    <audio id="sfx-hacker" src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3"></audio> 
+    <audio id="sfx-vip" src="https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3"></audio> 
+    <audio id="sfx-architect" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio> 
+    <audio id="sfx-corrupt" src="https://assets.mixkit.co/active_storage/sfx/2816/2816-preview.mp3"></audio> 
+    <audio id="sfx-auditor" src="https://assets.mixkit.co/active_storage/sfx/2820/2820-preview.mp3"></audio> 
+
+    <button class="history-btn" onclick="toggleHistory()">📋 TEAM RECORDS (Press R)</button>
+
+    <div class="history-panel" id="historyPanel"></div>
+
+    <div class="header">
+        <h1 class="title">Project Nirmaan: Blueprint Generator</h1>
+        <div class="subtitle">Press SPACEBAR to assign Team Destiny</div>
+    </div>
+
+    <div class="slot-machine">
+        <div class="slot">
+            <div class="slot-title">1. Map Terrain</div>
+            <div class="slot-img" id="img1">🌍</div>
+            <div class="slot-text" id="text1">WAITING...</div>
+            <div class="slot-desc" id="desc1"></div>
+        </div>
+        <div class="slot">
+            <div class="slot-title">2. Team Role</div>
+            <div class="slot-img" id="img2">👥</div>
+            <div class="slot-text" id="text2">WAITING...</div>
+            <div class="slot-desc" id="desc2"></div>
+        </div>
+        <div class="slot">
+            <div class="slot-title">3. Total Budget</div>
+            <div class="slot-img" id="img3">💰</div>
+            <div class="slot-text" id="text3">WAITING...</div>
+            <div class="slot-desc" id="desc3"></div>
+        </div>
+    </div>
+
+    <div class="controls-hint">PRESS <span>[SPACE]</span> TO SPIN &nbsp; | &nbsp; PRESS <span>[R]</span> TO VIEW RECORDS</div>
+
+    <script>
+        const API_BASE = (window.location.origin && window.location.origin.includes('http')) 
+            ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
+            : 'http://localhost:5000';
+
+        function updateDbBadge(isOnline, text) {
+            // MongoDB status indicator removed per request
+        }
+
+        // MASTER DATABASE (Default & Seed source)
+        let masterTerrains = [
+            { text: "River in Center", img: "🌊", desc: "[Must build a bridge; limited central space]" },
+            { text: "Hilly Slopes", img: "⛰️", desc: "[High landslide risk; foundation costs 2x]" },
+            { text: "Island Ground", img: "🏝️", desc: "[Limited space; must plan tight zoning]" },
+            { text: "Highway Crossing", img: "🛣️", desc: "[High traffic noise; Residential must be far]" },
+            { text: "Dense Forest", img: "🌲", desc: "[Eco-zone; cannot cut more than 30% area]" },
+            { text: "Fault Line", img: "⚡", desc: "[Earthquake zone; no tall structures allowed]" }
+        ];
+
+        let masterRoles = [
+            { 
+                text: "The Industrial Tycoon", 
+                subtitle: "(The Money Maker)", 
+                img: "🏭", 
+                desc: "[Perk: Red notes -50% cost | Constraint: Must place ≥3 Green notes at 2x cost]", 
+                perk: "Red sticky notes (Factories/Industrial) cost 50% less.",
+                constraint: "Heavy pollution tax. Must place at least 3 Green sticky notes (Eco Parks), and those Green notes cost double.",
+                sfxId: "sfx-architect" 
+            },
+            { 
+                text: "The Eco-Visionary", 
+                subtitle: "(The Green Mayor)", 
+                img: "🌱", 
+                desc: "[Perk: All Green notes free | Constraint: No Red notes within 2 blocks of River/Yellow]", 
+                perk: "All Green sticky notes are completely free.",
+                constraint: "Zero Tolerance for Pollution. Banned from placing any Red (Industrial) sticky notes within a 2-block radius of the River or Yellow (Residential) zones.",
+                sfxId: "sfx-vip" 
+            },
+            { 
+                text: "The Tech Mogul", 
+                subtitle: "(The Smart City Planner)", 
+                img: "💻", 
+                desc: "[Perk: Blue notes 2x points | Constraint: Starting Base Budget slashed by 20%]", 
+                perk: "Blue sticky notes (Tech Parks, Hospitals) score 2x bonus points during final evaluation.",
+                constraint: "Premium lifestyle costs money. Starting Base Budget is slashed by 20%.",
+                sfxId: "sfx-hacker" 
+            },
+            { 
+                text: "The Real Estate Shark", 
+                subtitle: "(The Builder)", 
+                img: "🏙️", 
+                desc: "[Perk: 4 Yellow notes free | Constraint: All Yellow notes in 1 giant connected block]", 
+                perk: "Receives 4 Yellow sticky notes (Residential/Housing) absolutely free at the start.",
+                constraint: "All Yellow sticky notes must be placed together in one giant connected block (a mega-society). Cannot scatter housing.",
+                sfxId: "sfx-architect" 
+            },
+            { 
+                text: "The Corrupt Politician", 
+                subtitle: "(The Gambler)", 
+                img: "💼", 
+                desc: "[Perk: +40L budget bonus | Constraint: Host raids 2 notes 2m before end; fix in 120s]", 
+                perk: "'Black Money' injection. Gets a massive bonus of +40L added to the starting budget.",
+                constraint: "The Anti-Corruption Raid. Exactly 2 minutes before the timer ends, the host will randomly tear out 2 sticky notes. The team must fix the layout in 120 seconds.",
+                sfxId: "sfx-corrupt" 
+            },
+            { 
+                text: "The Crisis Manager", 
+                subtitle: "(The Rule Breaker)", 
+                img: "🚨", 
+                desc: "[Perk: Build on River/Highway edges | Constraint: Round ends 5m early (at 25m)]", 
+                perk: "Master of Terrain. The ONLY team allowed to place sticky notes directly on top of the River/Highway boundaries without penalty.",
+                constraint: "High-pressure environment. Must step away from their map at the 25-minute mark. Their round ends 5 minutes early.",
+                sfxId: "sfx-auditor" 
+            },
+            { 
+                text: "The Speedrunner", 
+                subtitle: "(The Sprinter)", 
+                img: "⚡", 
+                desc: "[Perk: +50L budget bonus | Constraint: Only 15 Minutes to complete map]", 
+                perk: "Massive +50L bonus added to their starting budget.",
+                constraint: "Extreme time crunch. They only get 15 Minutes to complete their map while others get 30. They must drop their markers exactly at half-time.",
+                sfxId: "sfx-thief" 
+            },
+            { 
+                text: "The Philanthropist", 
+                subtitle: "(The Caretaker)", 
+                img: "🤝", 
+                desc: "[Perk: Equal Yellow & Blue gives +20 pts | Constraint: Red notes cost 2x]", 
+                perk: "Social welfare bonus. If they build exactly an equal number of Yellow (Housing) and Blue (Hospitals/Tech) notes, final score gets a flat +20 point boost.",
+                constraint: "Anti-capitalist. Red (Industrial) notes cost them double the normal price.",
+                sfxId: "sfx-vip" 
+            },
+            { 
+                text: "The Logistics Master", 
+                subtitle: "(The Transporter)", 
+                img: "🚛", 
+                desc: "[Perk: Immune to pollution penalties | Constraint: 2-grid wide Mega Highway left empty]", 
+                perk: "Immune to pollution penalties. Can place Red (Industrial) zones right next to Yellow (Residential) zones without losing points.",
+                constraint: "Must leave a continuous, straight 2-grid wide 'Mega Highway' completely empty, cutting across their entire map from one edge to the other.",
+                sfxId: "sfx-auditor" 
+            },
+            { 
+                text: "The Perfectionist", 
+                subtitle: "(The Architect)", 
+                img: "📐", 
+                desc: "[Perk: Symmetrical design gets 1.5x score | Constraint: Asymmetry loses 30% points]", 
+                perk: "Masterpiece multiplier. If their final city design is perfectly symmetrical (either left/right or top/bottom), total score is multiplied by 1.5x.",
+                constraint: "If the judges find their map asymmetrical, they lose 30% of their total points instantly.",
+                sfxId: "sfx-architect" 
+            },
+            { 
+                text: "The Suburb Developer", 
+                subtitle: "(The Local Planner)", 
+                img: "🏡", 
+                desc: "[Perk: Yellow notes cost 50% less | Constraint: Completely banned from Blue notes]", 
+                perk: "Cheap housing. All Yellow (Residential) notes cost 50% less.",
+                constraint: "Backward infrastructure. They are completely banned from using any Blue sticky notes (No Tech Parks or major Hospitals allowed).",
+                sfxId: "sfx-architect" 
+            },
+            { 
+                text: "The Megacity Mayor", 
+                subtitle: "(The Expansionist)", 
+                img: "👑", 
+                desc: "[Perk: Unlimited Funds | Constraint: Must cover ≥80% of A3 Grid or disqualified]", 
+                perk: "Unlimited Funds. This team has no budget limit and can buy as many sticky notes as they want.",
+                constraint: "Overpopulation rule. They MUST cover at least 80% of their A3 Grid with sticky notes. If they leave too much empty space, they are disqualified.",
+                sfxId: "sfx-vip" 
+            },
+            { 
+                text: "The Tourist Trap", 
+                subtitle: "(The Attraction)", 
+                img: "🎡", 
+                desc: "[Perk: 1 Green note gives 1 Yellow free | Constraint: Red & Blue clustered in 1 corner]", 
+                perk: "Tourism income. For every Green (Eco Park) note they place, they get to place one Yellow (Housing) note for absolutely free.",
+                constraint: "Congestion. All Red and Blue sticky notes must be clustered strictly in one single corner of the A3 map.",
+                sfxId: "sfx-thief" 
+            },
+            { 
+                text: "The Underdog", 
+                subtitle: "(The Efficiency Expert)", 
+                img: "🥊", 
+                desc: "[Perk: Least budget spent gets Round 3 wildcard | Constraint: Starts with only 50% budget]", 
+                perk: "The ultimate flex. If this team manages to build a functional city while spending the *least* amount of budget among all 15 teams, they get a direct wildcard entry to Round 3.",
+                constraint: "They start the game with only 50% of the standard Base Budget.",
+                sfxId: "sfx-hacker" 
+            },
+            { 
+                text: "The Dictator", 
+                subtitle: "(The Absolute Ruler)", 
+                img: "🎖️", 
+                desc: "[Perk: Ignore standard zoning logic | Constraint: Cannot place any Green notes]", 
+                perk: "Supreme authority. They can ignore all standard zoning logic (e.g. placing factories in the river) without penalty.",
+                constraint: "No care for citizens. They are not allowed to place a single Green (Eco Park) sticky note on their map.",
+                sfxId: "sfx-corrupt" 
+            }
+        ];
+
+        let masterBudgets = [
+            { text: "₹ 50 Crores", img: "🪙", desc: "[Tight Budget: Focus on low-cost survival]" },
+            { text: "₹ 100 Crores", img: "💵", desc: "[Balanced: Standard urban planning]" },
+            { text: "₹ 150 Crores", img: "💰", desc: "[Rich: Can afford advanced tech & defenses]" },
+            { text: "₹ 75 Crores", img: "📉", desc: "[Low Budget: Requires extreme Jugaad]" },
+            { text: "₹ 200 Crores", img: "🏦", desc: "[Luxury: Build premium eco-friendly infra]" },
+            { text: "₹ 80 Cr + Loan", img: "💳", desc: "[Takes ₹20 Cr loan, must pay back 5 points later]" }
+        ];
+
+        // TRACKING ARRAYS (For Non-Repeating Logic)
+        let availableTerrains = [...masterTerrains];
+        let availableRoles = [...masterRoles];
+        let availableBudgets = [...masterBudgets];
+
+        // UI Elements
+        const img1 = document.getElementById('img1'); const text1 = document.getElementById('text1'); const desc1 = document.getElementById('desc1');
+        const img2 = document.getElementById('img2'); const text2 = document.getElementById('text2'); const desc2 = document.getElementById('desc2');
+        const img3 = document.getElementById('img3'); const text3 = document.getElementById('text3'); const desc3 = document.getElementById('desc3');
+        const spinSfx = document.getElementById('spinSfx');
+        const historyPanel = document.getElementById('historyPanel');
+
+        let isSpinning = false;
+        let currentTeamNumber = 1; 
+        let teamHistory = []; 
+
+        // Gets purely random item for the ANIMATION effect
+        function getRandomAnimationItem(array) { 
+            return array[Math.floor(Math.random() * array.length)]; 
+        }
+
+        // Gets UNIQUE item and removes it from available list
+        function getUniqueItem(category) {
+            let availableArray, masterArray;
+            if (category === 'terrain') { availableArray = availableTerrains; masterArray = masterTerrains; }
+            else if (category === 'role') { availableArray = availableRoles; masterArray = masterRoles; }
+            else if (category === 'budget') { availableArray = availableBudgets; masterArray = masterBudgets; }
+
+            // If empty, shuffle and refill!
+            if (availableArray.length === 0) {
+                availableArray.push(...masterArray);
+            }
+
+            const randomIndex = Math.floor(Math.random() * availableArray.length);
+            const selectedItem = availableArray.splice(randomIndex, 1)[0]; // Remove and return
+            return selectedItem;
+        }
+
+        function playSfx(id) {
+            const audio = document.getElementById(id);
+            if(audio) { audio.currentTime = 0; audio.play().catch(e => console.log("Audio locked")); }
+        }
+
+        function toggleHistory() {
+            historyPanel.classList.toggle('active');
+            renderHistory();
+        }
+
+        function renderHistory() {
+            if (teamHistory.length === 0) {
+                historyPanel.innerHTML = `<h3 style="color:#fff; text-align:center;">No records yet.</h3>`;
+                return;
+            }
+            let html = "";
+            for (let i = teamHistory.length - 1; i >= 0; i--) {
+                const rec = teamHistory[i];
+                html += `
+                    <div class="record-card">
+                        <div class="record-team">TEAM ${rec.teamNum}</div>
+                        <div class="record-details">
+                            <span>Terrain:</span> ${rec.terrain}<br>
+                            <span>Role:</span> <b>${rec.role}</b><br>
+                            <span>Budget:</span> ${rec.budget}<br>
+                            ${(rec.roleDesc || rec.desc) ? `<div style="font-size:0.85rem; color:#f6d148; margin-top:6px; line-height:1.3;">${rec.roleDesc || rec.desc}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            historyPanel.innerHTML = html;
+        }
+
+        function spinSlots() {
+            if (isSpinning) return;
+            isSpinning = true;
+
+            desc1.innerText = ""; desc2.innerText = ""; desc3.innerText = "";
+            playSfx('spinSfx');
+
+            let counter = 0; const maxSpins = 25; const intervalTime = 90;
+
+            const spinInterval = setInterval(() => {
+                // Animation uses FULL array to look chaotic
+                let t = getRandomAnimationItem(masterTerrains); img1.innerText = t.img; text1.innerText = t.text;
+                let r = getRandomAnimationItem(masterRoles);    img2.innerText = r.img; text2.innerText = r.text;
+                let b = getRandomAnimationItem(masterBudgets);  img3.innerText = b.img; text3.innerText = b.text;
+
+                counter++;
+
+                // Stop Spinning
+                if (counter >= maxSpins) {
+                    clearInterval(spinInterval);
+                    spinSfx.pause(); 
+                    
+                    // Final Selection uses the SMART MEMORY ARRAY!
+                    let finalT = getUniqueItem('terrain'); 
+                    let finalR = getUniqueItem('role');    
+                    let finalB = getUniqueItem('budget');  
+
+                    img1.innerText = finalT.img; text1.innerText = finalT.text; desc1.innerText = finalT.desc;
+                    img2.innerText = finalR.img; text2.innerText = finalR.text; desc2.innerText = finalR.desc;
+                    img3.innerText = finalB.img; text3.innerText = finalB.text; desc3.innerText = finalB.desc;
+
+                    playSfx(finalR.sfxId);
+
+                    const record = {
+                        teamNum: currentTeamNumber,
+                        teamName: `TEAM ${currentTeamNumber}`,
+                        terrain: finalT.text,
+                        role: finalR.text,
+                        roleDesc: finalR.desc,
+                        budget: finalB.text
+                    };
+
+                    teamHistory.push(record);
+                    saveBlueprintToBackend(record);
+                    
+                    currentTeamNumber++; 
+                    if(historyPanel.classList.contains('active')) renderHistory(); 
+
+                    isSpinning = false; 
+                }
+            }, intervalTime);
+        }
+
+        async function saveBlueprintToBackend(rec) {
+            try {
+                await fetch(`${API_BASE}/api/round2/teams`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(rec)
+                });
+                updateDbBadge(true, `MongoDB (${teamHistory.length} Teams)`);
+            } catch (err) {
+                console.warn('Failed to save team blueprint to MongoDB:', err);
+            }
+        }
+
+        async function loadDataFromBackend() {
+            try {
+                updateDbBadge(false, 'Connecting to MongoDB...');
+                
+                // Fetch dynamic options
+                const optRes = await fetch(`${API_BASE}/api/round2/options`);
+                if (optRes.ok) {
+                    const optJson = await optRes.json();
+                    if (optJson.success && optJson.data) {
+                        if (optJson.data.terrains && optJson.data.terrains.length > 0) {
+                            masterTerrains = optJson.data.terrains;
+                            availableTerrains = [...masterTerrains];
+                        }
+                        if (optJson.data.roles && optJson.data.roles.length > 0) {
+                            masterRoles = optJson.data.roles;
+                            availableRoles = [...masterRoles];
+                        }
+                        if (optJson.data.budgets && optJson.data.budgets.length > 0) {
+                            masterBudgets = optJson.data.budgets;
+                            availableBudgets = [...masterBudgets];
+                        }
+                    }
+                }
+
+                // Fetch saved teams history from MongoDB
+                const teamsRes = await fetch(`${API_BASE}/api/round2/teams`);
+                if (teamsRes.ok) {
+                    const teamsJson = await teamsRes.json();
+                    if (teamsJson.success && Array.isArray(teamsJson.data)) {
+                        teamHistory = teamsJson.data;
+                        if (teamHistory.length > 0) {
+                            const maxNum = Math.max(...teamHistory.map(t => t.teamNum || 0));
+                            currentTeamNumber = maxNum + 1;
+                        }
+                        updateDbBadge(true, `MongoDB (${teamHistory.length} Teams)`);
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.warn('Backend server unreachable, using offline mode:', err);
+            }
+            updateDbBadge(false, 'Local Mode');
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') { event.preventDefault(); spinSlots(); }
+            if (event.key.toLowerCase() === 'r') { toggleHistory(); }
+        });
+
+        // Initialize backend connection and load saved records
+        loadDataFromBackend();
+        document.body.addEventListener('click', () => { spinSfx.load(); }, {once:true});
+    </script>
+</body>
+</html>

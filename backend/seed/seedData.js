@@ -268,13 +268,112 @@ const round2Options = [
     { category: "terrain", text: "Dense Forest", img: "🌲", desc: "[Eco-zone; cannot cut more than 30% area]" },
     { category: "terrain", text: "Fault Line", img: "⚡", desc: "[Earthquake zone; no tall structures allowed]" },
 
-    // Roles
-    { category: "role", text: "The Thief", img: "🥷", desc: "[Can steal 1 sticky note or 10 Cr from any rival team during planning]", sfxId: "sfx-thief" },
-    { category: "role", text: "The Hacker", img: "👨‍💻", desc: "[Gets exactly 1 minute of Google Search to verify a technical solution]", sfxId: "sfx-hacker" },
-    { category: "role", text: "The VIP", img: "🕴️", desc: "[Gets absolute immunity from the first Doom Wheel disaster in Round 3]", sfxId: "sfx-vip" },
-    { category: "role", text: "The Architect", img: "📐", desc: "[Given 2 extra sticky notes of any color for advanced zoning logic]", sfxId: "sfx-architect" },
-    { category: "role", text: "The Corrupt Builder", img: "🏗️", desc: "[Gets extra ₹20 Cr budget, but takes double damage during Earthquakes]", sfxId: "sfx-corrupt" },
-    { category: "role", text: "The Auditor", img: "🕵️", desc: "[Can pause the timer for 30s to inspect and copy a rival's map idea]", sfxId: "sfx-auditor" }
+    // 15 Official Roles from Master Rulebook
+    { 
+        category: "role", 
+        text: "The Industrial Tycoon", 
+        img: "🏭", 
+        desc: "[Perk: Red notes -50% cost | Constraint: Must place ≥3 Green notes at 2x cost]", 
+        sfxId: "sfx-architect" 
+    },
+    { 
+        category: "role", 
+        text: "The Eco-Visionary", 
+        img: "🌱", 
+        desc: "[Perk: All Green notes free | Constraint: No Red notes within 2 blocks of River/Yellow]", 
+        sfxId: "sfx-vip" 
+    },
+    { 
+        category: "role", 
+        text: "The Tech Mogul", 
+        img: "💻", 
+        desc: "[Perk: Blue notes 2x points | Constraint: Starting Base Budget slashed by 20%]", 
+        sfxId: "sfx-hacker" 
+    },
+    { 
+        category: "role", 
+        text: "The Real Estate Shark", 
+        img: "🏙️", 
+        desc: "[Perk: 4 Yellow notes free | Constraint: All Yellow notes in 1 giant connected block]", 
+        sfxId: "sfx-architect" 
+    },
+    { 
+        category: "role", 
+        text: "The Corrupt Politician", 
+        img: "💼", 
+        desc: "[Perk: +40L budget bonus | Constraint: Host raids 2 notes 2m before end; fix in 120s]", 
+        sfxId: "sfx-corrupt" 
+    },
+    { 
+        category: "role", 
+        text: "The Crisis Manager", 
+        img: "🚨", 
+        desc: "[Perk: Build on River/Highway edges | Constraint: Round ends 5m early (at 25m)]", 
+        sfxId: "sfx-auditor" 
+    },
+    { 
+        category: "role", 
+        text: "The Speedrunner", 
+        img: "⚡", 
+        desc: "[Perk: +50L budget bonus | Constraint: Only 15 Minutes to complete map]", 
+        sfxId: "sfx-thief" 
+    },
+    { 
+        category: "role", 
+        text: "The Philanthropist", 
+        img: "🤝", 
+        desc: "[Perk: Equal Yellow & Blue gives +20 pts | Constraint: Red notes cost 2x]", 
+        sfxId: "sfx-vip" 
+    },
+    { 
+        category: "role", 
+        text: "The Logistics Master", 
+        img: "🚛", 
+        desc: "[Perk: Immune to pollution penalties | Constraint: 2-grid wide Mega Highway left empty]", 
+        sfxId: "sfx-auditor" 
+    },
+    { 
+        category: "role", 
+        text: "The Perfectionist", 
+        img: "📐", 
+        desc: "[Perk: Symmetrical design gets 1.5x score | Constraint: Asymmetry loses 30% points]", 
+        sfxId: "sfx-architect" 
+    },
+    { 
+        category: "role", 
+        text: "The Suburb Developer", 
+        img: "🏡", 
+        desc: "[Perk: Yellow notes cost 50% less | Constraint: Completely banned from Blue notes]", 
+        sfxId: "sfx-architect" 
+    },
+    { 
+        category: "role", 
+        text: "The Megacity Mayor", 
+        img: "👑", 
+        desc: "[Perk: Unlimited Funds | Constraint: Must cover ≥80% of A3 Grid or disqualified]", 
+        sfxId: "sfx-vip" 
+    },
+    { 
+        category: "role", 
+        text: "The Tourist Trap", 
+        img: "🎡", 
+        desc: "[Perk: 1 Green note gives 1 Yellow free | Constraint: Red & Blue clustered in 1 corner]", 
+        sfxId: "sfx-thief" 
+    },
+    { 
+        category: "role", 
+        text: "The Underdog", 
+        img: "🥊", 
+        desc: "[Perk: Least budget spent gets Round 3 wildcard | Constraint: Starts with only 50% budget]", 
+        sfxId: "sfx-hacker" 
+    },
+    { 
+        category: "role", 
+        text: "The Dictator", 
+        img: "🎖️", 
+        desc: "[Perk: Ignore standard zoning logic | Constraint: Cannot place any Green notes]", 
+        sfxId: "sfx-corrupt" 
+    }
 ];
 
 const round3Puzzles = [
@@ -348,11 +447,12 @@ const seedDatabase = async () => {
 
         // Round 2
         const r2Count = await Round2Option.countDocuments();
-        if (r2Count === 0) {
+        if (r2Count !== round2Options.length) {
+            await Round2Option.deleteMany({});
             await Round2Option.insertMany(round2Options);
-            console.log(`✅ Seeded ${round2Options.length} Round 2 Options`);
+            console.log(`✅ Seeded ${round2Options.length} Round 2 Options (including 15 official roles)`);
         } else {
-            console.log(`ℹ️ Round 2 Options already exist (${r2Count} found)`);
+            console.log(`ℹ️ Round 2 Options already up to date (${r2Count} found)`);
         }
 
         // Round 3

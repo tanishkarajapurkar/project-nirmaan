@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Round 3: Defusal Arena</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@700;800;900&family=Rajdhani:wght@600;700&display=swap');
         
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background-color: #050505;
+            background-image: radial-gradient(circle at center, #15050a 0%, #050505 100%);
             color: white;
             font-family: 'Share Tech Mono', monospace;
             margin: 0;
-            overflow: hidden;
+            padding: 0;
+            overflow-x: hidden;
             user-select: none;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .hazard-stripes {
-            height: 20px;
+            height: 16px;
             background: repeating-linear-gradient(
                 45deg,
                 #ffe600,
@@ -25,232 +35,534 @@
                 #000000 20px,
                 #000000 40px
             );
+            width: 100%;
+        }
+
+        /* TOP NAVIGATION & CONTROLS */
+        .top-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background: rgba(0, 0, 0, 0.7);
+            border-bottom: 2px solid #331118;
+            z-index: 50;
+        }
+
+        .set-selector-wrap {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .set-label {
+            color: #f6d148;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .set-select {
+            background: #111;
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+        .set-select option {
+            background: #111;
+            color: #fff;
+        }
+
+        .nav-btn {
+            background: rgba(20, 20, 30, 0.9);
+            border: 2px solid #888;
+            color: #fff;
+            padding: 6px 14px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .nav-btn:hover {
+            border-color: #f6d148;
+            color: #f6d148;
+            box-shadow: 0 0 10px rgba(246, 209, 72, 0.4);
+        }
+        .nav-btn.btn-leaderboard {
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+        .nav-btn.btn-leaderboard:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 15px #00ffff;
         }
 
         .header {
             text-align: center;
             color: #ff003c;
-            font-size: 38px;
-            margin-top: 10px;
-            font-weight: bold;
-            text-shadow: 0 0 10px #ff003c;
+            font-size: 32px;
+            margin: 5px 0;
+            font-weight: 900;
+            text-shadow: 0 0 15px #ff003c;
             letter-spacing: 2px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .main-container {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 50px;
-            height: 60vh;
-        }
-
-        .side-panel {
-            width: 20%;
-            background: #111;
-            border: 2px solid #333;
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            border-radius: 12px;
-        }
-
-        .team-name {
-            color: #00ffff;
-            font-size: 45px;
-            margin-bottom: 20px;
-            font-family: 'Orbitron', sans-serif;
-        }
-
-        .level-text {
-            color: #888;
-            font-size: 20px;
-        }
-
-        .level-number {
-            font-size: 60px;
-            color: white;
-        }
-
-        .warning-panel {
-            border-color: #ff003c;
-            background: #1a0005;
-        }
-
-        .warning-text {
-            color: #ff003c;
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
-
-        .penalty {
-            font-size: 60px;
-            color: #ff003c;
-            animation: pulse 1s infinite alternate;
-        }
-
-        .center-panel {
-            width: 54%;
-            text-align: center;
-        }
-
-        .timer-box {
-            border: 4px solid #ff003c;
-            padding: 10px;
-            background: #1a0005;
-            margin-bottom: 20px;
-            border-radius: 12px;
-        }
-
-        #timer {
-            font-size: 90px;
-            color: #ff3366;
-            text-shadow: 0 0 20px #ff003c;
-            margin: 0;
-            line-height: 1;
-        }
-
-        .puzzle-box {
-            border: 2px dashed #00ffff;
-            min-height: 260px;
-            background: #0d1a26;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            position: relative;
-            padding: 20px 30px;
-            border-radius: 12px;
-            box-sizing: border-box;
-        }
-
-        #puzzle-title {
-            color: #00ffff;
-            font-size: 26px;
-            text-shadow: 0 0 10px #00ffff;
-            margin-bottom: 12px;
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
         }
 
-        #puzzle-clue {
-            color: #ffffff;
-            font-size: 20px;
-            line-height: 1.4;
-            max-width: 90%;
-            margin-bottom: 10px;
+        /* MAIN GAME CONTAINER */
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 5px 40px;
+            gap: 25px;
+            flex-grow: 1;
         }
 
-        #puzzle-component {
+        /* SIDE PANELS */
+        .side-panel {
+            width: 220px;
+            background: rgba(17, 17, 24, 0.9);
+            border: 2px solid #2a2a38;
+            padding: 20px 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 14px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .team-name {
+            color: #00ffff;
+            font-size: 32px;
+            margin-bottom: 12px;
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+        }
+
+        .level-text {
+            color: #888;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .level-number {
+            font-size: 52px;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            line-height: 1.1;
+            margin: 6px 0;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .set-badge-side {
+            background: rgba(246, 209, 72, 0.15);
+            border: 1px solid #f6d148;
             color: #f6d148;
-            font-size: 18px;
-            font-style: italic;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-top: 10px;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        /* Wires Section */
+        .warning-panel {
+            border-color: #ff003c;
+            background: rgba(30, 0, 10, 0.85);
+            box-shadow: inset 0 0 25px rgba(255, 0, 60, 0.2), 0 8px 25px rgba(0, 0, 0, 0.6);
+        }
+
+        .warning-text {
+            color: #ff003c;
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+        }
+
+        .penalty {
+            font-size: 44px;
+            color: #ff003c;
+            animation: pulse-penalty 1s infinite alternate;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+        }
+
+        .penalties-count {
+            color: #f6d148;
+            font-size: 16px;
+            margin-top: 15px;
+            border-top: 1px dashed rgba(255, 0, 60, 0.4);
+            padding-top: 10px;
+            width: 100%;
+        }
+
+        @keyframes pulse-penalty {
+            from { text-shadow: 0 0 10px #ff003c; transform: scale(1); }
+            to { text-shadow: 0 0 25px #ff003c, 0 0 45px #ff003c; transform: scale(1.05); }
+        }
+
+        /* CENTER PANEL */
+        .center-panel {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .timer-box {
+            border: 4px solid #ff003c;
+            padding: 8px 35px;
+            background: rgba(25, 0, 8, 0.95);
+            margin-bottom: 15px;
+            border-radius: 14px;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.4), inset 0 0 20px rgba(255, 0, 60, 0.3);
+            text-align: center;
+        }
+
+        #timer {
+            font-size: 78px;
+            color: #ff3366;
+            text-shadow: 0 0 25px #ff003c;
+            margin: 0;
+            line-height: 1;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 3px;
+        }
+
+        /* PUZZLE & QUESTION BOX */
+        .puzzle-box {
+            border: 2px dashed #00ffff;
+            background: rgba(10, 20, 35, 0.92);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 20px 30px;
+            border-radius: 14px;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2), inset 0 0 25px rgba(0, 0, 0, 0.8);
+            min-height: 270px;
+            justify-content: space-between;
+        }
+
+        .puzzle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 12px;
+        }
+
+        #puzzle-title {
+            color: #00ffff;
+            font-size: 20px;
+            text-shadow: 0 0 10px #00ffff;
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .wire-target-tag {
+            color: #f6d148;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            background: rgba(246, 209, 72, 0.15);
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #f6d148;
+        }
+
+        #puzzle-question {
+            color: #ffffff;
+            font-size: 22px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            line-height: 1.35;
+            margin: 8px 0 16px 0;
+            letter-spacing: 0.5px;
+            text-align: left;
+        }
+
+        /* OPTIONS LIST (NO POINTS) */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 18px;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .option-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1.5px solid #335577;
+            border-radius: 8px;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #e0f0ff;
+            transition: all 0.2s ease;
+        }
+
+        .option-item:hover {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.08);
+        }
+
+        .option-item.full-width {
+            grid-column: span 2;
+        }
+
+        .opt-letter {
+            background: #00ffff;
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            box-shadow: 0 0 8px #00ffff;
+        }
+
+        .opt-text {
+            flex-grow: 1;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+
+        /* CONTROLS BAR UNDER QUESTION */
+        .action-controls-bar {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            width: 100%;
+            margin-top: 5px;
+            padding-top: 12px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+        }
+
+        .arena-btn {
+            padding: 10px 22px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 15px;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            outline: none;
+        }
+
+        .btn-correct {
+            background: rgba(0, 255, 128, 0.15);
+            border: 2px solid #00ff80;
+            color: #00ff80;
+            box-shadow: 0 0 15px rgba(0, 255, 128, 0.3);
+        }
+        .btn-correct:hover {
+            background: #00ff80;
+            color: #000;
+            box-shadow: 0 0 25px #00ff80;
+            transform: translateY(-2px);
+        }
+
+        .btn-wrong {
+            background: rgba(255, 0, 60, 0.15);
+            border: 2px solid #ff003c;
+            color: #ff003c;
+            box-shadow: 0 0 15px rgba(255, 0, 60, 0.3);
+        }
+        .btn-wrong:hover {
+            background: #ff003c;
+            color: #fff;
+            box-shadow: 0 0 25px #ff003c;
+            transform: translateY(-2px);
+        }
+
+        .btn-timer {
+            background: rgba(0, 255, 255, 0.15);
+            border: 2px solid #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        .btn-timer:hover {
+            background: #00ffff;
+            color: #000;
+            box-shadow: 0 0 25px #00ffff;
+            transform: translateY(-2px);
+        }
+
+        /* WIRES SECTION */
+        .wires-section {
+            background: rgba(10, 8, 15, 0.9);
+            border-top: 2px solid #331118;
+            padding: 10px 20px 15px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .wires-instruction {
+            color: #aaa;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .wires-instruction span {
+            color: #ff003c;
+            font-weight: bold;
+        }
+
         .wires-container {
             display: flex;
             justify-content: center;
-            gap: 50px;
-            margin-top: 15px;
+            gap: 40px;
+            margin-top: 5px;
         }
 
         .wire-wrap {
             text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            position: relative;
+        }
+        .wire-wrap:hover {
+            transform: translateY(-4px);
+        }
+        .wire-wrap:hover .wire.intact {
+            box-shadow: 0 0 25px #ff003c;
+            border-color: #ff003c;
         }
 
         .wire {
-            width: 22px;
-            height: 90px;
-            background: #fff;
-            margin: 10px auto;
-            border-radius: 10px;
-            transition: 0.3s;
+            width: 24px;
+            height: 95px;
+            margin: 8px auto;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .wire-wrap:nth-child(1) .wire.intact { background: #00aaff; box-shadow: 0 0 15px #00aaff; }
+        .wire-wrap:nth-child(2) .wire.intact { background: #ffaa00; box-shadow: 0 0 15px #ffaa00; }
+        .wire-wrap:nth-child(3) .wire.intact { background: #00ff80; box-shadow: 0 0 15px #00ff80; }
+        .wire-wrap:nth-child(4) .wire.intact { background: #ff00ff; box-shadow: 0 0 15px #ff00ff; }
+        .wire-wrap:nth-child(5) .wire.intact { background: #ff3333; box-shadow: 0 0 15px #ff3333; }
+
+        .wire.cut {
+            background: #222 !important;
+            box-shadow: none !important;
+            border-color: #444 !important;
+            position: relative;
+        }
+        .wire.cut::after {
+            content: "✂";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff003c;
+            font-size: 16px;
+        }
+
+        .wire.defused {
+            background: #00ff80 !important;
+            box-shadow: 0 0 25px #00ff80 !important;
+            border-color: #ffffff !important;
         }
 
         .status {
             color: #888;
-            font-size: 20px;
+            font-size: 16px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .status.defused-text {
+            color: #00ff80 !important;
+            text-shadow: 0 0 10px #00ff80;
+        }
+        .status.cut-text {
+            color: #ff003c !important;
+            text-decoration: line-through;
         }
 
-        /* States */
-        .intact { background: #00aaff; box-shadow: 0 0 15px #00aaff; }
-        .cut { background: #333 !important; box-shadow: none !important; }
-        .cut-text { color: #00ff00 !important; }
-
-        @keyframes pulse {
-            from { text-shadow: 0 0 10px #ff003c; }
-            to { text-shadow: 0 0 30px #ff003c, 0 0 50px #ff003c; }
-        }
-
+        /* SHAKE EFFECT */
         .shake {
             animation: shake 0.5s;
         }
 
         @keyframes shake {
-            0% { transform: translate(1px, 1px) rotate(0deg); }
-            10% { transform: translate(-1px, -2px) rotate(-1deg); }
-            20% { transform: translate(-3px, 0px) rotate(1deg); }
-            30% { transform: translate(3px, 2px) rotate(0deg); }
-            40% { transform: translate(1px, -1px) rotate(1deg); }
-            50% { transform: translate(-1px, 2px) rotate(-1deg); }
-            60% { transform: translate(-3px, 1px) rotate(0deg); }
-            70% { transform: translate(3px, 1px) rotate(-1deg); }
-            80% { transform: translate(-1px, -1px) rotate(1deg); }
-            90% { transform: translate(1px, 2px) rotate(0deg); }
+            0% { transform: translate(2px, 1px) rotate(0deg); }
+            10% { transform: translate(-2px, -3px) rotate(-1deg); }
+            20% { transform: translate(-4px, 0px) rotate(1deg); }
+            30% { transform: translate(4px, 3px) rotate(0deg); }
+            40% { transform: translate(2px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 3px) rotate(-1deg); }
+            60% { transform: translate(-4px, 1px) rotate(0deg); }
+            70% { transform: translate(4px, 1px) rotate(-1deg); }
+            80% { transform: translate(-2px, -1px) rotate(1deg); }
+            90% { transform: translate(2px, 3px) rotate(0deg); }
             100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
-        /* Badges & Overlays */
-        #backend-status {
-            position: fixed;
-            top: 25px;
-            left: 25px;
-            font-size: 13px;
-            background: rgba(0,0,0,0.85);
-            border: 1px solid #00ff80;
-            color: #00ff80;
-            padding: 8px 16px;
-            border-radius: 20px;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .leaderboard-btn {
-            position: fixed;
-            top: 25px;
-            right: 25px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid #00ffff;
-            color: #00ffff;
-            padding: 8px 18px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 14px;
-            cursor: pointer;
-            border-radius: 8px;
-            z-index: 100;
-            transition: 0.3s;
-        }
-        .leaderboard-btn:hover { background: #00ffff; color: #000; }
-
+        /* LEADERBOARD PANEL (DRAWER) */
         .leaderboard-panel {
             position: fixed;
-            top: 0; right: -420px;
-            width: 380px; height: 100vh;
-            background: rgba(10, 5, 20, 0.96);
+            top: 0;
+            right: -450px;
+            width: 420px;
+            height: 100vh;
+            background: rgba(10, 5, 20, 0.98);
             border-left: 3px solid #00ffff;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.9);
-            z-index: 99;
+            box-shadow: -10px 0 35px rgba(0,0,0,0.9);
+            z-index: 100;
             transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            padding: 80px 20px 20px 20px;
+            padding: 80px 25px 25px 25px;
             overflow-y: auto;
             box-sizing: border-box;
         }
         .leaderboard-panel.active { right: 0; }
+
+        .leaderboard-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 1px solid #ff003c;
+            color: #ff003c;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Orbitron';
+        }
 
         .leaderboard-card {
             background: rgba(255,255,255,0.05);
@@ -261,32 +573,114 @@
         }
         .leaderboard-card.defused {
             border-color: #00ff80;
+            box-shadow: 0 0 10px rgba(0, 255, 128, 0.2);
+        }
+
+        /* VICTORY / DETONATION OVERLAY */
+        .result-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        .result-modal.active {
+            display: flex;
+        }
+
+        .result-content {
+            background: #0d1a26;
+            border: 3px solid #00ff80;
+            border-radius: 18px;
+            padding: 35px 50px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(0, 255, 128, 0.5);
+            max-width: 600px;
+            width: 90%;
+            animation: popup 0.3s ease-out;
+        }
+        .result-content.detonated {
+            border-color: #ff003c;
+            box-shadow: 0 0 50px rgba(255, 0, 60, 0.6);
+            background: #1a050a;
+        }
+
+        @keyframes popup {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .result-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 38px;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .result-desc {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 22px;
+            color: #ddd;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .result-stats {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 18px;
+            color: #fff;
         }
     </style>
 </head>
-<body>
+<body id="main-body">
 
     <div class="hazard-stripes"></div>
 
-    <!-- BACKEND STATUS BADGE -->
-    <div id="backend-status">
-        <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#00ff80; box-shadow:0 0 8px #00ff80;"></span>
-        <span id="backend-status-text">Connecting to MongoDB...</span>
+    <!-- TOP NAVIGATION -->
+    <div class="top-navbar">
+        <div class="set-selector-wrap">
+            <span class="set-label">QUESTION SET:</span>
+            <select class="set-select" id="setSelect" onchange="changeSet(this.value)">
+                <option value="1">SET 1 (Q1 - Q5)</option>
+                <option value="2">SET 2 (Q6 - Q10)</option>
+                <option value="3">SET 3 (Q11 - Q15)</option>
+                <option value="4">SET 4 (Q16 - Q20)</option>
+                <option value="5">SET 5 (Q21 - Q25)</option>
+                <option value="6">SET 6 (Q26 - Q30)</option>
+                <option value="7">SET 7 (Q31 - Q35)</option>
+                <option value="8">SET 8 (Q36 - Q40)</option>
+                <option value="9">SET 9 (Q41 - Q45)</option>
+                <option value="10">SET 10 (Q46 - Q50)</option>
+            </select>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+            <button class="nav-btn" onclick="resetTimerOnly()">🔄 RESET TIMER (R)</button>
+            <button class="nav-btn btn-leaderboard" onclick="toggleLeaderboard()">🏆 LEADERBOARD (L)</button>
+        </div>
     </div>
 
-    <!-- LEADERBOARD BUTTON & DRAWER -->
-    <button class="leaderboard-btn" onclick="toggleLeaderboard()">🏆 LEADERBOARD (Press L)</button>
-    <div class="leaderboard-panel" id="leaderboardPanel"></div>
+    <div class="header">SYSTEM COMPROMISED: DEFUSAL ARENA</div>
 
-    <div class="header">SYSTEM COMPROMISED: DEFUSAL REQUIRED</div>
-
-    <div class="main-container" id="main-body">
+    <!-- MAIN GAME BODY -->
+    <div class="main-container">
         
         <!-- Left Panel: Team Info -->
         <div class="side-panel">
             <div class="team-name" id="team-name">TEAM 1</div>
-            <div class="level-text">LEVEL</div>
+            <div class="level-text">PROGRESS</div>
             <div class="level-number"><span id="current-level">1</span> / 5</div>
+            <div class="set-badge-side" id="set-badge">SET 1 ACTIVE</div>
         </div>
 
         <!-- Center Panel: Timer & Puzzle -->
@@ -296,97 +690,754 @@
             </div>
             
             <div class="puzzle-box">
-                <h2 id="puzzle-title">[ LOADING ENCRYPTION PUZZLE... ]</h2>
-                <div id="puzzle-clue">Initializing wire sequence from database...</div>
-                <div id="puzzle-component"></div>
+                <div class="puzzle-header">
+                    <h2 id="puzzle-title">[ LEVEL 1 / 5 • QUESTION 1 ]</h2>
+                    <div class="wire-target-tag" id="wire-target-tag">DEFUSING WIRE 1</div>
+                </div>
+
+                <div id="puzzle-question">Loading defusal question...</div>
+                
+                <div class="options-grid" id="options-grid">
+                    <!-- Populated dynamically (No points) -->
+                </div>
+
+                <!-- CONTROLS BAR: ENTER FOR DEFUSE, X FOR WRONG, SPACE FOR TIMER -->
+                <div class="action-controls-bar">
+                    <button class="arena-btn btn-correct" onclick="correctAnswer()">
+                        ✔ DEFUSE WIRE (ENTER)
+                    </button>
+                    <button class="arena-btn btn-wrong" onclick="wrongAnswer()">
+                        ❌ WRONG ANSWER (CUT WIRE / X)
+                    </button>
+                    <button class="arena-btn btn-timer" onclick="toggleTimer()">
+                        ⏯ START/PAUSE (SPACE)
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Right Panel: Penalty -->
+        <!-- Right Panel: Penalty Info -->
         <div class="side-panel warning-panel">
             <div class="warning-text">WARNING!</div>
             <div class="level-text">WRONG ANSWER</div>
             <div class="penalty">-10 SEC</div>
+            <div class="penalties-count" id="penalties-display">⚠️ 0 PENALTIES</div>
         </div>
 
     </div>
 
-    <!-- Wires Section -->
-    <div class="wires-container">
-        <div class="wire-wrap"><div class="status" id="stat-1">WIRE 1</div><div class="wire intact" id="wire-1"></div></div>
-        <div class="wire-wrap"><div class="status" id="stat-2">WIRE 2</div><div class="wire intact" id="wire-2"></div></div>
-        <div class="wire-wrap"><div class="status" id="stat-3">WIRE 3</div><div class="wire intact" id="wire-3"></div></div>
-        <div class="wire-wrap"><div class="status" id="stat-4">WIRE 4</div><div class="wire intact" id="wire-4"></div></div>
-        <div class="wire-wrap"><div class="status" id="stat-5">WIRE 5</div><div class="wire intact" id="wire-5"></div></div>
+    <!-- WIRES SECTION (Clicking on wire cuts it = Wrong answer) -->
+    <div class="wires-section">
+        <div class="wires-instruction">
+            <span>DEFUSAL INTERFACE:</span> Press <b>[ENTER]</b> for Correct Defusal &nbsp;|&nbsp; <span>Click any Wire or [X] for Wrong Answer (-10s)</span>
+        </div>
+        <div class="wires-container">
+            <div class="wire-wrap" onclick="handleWireClick(1)" title="Click to Cut (Wrong Answer)">
+                <div class="status" id="stat-1">WIRE 1</div>
+                <div class="wire intact" id="wire-1"></div>
+            </div>
+            <div class="wire-wrap" onclick="handleWireClick(2)" title="Click to Cut (Wrong Answer)">
+                <div class="status" id="stat-2">WIRE 2</div>
+                <div class="wire intact" id="wire-2"></div>
+            </div>
+            <div class="wire-wrap" onclick="handleWireClick(3)" title="Click to Cut (Wrong Answer)">
+                <div class="status" id="stat-3">WIRE 3</div>
+                <div class="wire intact" id="wire-3"></div>
+            </div>
+            <div class="wire-wrap" onclick="handleWireClick(4)" title="Click to Cut (Wrong Answer)">
+                <div class="status" id="stat-4">WIRE 4</div>
+                <div class="wire intact" id="wire-4"></div>
+            </div>
+            <div class="wire-wrap" onclick="handleWireClick(5)" title="Click to Cut (Wrong Answer)">
+                <div class="status" id="stat-5">WIRE 5</div>
+                <div class="wire intact" id="wire-5"></div>
+            </div>
+        </div>
     </div>
 
-    <div class="hazard-stripes" style="position: absolute; bottom: 0; width: 100%;"></div>
+    <div class="hazard-stripes"></div>
+
+    <!-- LEADERBOARD DRAWER -->
+    <div class="leaderboard-panel" id="leaderboardPanel">
+        <button class="leaderboard-close-btn" onclick="toggleLeaderboard()">✕ CLOSE</button>
+        <div id="leaderboardContent"></div>
+    </div>
+
+    <!-- RESULT MODAL (VICTORY OR DETONATION) -->
+    <div class="result-modal" id="resultModal">
+        <div class="result-content" id="resultModalContent">
+            <div class="result-title" id="resultTitle">BOMB DEFUSED!</div>
+            <div class="result-desc" id="resultDesc">All 5 circuits neutralized safely in record time!</div>
+            <div class="result-stats" id="resultStats">
+                <div>Time Taken: <b id="stat-time-taken" style="color:#00ffff;">24s</b></div>
+                <div>Penalties: <b id="stat-penalties" style="color:#ff003c;">0</b></div>
+            </div>
+            <div style="display:flex; justify-content:center; gap:15px;">
+                <button class="arena-btn btn-timer" onclick="nextSetAndReset()">NEXT SET & RESET (R)</button>
+                <button class="arena-btn" style="border:2px solid #888; color:#fff;" onclick="closeResultModal()">CLOSE</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- AUDIO ELEMENTS -->
+    <audio id="beepSfx" src="https://assets.mixkit.co/active_storage/sfx/2574/2574-preview.mp3"></audio>
+    <audio id="successSfx" src="https://assets.mixkit.co/active_storage/sfx/2018/2018-preview.mp3"></audio>
+    <audio id="explosionSfx" src="https://assets.mixkit.co/active_storage/sfx/2816/2816-preview.mp3"></audio>
+    <audio id="sparkSfx" src="https://assets.mixkit.co/active_storage/sfx/2573/2573-preview.mp3"></audio>
 
     <script>
         const API_BASE = (window.location.origin && window.location.origin.includes('http')) 
             ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
             : 'http://localhost:5000';
 
-        let timeLeft = 90000; // 90 seconds in milliseconds
-        let timerInterval;
+        // ================= COMPLETE 10 SETS QUESTION BANK (50 QUESTIONS, NO POINTS) =================
+        const questionBank = {
+            1: [
+                {
+                    qNum: 1,
+                    question: "Which component is known as the brain of a computer?",
+                    options: [
+                        { key: "A", text: "RAM" },
+                        { key: "B", text: "CPU" },
+                        { key: "C", text: "SSD" },
+                        { key: "D", text: "GPU" },
+                        { key: "E", text: "Motherboard" }
+                    ]
+                },
+                {
+                    qNum: 2,
+                    question: "Which protocol is used to securely access websites?",
+                    options: [
+                        { key: "A", text: "HTTP" },
+                        { key: "B", text: "FTP" },
+                        { key: "C", text: "SMTP" },
+                        { key: "D", text: "HTTPS" },
+                        { key: "E", text: "Telnet" }
+                    ]
+                },
+                {
+                    qNum: 3,
+                    question: "Which data structure follows the LIFO principle?",
+                    options: [
+                        { key: "A", text: "Queue" },
+                        { key: "B", text: "Graph" },
+                        { key: "C", text: "Stack" },
+                        { key: "D", text: "Tree" },
+                        { key: "E", text: "Linked list" }
+                    ]
+                },
+                {
+                    qNum: 4,
+                    question: "Which country has the largest population in the world as of recent estimates?",
+                    options: [
+                        { key: "A", text: "India" },
+                        { key: "B", text: "China" },
+                        { key: "C", text: "United States" },
+                        { key: "D", text: "Indonesia" },
+                        { key: "E", text: "Brazil" }
+                    ]
+                },
+                {
+                    qNum: 5,
+                    question: "A team completes 3 tasks in 12 minutes at a constant rate. How long will it take to complete 8 tasks?",
+                    options: [
+                        { key: "A", text: "24 minutes" },
+                        { key: "B", text: "28 minutes" },
+                        { key: "C", text: "30 minutes" },
+                        { key: "D", text: "32 minutes" },
+                        { key: "E", text: "36 minutes" }
+                    ]
+                }
+            ],
+            2: [
+                {
+                    qNum: 6,
+                    question: "Which language is primarily used to structure web pages?",
+                    options: [
+                        { key: "A", text: "Python" },
+                        { key: "B", text: "SQL" },
+                        { key: "C", text: "HTML" },
+                        { key: "D", text: "C++" },
+                        { key: "E", text: "Java" }
+                    ]
+                },
+                {
+                    qNum: 7,
+                    question: "Which device forwards data packets between different networks?",
+                    options: [
+                        { key: "A", text: "Switch" },
+                        { key: "B", text: "Router" },
+                        { key: "C", text: "Repeater" },
+                        { key: "D", text: "Hub" },
+                        { key: "E", text: "Bridge" }
+                    ]
+                },
+                {
+                    qNum: 8,
+                    question: "What is the time complexity of binary search on a sorted array?",
+                    options: [
+                        { key: "A", text: "O(n)" },
+                        { key: "B", text: "O(n²)" },
+                        { key: "C", text: "O(1) in every case" },
+                        { key: "D", text: "O(log n)" },
+                        { key: "E", text: "O(n log n)" }
+                    ]
+                },
+                {
+                    qNum: 9,
+                    question: "Which Indian state is the largest by area?",
+                    options: [
+                        { key: "A", text: "Maharashtra" },
+                        { key: "B", text: "Madhya Pradesh" },
+                        { key: "C", text: "Rajasthan" },
+                        { key: "D", text: "Uttar Pradesh" },
+                        { key: "E", text: "Gujarat" }
+                    ]
+                },
+                {
+                    qNum: 10,
+                    question: "What is the next number in the sequence: 5, 11, 19, 29, 41, __?",
+                    options: [
+                        { key: "A", text: "49" },
+                        { key: "B", text: "53" },
+                        { key: "C", text: "54" },
+                        { key: "D", text: "55" },
+                        { key: "E", text: "57" }
+                    ]
+                }
+            ],
+            3: [
+                {
+                    qNum: 11,
+                    question: "Which SQL command retrieves records from a database?",
+                    options: [
+                        { key: "A", text: "INSERT" },
+                        { key: "B", text: "DELETE" },
+                        { key: "C", text: "UPDATE" },
+                        { key: "D", text: "SELECT" },
+                        { key: "E", text: "DROP" }
+                    ]
+                },
+                {
+                    qNum: 12,
+                    question: "Which MongoDB format is used to represent documents internally?",
+                    options: [
+                        { key: "A", text: "CSV" },
+                        { key: "B", text: "BSON" },
+                        { key: "C", text: "HTML" },
+                        { key: "D", text: "CSS" },
+                        { key: "E", text: "TXT" }
+                    ]
+                },
+                {
+                    qNum: 13,
+                    question: "Which MongoDB update operator increments a numeric field?",
+                    options: [
+                        { key: "A", text: "$set" },
+                        { key: "B", text: "$push" },
+                        { key: "C", text: "$inc" },
+                        { key: "D", text: "$unset" },
+                        { key: "E", text: "$rename" }
+                    ]
+                },
+                {
+                    qNum: 14,
+                    question: "Which organization publishes the Human Development Report?",
+                    options: [
+                        { key: "A", text: "UNESCO" },
+                        { key: "B", text: "World Trade Organization" },
+                        { key: "C", text: "UNICEF" },
+                        { key: "D", text: "UNDP" },
+                        { key: "E", text: "World Bank" }
+                    ]
+                },
+                {
+                    qNum: 15,
+                    question: "A number is increased by 20% and becomes 360. What was the original number?",
+                    options: [
+                        { key: "A", text: "280" },
+                        { key: "B", text: "290" },
+                        { key: "C", text: "300" },
+                        { key: "D", text: "320" },
+                        { key: "E", text: "330" }
+                    ]
+                }
+            ],
+            4: [
+                {
+                    qNum: 16,
+                    question: "Which tool is widely used for version control?",
+                    options: [
+                        { key: "A", text: "Git" },
+                        { key: "B", text: "Docker" },
+                        { key: "C", text: "Jenkins" },
+                        { key: "D", text: "Kubernetes" },
+                        { key: "E", text: "Selenium" }
+                    ]
+                },
+                {
+                    qNum: 17,
+                    question: "Which security technique converts readable information into an encoded form that requires a key to decrypt?",
+                    options: [
+                        { key: "A", text: "Debugging" },
+                        { key: "B", text: "Encryption" },
+                        { key: "C", text: "Indexing" },
+                        { key: "D", text: "Compilation" },
+                        { key: "E", text: "Routing" }
+                    ]
+                },
+                {
+                    qNum: 18,
+                    question: "Which type of attack attempts to make a service unavailable by overwhelming it with traffic?",
+                    options: [
+                        { key: "A", text: "Phishing" },
+                        { key: "B", text: "SQL injection" },
+                        { key: "C", text: "Brute-force login" },
+                        { key: "D", text: "Denial of Service" },
+                        { key: "E", text: "Spoofed email only" }
+                    ]
+                },
+                {
+                    qNum: 19,
+                    question: "Which Indian institution is responsible for monetary policy decisions through its Monetary Policy Committee?",
+                    options: [
+                        { key: "A", text: "SEBI" },
+                        { key: "B", text: "NITI Aayog" },
+                        { key: "C", text: "Reserve Bank of India" },
+                        { key: "D", text: "NABARD" },
+                        { key: "E", text: "Finance Commission" }
+                    ]
+                },
+                {
+                    qNum: 20,
+                    question: "A product costs ₹800 after a 20% discount. What was its original price?",
+                    options: [
+                        { key: "A", text: "₹900" },
+                        { key: "B", text: "₹960" },
+                        { key: "C", text: "₹1,000" },
+                        { key: "D", text: "₹1,040" },
+                        { key: "E", text: "₹1,200" }
+                    ]
+                }
+            ],
+            5: [
+                {
+                    qNum: 21,
+                    question: "Which command downloads a Git repository to your local machine?",
+                    options: [
+                        { key: "A", text: "git push" },
+                        { key: "B", text: "git clone" },
+                        { key: "C", text: "git commit" },
+                        { key: "D", text: "git status" },
+                        { key: "E", text: "git merge" }
+                    ]
+                },
+                {
+                    qNum: 22,
+                    question: "What is the main purpose of a CI/CD pipeline?",
+                    options: [
+                        { key: "A", text: "Design hardware" },
+                        { key: "B", text: "Replace databases" },
+                        { key: "C", text: "Automate software build, testing, and delivery" },
+                        { key: "D", text: "Increase internet speed" },
+                        { key: "E", text: "Create user passwords" }
+                    ]
+                },
+                {
+                    qNum: 23,
+                    question: "In Kubernetes, what is the smallest deployable unit?",
+                    options: [
+                        { key: "A", text: "Cluster" },
+                        { key: "B", text: "Node" },
+                        { key: "C", text: "Namespace" },
+                        { key: "D", text: "Pod" },
+                        { key: "E", text: "Deployment" }
+                    ]
+                },
+                {
+                    qNum: 24,
+                    question: "Which country hosted the 2024 Summer Olympics?",
+                    options: [
+                        { key: "A", text: "Japan" },
+                        { key: "B", text: "France" },
+                        { key: "C", text: "Brazil" },
+                        { key: "D", text: "Australia" },
+                        { key: "E", text: "Italy" }
+                    ]
+                },
+                {
+                    qNum: 25,
+                    question: "The average of five numbers is 24. Four numbers are 18, 20, 25, and 27. What is the fifth number?",
+                    options: [
+                        { key: "A", text: "28" },
+                        { key: "B", text: "29" },
+                        { key: "C", text: "30" },
+                        { key: "D", text: "31" },
+                        { key: "E", text: "32" }
+                    ]
+                }
+            ],
+            6: [
+                {
+                    qNum: 26,
+                    question: "Which of these is an open-source operating system?",
+                    options: [
+                        { key: "A", text: "Windows" },
+                        { key: "B", text: "Linux" },
+                        { key: "C", text: "macOS" },
+                        { key: "D", text: "iOS" },
+                        { key: "E", text: "MS-DOS" }
+                    ]
+                },
+                {
+                    qNum: 27,
+                    question: "Which protocol translates domain names into IP addresses?",
+                    options: [
+                        { key: "A", text: "FTP" },
+                        { key: "B", text: "SSH" },
+                        { key: "C", text: "DNS" },
+                        { key: "D", text: "SMTP" },
+                        { key: "E", text: "DHCP" }
+                    ]
+                },
+                {
+                    qNum: 28,
+                    question: "Which scheduling algorithm allocates a fixed time slice to each process in turn?",
+                    options: [
+                        { key: "A", text: "First Come, First Served" },
+                        { key: "B", text: "Shortest Job First" },
+                        { key: "C", text: "Priority Scheduling" },
+                        { key: "D", text: "Round Robin" },
+                        { key: "E", text: "Shortest Remaining Time" }
+                    ]
+                },
+                {
+                    qNum: 29,
+                    question: "Which is the headquarters city of the United Nations?",
+                    options: [
+                        { key: "A", text: "Geneva" },
+                        { key: "B", text: "Paris" },
+                        { key: "C", text: "New York City" },
+                        { key: "D", text: "London" },
+                        { key: "E", text: "Vienna" }
+                    ]
+                },
+                {
+                    qNum: 30,
+                    question: "If 3x - 7 = 32, what is the value of x?",
+                    options: [
+                        { key: "A", text: "9" },
+                        { key: "B", text: "11" },
+                        { key: "C", text: "12" },
+                        { key: "D", text: "13" },
+                        { key: "E", text: "15" }
+                    ]
+                }
+            ],
+            7: [
+                {
+                    qNum: 31,
+                    question: "What does API stand for?",
+                    options: [
+                        { key: "A", text: "Application Programming Interface" },
+                        { key: "B", text: "Automated Program Internet" },
+                        { key: "C", text: "Advanced Processing Input" },
+                        { key: "D", text: "Application Protocol Integration" },
+                        { key: "E", text: "Applied Programming Instruction" }
+                    ]
+                },
+                {
+                    qNum: 32,
+                    question: "Which HTTP method is generally used to retrieve a resource?",
+                    options: [
+                        { key: "A", text: "POST" },
+                        { key: "B", text: "DELETE" },
+                        { key: "C", text: "PATCH" },
+                        { key: "D", text: "GET" },
+                        { key: "E", text: "CONNECT" }
+                    ]
+                },
+                {
+                    qNum: 33,
+                    question: "What does HTTP status code 404 usually indicate?",
+                    options: [
+                        { key: "A", text: "Request succeeded" },
+                        { key: "B", text: "Unauthorized access" },
+                        { key: "C", text: "Resource not found" },
+                        { key: "D", text: "Internal server error" },
+                        { key: "E", text: "Permanent redirect" }
+                    ]
+                },
+                {
+                    qNum: 34,
+                    question: "Which Indian state is famous for the classical dance form Kathakali?",
+                    options: [
+                        { key: "A", text: "Tamil Nadu" },
+                        { key: "B", text: "Kerala" },
+                        { key: "C", text: "Odisha" },
+                        { key: "D", text: "Assam" },
+                        { key: "E", text: "Punjab" }
+                    ]
+                },
+                {
+                    qNum: 35,
+                    question: "Two numbers are in the ratio 3:5, and their sum is 64. What is the smaller number?",
+                    options: [
+                        { key: "A", text: "18" },
+                        { key: "B", text: "21" },
+                        { key: "C", text: "24" },
+                        { key: "D", text: "32" },
+                        { key: "E", text: "40" }
+                    ]
+                }
+            ],
+            8: [
+                {
+                    qNum: 36,
+                    question: "What does AWS stand for?",
+                    options: [
+                        { key: "A", text: "Advanced Web Software" },
+                        { key: "B", text: "Amazon Web Services" },
+                        { key: "C", text: "Automated Web System" },
+                        { key: "D", text: "Application Workflow Server" },
+                        { key: "E", text: "Advanced Wireless Service" }
+                    ]
+                },
+                {
+                    qNum: 37,
+                    question: "In cloud computing, what does auto-scaling do?",
+                    options: [
+                        { key: "A", text: "Automatically adjusts computing resources to demand" },
+                        { key: "B", text: "Deletes all inactive users" },
+                        { key: "C", text: "Encrypts every file manually" },
+                        { key: "D", text: "Replaces all databases" },
+                        { key: "E", text: "Converts source code into HTML" }
+                    ]
+                },
+                {
+                    qNum: 38,
+                    question: "Which container platform is commonly used to package and run applications?",
+                    options: [
+                        { key: "A", text: "Git" },
+                        { key: "B", text: "Jenkins" },
+                        { key: "C", text: "Docker" },
+                        { key: "D", text: "Maven" },
+                        { key: "E", text: "Selenium" }
+                    ]
+                },
+                {
+                    qNum: 39,
+                    question: "Which is the world's largest democracy by population?",
+                    options: [
+                        { key: "A", text: "United States" },
+                        { key: "B", text: "Indonesia" },
+                        { key: "C", text: "India" },
+                        { key: "D", text: "Brazil" },
+                        { key: "E", text: "Japan" }
+                    ]
+                },
+                {
+                    qNum: 40,
+                    question: "A server processes 1,200 requests in 4 minutes. At the same rate, how many requests can it process in 7 minutes?",
+                    options: [
+                        { key: "A", text: "1,800" },
+                        { key: "B", text: "2,000" },
+                        { key: "C", text: "2,100" },
+                        { key: "D", text: "2,400" },
+                        { key: "E", text: "2,800" }
+                    ]
+                }
+            ],
+            9: [
+                {
+                    qNum: 41,
+                    question: "Which of the following is a NoSQL database?",
+                    options: [
+                        { key: "A", text: "MongoDB" },
+                        { key: "B", text: "Microsoft Word" },
+                        { key: "C", text: "Excel" },
+                        { key: "D", text: "PowerPoint" },
+                        { key: "E", text: "Notepad" }
+                    ]
+                },
+                {
+                    qNum: 42,
+                    question: "What is the purpose of a database index?",
+                    options: [
+                        { key: "A", text: "Increase screen resolution" },
+                        { key: "B", text: "Improve data retrieval speed" },
+                        { key: "C", text: "Replace database backups" },
+                        { key: "D", text: "Encrypt all network traffic" },
+                        { key: "E", text: "Compile programs" }
+                    ]
+                },
+                {
+                    qNum: 43,
+                    question: "Which ACID property ensures that a transaction is completed entirely or not at all?",
+                    options: [
+                        { key: "A", text: "Consistency" },
+                        { key: "B", text: "Isolation" },
+                        { key: "C", text: "Durability" },
+                        { key: "D", text: "Atomicity" },
+                        { key: "E", text: "Availability" }
+                    ]
+                },
+                {
+                    qNum: 44,
+                    question: "Which international organization primarily coordinates global public health efforts?",
+                    options: [
+                        { key: "A", text: "WTO" },
+                        { key: "B", text: "WHO" },
+                        { key: "C", text: "IMF" },
+                        { key: "D", text: "FIFA" },
+                        { key: "E", text: "UNESCO" }
+                    ]
+                },
+                {
+                    qNum: 45,
+                    question: "A value increases from 80 to 100. What is the percentage increase?",
+                    options: [
+                        { key: "A", text: "15%" },
+                        { key: "B", text: "20%" },
+                        { key: "C", text: "25%" },
+                        { key: "D", text: "30%" },
+                        { key: "E", text: "35%" }
+                    ]
+                }
+            ],
+            10: [
+                {
+                    qNum: 46,
+                    question: "Which language is commonly used for data analysis and scripting?",
+                    options: [
+                        { key: "A", text: "Python" },
+                        { key: "B", text: "HTML" },
+                        { key: "C", text: "CSS" },
+                        { key: "D", text: "XML" },
+                        { key: "E", text: "Markdown" }
+                    ]
+                },
+                {
+                    qNum: 47,
+                    question: "Which security method verifies a user's identity using two different authentication factors?",
+                    options: [
+                        { key: "A", text: "Data compression" },
+                        { key: "B", text: "Two-factor authentication" },
+                        { key: "C", text: "Load balancing" },
+                        { key: "D", text: "Version control" },
+                        { key: "E", text: "Virtual memory" }
+                    ]
+                },
+                {
+                    qNum: 48,
+                    question: "Which SQL clause filters grouped results after aggregation?",
+                    options: [
+                        { key: "A", text: "WHERE" },
+                        { key: "B", text: "ORDER BY" },
+                        { key: "C", text: "HAVING" },
+                        { key: "D", text: "DISTINCT" },
+                        { key: "E", text: "LIMIT" }
+                    ]
+                },
+                {
+                    qNum: 49,
+                    question: "Which Indian space mission successfully landed near the Moon's south polar region in 2023?",
+                    options: [
+                        { key: "A", text: "Chandrayaan-1" },
+                        { key: "B", text: "Mangalyaan" },
+                        { key: "C", text: "Chandrayaan-2" },
+                        { key: "D", text: "Chandrayaan-3" },
+                        { key: "E", text: "Aditya-L1" }
+                    ]
+                },
+                {
+                    qNum: 50,
+                    question: "A team scores 72, 84, 91, and 77 points in four rounds. What is its average score?",
+                    options: [
+                        { key: "A", text: "78" },
+                        { key: "B", text: "80" },
+                        { key: "C", text: "81" },
+                        { key: "D", text: "82" },
+                        { key: "E", text: "84" }
+                    ]
+                }
+            ]
+        };
+
+        // GAME STATE
+        let activeSetNumber = 1;
+        let currentLevel = 1; // 1 to 5
+        let timeLeft = 90000; // 90.00 seconds
+        let timerInterval = null;
         let isRunning = false;
-        let currentLevel = 1;
-        let selectedTeamNum = 1;
         let penaltiesCount = 0;
-        let wiresCutArray = [];
+        let selectedTeamNum = 1;
+        let wiresCutArray = []; // List of cut wire indices
 
-        // Fallback engineering puzzles
-        let puzzles = [
-            { level: 1, title: "PRIMARY LOGIC GATE", clue: "I output high only when both my inputs agree to be true. Which component am I?", componentName: "AND Gate IC (7408)" },
-            { level: 2, title: "POWER REGULATION DECOUPLING", clue: "I store electrical energy in an electric field and block DC while passing AC noise. Cut my bypass wire!", componentName: "Electrolytic Capacitor" },
-            { level: 3, title: "REVERSE BREAKDOWN DIODE", clue: "I allow current in forward bias like normal, but conduct safely in reverse bias at a specified breakdown voltage.", componentName: "Zener Diode" },
-            { level: 4, title: "STRUCTURAL LOAD BEARING", clue: "In beam mechanics, I represent the cross-sectional resistance against bending moments. Cut the neutral axis trace!", componentName: "Section Modulus (I/y)" },
-            { level: 5, title: "MASTER TIMING CRYSTAL", clue: "I generate precise clock oscillations using the piezoelectric effect to keep the detonator synchronized.", componentName: "Quartz Crystal Oscillator" }
-        ];
-
+        // DOM Elements
         const timerDisplay = document.getElementById('timer');
         const levelDisplay = document.getElementById('current-level');
-        const bodyElement = document.getElementById('main-body');
         const teamNameDisplay = document.getElementById('team-name');
+        const setBadge = document.getElementById('set-badge');
         const puzzleTitle = document.getElementById('puzzle-title');
-        const puzzleClue = document.getElementById('puzzle-clue');
-        const puzzleComponent = document.getElementById('puzzle-component');
+        const wireTargetTag = document.getElementById('wire-target-tag');
+        const puzzleQuestion = document.getElementById('puzzle-question');
+        const optionsGrid = document.getElementById('options-grid');
+        const penaltiesDisplay = document.getElementById('penalties-display');
+        const bodyElement = document.getElementById('main-body');
         const leaderboardPanel = document.getElementById('leaderboardPanel');
+        const resultModal = document.getElementById('resultModal');
 
-        function updateDbBadge(isOnline, text) {
-            const badge = document.getElementById('backend-status');
-            const txt = document.getElementById('backend-status-text');
-            if (badge && txt) {
-                badge.style.borderColor = isOnline ? '#00ff80' : '#f6d148';
-                badge.style.color = isOnline ? '#00ff80' : '#f6d148';
-                badge.firstElementChild.style.background = isOnline ? '#00ff80' : '#f6d148';
-                badge.firstElementChild.style.boxShadow = isOnline ? '0 0 8px #00ff80' : '0 0 8px #f6d148';
-                txt.innerText = text;
+        function playSfx(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.currentTime = 0;
+                el.play().catch(() => {});
             }
         }
 
-        function updatePuzzleUI() {
-            if (currentLevel <= 5 && puzzles[currentLevel - 1]) {
-                const p = puzzles[currentLevel - 1];
-                puzzleTitle.innerText = `[ LEVEL ${currentLevel}: ${p.title} ]`;
-                puzzleClue.innerText = `"${p.clue}"`;
-                puzzleComponent.innerText = `Target Component: ${p.componentName || ''}`;
-                puzzleTitle.style.color = "#00ffff";
-            }
+        // ================= QUESTION UI RENDERING =================
+        function updateQuestionUI() {
+            const currentSetQuestions = questionBank[activeSetNumber] || questionBank[1];
+            const qData = currentSetQuestions[currentLevel - 1];
+
+            if (!qData) return;
+
+            puzzleTitle.innerText = `[ LEVEL ${currentLevel} / 5 • QUESTION ${qData.qNum} ]`;
+            wireTargetTag.innerText = `DEFUSING WIRE ${currentLevel}`;
+            puzzleQuestion.innerText = qData.question;
+
+            // Render options without points
+            let optionsHTML = '';
+            qData.options.forEach((opt, idx) => {
+                const isFull = (idx === 4 && qData.options.length === 5);
+                optionsHTML += `
+                    <div class="option-item ${isFull ? 'full-width' : ''}">
+                        <span class="opt-letter">${opt.key}</span>
+                        <span class="opt-text">${opt.text}</span>
+                    </div>
+                `;
+            });
+            optionsGrid.innerHTML = optionsHTML;
+            levelDisplay.innerText = currentLevel;
         }
 
+        // ================= TIMER CONTROLS =================
         function updateDisplay() {
             if (timeLeft <= 0) {
+                timeLeft = 0;
                 timerDisplay.innerText = "00:00.00";
-                timerDisplay.style.color = "red";
-                puzzleTitle.innerText = "BOMB DETONATED!";
-                puzzleTitle.style.color = "red";
-                puzzleClue.innerText = "Time has expired. Facility lockdown engaged.";
-                puzzleComponent.innerText = "";
+                timerDisplay.style.color = "#ff003c";
                 clearInterval(timerInterval);
                 isRunning = false;
 
-                // Record detonated session to MongoDB
+                // Play explosion SFX
+                playSfx('explosionSfx');
+
+                // Show detonation modal
+                showResultModal(false);
+
+                // Save session to backend
                 saveSessionToBackend('detonated');
                 return;
             }
@@ -406,8 +1457,9 @@
                 clearInterval(timerInterval);
                 isRunning = false;
             } else {
-                if(timeLeft > 0 && currentLevel <= 5) {
+                if (timeLeft > 0 && currentLevel <= 5) {
                     isRunning = true;
+                    playSfx('beepSfx');
                     timerInterval = setInterval(() => {
                         timeLeft -= 10;
                         updateDisplay();
@@ -416,74 +1468,161 @@
             }
         }
 
+        // ================= RIGHT ANSWER / DEFUSE LOGIC (ENTER) =================
         function correctAnswer() {
-            if(currentLevel > 5 || timeLeft <= 0 || !isRunning) return;
+            if (timeLeft <= 0) return;
+            if (currentLevel > 5) return;
 
-            // Cut the current wire
-            document.getElementById(`wire-${currentLevel}`).classList.remove('intact');
-            document.getElementById(`wire-${currentLevel}`).classList.add('cut');
-            wiresCutArray.push(currentLevel);
+            // If timer wasn't started, auto-start it for convenience
+            if (!isRunning) {
+                toggleTimer();
+            }
+
+            playSfx('successSfx');
+
+            // Neutralize / defuse the active wire
+            const currentWire = document.getElementById(`wire-${currentLevel}`);
+            const statText = document.getElementById(`stat-${currentLevel}`);
             
-            let statText = document.getElementById(`stat-${currentLevel}`);
-            statText.innerText = "DEFUSED";
-            statText.classList.add('cut-text');
+            if (currentWire) {
+                currentWire.classList.remove('intact');
+                currentWire.classList.add('defused');
+            }
+            if (statText) {
+                statText.innerText = "DEFUSED";
+                statText.classList.add('defused-text');
+            }
 
+            // Check if level 5 is completed (Bomb defused!)
             if (currentLevel === 5) {
                 clearInterval(timerInterval);
                 isRunning = false;
-                timerDisplay.style.color = "#00ff00"; // Green color for win
-                puzzleTitle.innerText = "BOMB DEFUSED! TEAM WINS!";
-                puzzleTitle.style.color = "#00ff00";
-                puzzleClue.innerText = "All circuits neutralized safely in record time!";
-                puzzleComponent.innerText = "DEFUSAL SUCCESSFUL";
-
-                // Record defused session to MongoDB
+                timerDisplay.style.color = "#00ff80";
+                
+                showResultModal(true);
                 saveSessionToBackend('defused');
             } else {
+                // Advance to next question in the set
                 currentLevel++;
-                levelDisplay.innerText = currentLevel;
-                updatePuzzleUI();
+                updateQuestionUI();
             }
         }
 
-        function wrongAnswer() {
-            if(timeLeft <= 0 || !isRunning || currentLevel > 5) return;
-            
-            timeLeft -= 10000; // Subtract 10 seconds
+        // ================= WRONG ANSWER / CUT WIRE (CLICK WIRE OR X) =================
+        function wrongAnswer(wireIdx = null) {
+            if (timeLeft <= 0) return;
+
+            // Target wire is either the clicked wire, or the current level wire
+            const targetWireNum = wireIdx || currentLevel;
+            const wireEl = document.getElementById(`wire-${targetWireNum}`);
+            const statText = document.getElementById(`stat-${targetWireNum}`);
+
+            playSfx('sparkSfx');
+
+            // Penalty: -10 Seconds
+            timeLeft -= 10000;
+            if (timeLeft < 0) timeLeft = 0;
             penaltiesCount++;
-            if(timeLeft < 0) timeLeft = 0;
-            
-            // Screen shake effect
+            penaltiesDisplay.innerText = `⚠️ ${penaltiesCount} PENALTIES`;
+
+            // Visual cut
+            if (wireEl && !wireEl.classList.contains('defused')) {
+                wireEl.classList.remove('intact');
+                wireEl.classList.add('cut');
+                if (!wiresCutArray.includes(targetWireNum)) {
+                    wiresCutArray.push(targetWireNum);
+                }
+            }
+            if (statText && !statText.classList.contains('defused-text')) {
+                statText.innerText = `CUT`;
+                statText.classList.add('cut-text');
+            }
+
+            // Screen shake
             bodyElement.classList.remove('shake');
             void bodyElement.offsetWidth; // trigger reflow
             bodyElement.classList.add('shake');
-            
+
             updateDisplay();
         }
 
-        function resetGame() {
+        function handleWireClick(wireNumber) {
+            // User requested: "for wrong click on the wire to cut it"
+            wrongAnswer(wireNumber);
+        }
+
+        // ================= RESET CONTROLS =================
+        function resetTimerOnly() {
             clearInterval(timerInterval);
             isRunning = false;
             timeLeft = 90000;
             currentLevel = 1;
             penaltiesCount = 0;
             wiresCutArray = [];
-            levelDisplay.innerText = "1";
+            penaltiesDisplay.innerText = `⚠️ 0 PENALTIES`;
             timerDisplay.style.color = "#ff3366";
-            
-            updatePuzzleUI();
-            
-            for(let i=1; i<=5; i++) {
-                let wire = document.getElementById(`wire-${i}`);
-                wire.classList.remove('cut');
-                wire.classList.add('intact');
-                let statText = document.getElementById(`stat-${i}`);
-                statText.innerText = `WIRE ${i}`;
-                statText.classList.remove('cut-text');
+
+            // Reset wires visuals
+            for (let i = 1; i <= 5; i++) {
+                const wire = document.getElementById(`wire-${i}`);
+                const statText = document.getElementById(`stat-${i}`);
+                if (wire) {
+                    wire.className = 'wire intact';
+                }
+                if (statText) {
+                    statText.innerText = `WIRE ${i}`;
+                    statText.className = 'status';
+                }
             }
+
+            updateQuestionUI();
             updateDisplay();
         }
 
+        function changeSet(setNum) {
+            activeSetNumber = parseInt(setNum);
+            setBadge.innerText = `SET ${activeSetNumber} ACTIVE`;
+            resetTimerOnly();
+        }
+
+        function nextSetAndReset() {
+            closeResultModal();
+            let nextSet = activeSetNumber + 1;
+            if (nextSet > 10) nextSet = 1;
+            document.getElementById('setSelect').value = nextSet;
+            changeSet(nextSet);
+        }
+
+        // ================= RESULT MODAL =================
+        function showResultModal(isDefused) {
+            const timeTakenSec = Math.max(0, 90 - Math.round(timeLeft / 1000));
+            const content = document.getElementById('resultModalContent');
+            const title = document.getElementById('resultTitle');
+            const desc = document.getElementById('resultDesc');
+            
+            document.getElementById('stat-time-taken').innerText = `${timeTakenSec}s`;
+            document.getElementById('stat-penalties').innerText = `${penaltiesCount}`;
+
+            if (isDefused) {
+                content.className = 'result-content';
+                title.innerText = 'BOMB DEFUSED! SET COMPLETE!';
+                title.style.color = '#00ff80';
+                desc.innerText = `Excellent work! TEAM ${selectedTeamNum} cleared SET ${activeSetNumber} safely!`;
+            } else {
+                content.className = 'result-content detonated';
+                title.innerText = 'BOMB DETONATED!';
+                title.style.color = '#ff003c';
+                desc.innerText = `Time expired! SET ${activeSetNumber} was not neutralized in time.`;
+            }
+
+            resultModal.classList.add('active');
+        }
+
+        function closeResultModal() {
+            resultModal.classList.remove('active');
+        }
+
+        // ================= BACKEND INTEGRATION (SILENT MONGODB) =================
         async function saveSessionToBackend(status) {
             const timeTakenSec = Math.max(0, 90 - Math.round(timeLeft / 1000));
             const sessionData = {
@@ -495,7 +1634,7 @@
                 timeTakenSeconds: timeTakenSec,
                 penaltiesCount: penaltiesCount,
                 status: status,
-                score: status === 'defused' ? Math.max(10, Math.round(timeLeft / 1000)) : 0
+                score: 0 // No points per user instruction
             };
 
             try {
@@ -504,12 +1643,12 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(sessionData)
                 });
-                console.log('Recorded defusal session to MongoDB');
             } catch (err) {
-                console.warn('Failed to record session to backend:', err);
+                console.warn('Backend session save skipped:', err);
             }
         }
 
+        // ================= LEADERBOARD =================
         async function toggleLeaderboard() {
             leaderboardPanel.classList.toggle('active');
             if (leaderboardPanel.classList.contains('active')) {
@@ -518,81 +1657,72 @@
         }
 
         async function renderLeaderboard() {
+            const container = document.getElementById('leaderboardContent');
             try {
                 const res = await fetch(`${API_BASE}/api/round3/leaderboard`);
                 if (res.ok) {
                     const json = await res.json();
                     if (json.success && json.data.length > 0) {
-                        let html = `<h2 style="color:#00ffff; font-family:'Orbitron'; text-align:center; margin-bottom:20px;">ROUND 3 SCORES</h2>`;
+                        let html = `<h2 style="color:#00ffff; font-family:'Orbitron'; text-align:center; margin-bottom:20px;">ROUND 3 RECORDS</h2>`;
                         json.data.forEach((rec, idx) => {
                             const isWin = rec.status === 'defused';
                             html += `
                                 <div class="leaderboard-card ${isWin ? 'defused' : ''}">
                                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                                        <span style="color:#ff00ff; font-weight:bold; font-size:18px;">#${idx+1} ${rec.teamName}</span>
-                                        <span style="color:${isWin ? '#00ff80':'#ff003c'}; font-weight:bold;">${rec.status.toUpperCase()}</span>
+                                        <span style="color:#ff00ff; font-weight:bold; font-size:18px; font-family:'Orbitron';">#${idx+1} ${rec.teamName}</span>
+                                        <span style="color:${isWin ? '#00ff80':'#ff003c'}; font-weight:bold; font-family:'Orbitron';">${rec.status.toUpperCase()}</span>
                                     </div>
-                                    <div style="font-size:14px; color:#aaa; margin-top:6px;">
+                                    <div style="font-size:14px; color:#aaa; margin-top:8px;">
                                         ⏱️ Time Taken: <b style="color:#fff;">${rec.timeTakenSeconds}s</b> &nbsp;|&nbsp; 
                                         ⚠️ Penalties: <b style="color:#ff003c;">${rec.penaltiesCount}</b><br>
-                                        ⭐ Score: <b style="color:#f6d148;">${rec.score} pts</b>
+                                        ⚡ Wires Cut: <b style="color:#f6d148;">${rec.wiresCut ? rec.wiresCut.length : 0}</b>
                                     </div>
                                 </div>
                             `;
                         });
-                        leaderboardPanel.innerHTML = html;
+                        container.innerHTML = html;
                         return;
                     }
                 }
             } catch (err) {
-                console.warn('Could not fetch leaderboard:', err);
+                console.warn('Leaderboard fetch skipped:', err);
             }
-            leaderboardPanel.innerHTML = `<h3 style="color:#fff; text-align:center;">No attempts recorded yet.</h3>`;
+            container.innerHTML = `<h3 style="color:#fff; text-align:center; margin-top:40px;">No attempts recorded yet.</h3>`;
         }
 
-        async function loadPuzzlesFromBackend() {
-            try {
-                updateDbBadge(false, 'Connecting to MongoDB...');
-                const res = await fetch(`${API_BASE}/api/round3/puzzles`);
-                if (res.ok) {
-                    const json = await res.json();
-                    if (json.success && json.data && json.data.length > 0) {
-                        puzzles = json.data;
-                        updateDbBadge(true, `MongoDB (${puzzles.length} Puzzles)`);
-                        updatePuzzleUI();
-                        return;
-                    }
-                }
-            } catch (err) {
-                console.warn('Backend server unreachable, using offline fallback', err);
-            }
-            updateDbBadge(false, 'Local Mode');
-            updatePuzzleUI();
-        }
-
-        // Keyboard Controls
+        // ================= KEYBOARD CONTROLS =================
         document.addEventListener('keydown', (e) => {
+            // Space: Toggle timer
             if (e.code === 'Space') {
                 e.preventDefault();
                 toggleTimer();
-            } else if (e.code === 'KeyC') {
+            }
+            // Enter: Correct answer / Defuse wire
+            else if (e.code === 'Enter') {
+                e.preventDefault();
                 correctAnswer();
-            } else if (e.code === 'KeyX') {
+            }
+            // X: Wrong answer / Cut wire
+            else if (e.code === 'KeyX') {
                 wrongAnswer();
-            } else if (e.code === 'KeyR') {
-                resetGame();
-            } else if (e.code === 'KeyL') {
+            }
+            // R: Reset game / timer
+            else if (e.code === 'KeyR') {
+                resetTimerOnly();
+            }
+            // L: Leaderboard toggle
+            else if (e.code === 'KeyL') {
                 toggleLeaderboard();
-            } else if (['Digit1', 'Digit2', 'Digit3', 'Digit4', 'Digit5'].includes(e.code)) {
-                let teamNum = parseInt(e.code.replace('Digit', ''));
-                selectedTeamNum = teamNum;
-                teamNameDisplay.innerText = "TEAM " + teamNum;
-                resetGame();
+            }
+            // 1-9: Select team number
+            else if (e.key >= '1' && e.key <= '9') {
+                selectedTeamNum = parseInt(e.key);
+                teamNameDisplay.innerText = "TEAM " + selectedTeamNum;
             }
         });
 
-        // Initialize backend puzzles and display
-        loadPuzzlesFromBackend();
+        // Initialize display and question
+        updateQuestionUI();
         updateDisplay();
     </script>
 </body>
