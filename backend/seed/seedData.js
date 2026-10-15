@@ -245,16 +245,120 @@ const round1Questions = [
         ]
     },
     {
-        question: "Name a subject students often find difficult.",
+        question: "What is the first thing students check after an exam ends?",
         order: 19,
         category: "College Life",
         answers: [
-            { rank: 1, text: "Mathematics", points: 35 },
-            { rank: 2, text: "Science", points: 25 },
-            { rank: 3, text: "Physics", points: 15 },
-            { rank: 4, text: "Chemistry", points: 10 },
-            { rank: 5, text: "History", points: 10 },
-            { rank: 6, text: "English grammar", points: 5 }
+            { rank: 1, text: "Answers with friends", points: 35 },
+            { rank: 2, text: "The question paper", points: 25 },
+            { rank: 3, text: "Messages on their phone", points: 15 },
+            { rank: 4, text: "The next exam date", points: 10 },
+            { rank: 5, text: "How many marks they may get", points: 10 },
+            { rank: 6, text: "Whether attendance was taken", points: 5 }
+        ]
+    },
+    {
+        question: "Name something students do when the college announces a holiday.",
+        order: 20,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Sleep longer", points: 35 },
+            { rank: 2, text: "Make plans with friends", points: 25 },
+            { rank: 3, text: "Watch movies or series", points: 15 },
+            { rank: 4, text: "Visit family", points: 10 },
+            { rank: 5, text: "Play video games", points: 10 },
+            { rank: 6, text: "Finish pending assignments", points: 5 }
+        ]
+    },
+    {
+        question: "What is something students commonly borrow from classmates?",
+        order: 21,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Pen", points: 35 },
+            { rank: 2, text: "Class notes", points: 25 },
+            { rank: 3, text: "Charger", points: 15 },
+            { rank: 4, text: "Calculator", points: 10 },
+            { rank: 5, text: "Lab coat or apron", points: 10 },
+            { rank: 6, text: "Money", points: 5 }
+        ]
+    },
+    {
+        question: "Name a reason students rush into class just before attendance.",
+        order: 22,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Woke up late", points: 35 },
+            { rank: 2, text: "Missed the earlier bus/train", points: 25 },
+            { rank: 3, text: "Got ready slowly", points: 15 },
+            { rank: 4, text: "Traffic jam", points: 10 },
+            { rank: 5, text: "Forgot the timetable", points: 10 },
+            { rank: 6, text: "Was chatting with friends", points: 5 }
+        ]
+    },
+    {
+        question: "What is something students do in a computer lab when the internet stops working?",
+        order: 23,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Refresh the page", points: 35 },
+            { rank: 2, text: "Ask the lab assistant", points: 25 },
+            { rank: 3, text: "Use mobile data", points: 15 },
+            { rank: 4, text: "Talk to friends", points: 10 },
+            { rank: 5, text: "Wait for it to return", points: 10 },
+            { rank: 6, text: "Restart the computer", points: 5 }
+        ]
+    },
+    {
+        question: "Name something students usually do the night before a submission.",
+        order: 24,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Work all night", points: 35 },
+            { rank: 2, text: "Ask for an extension", points: 25 },
+            { rank: 3, text: "Borrow a laptop or charger", points: 15 },
+            { rank: 4, text: "Print the report", points: 10 },
+            { rank: 5, text: "Fix formatting", points: 10 },
+            { rank: 6, text: "Message group members", points: 5 }
+        ]
+    },
+    {
+        question: "What is a common reason a college group project becomes stressful?",
+        order: 25,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Members do not contribute equally", points: 35 },
+            { rank: 2, text: "Someone misses deadlines", points: 25 },
+            { rank: 3, text: "Poor communication", points: 15 },
+            { rank: 4, text: "Last-minute changes", points: 10 },
+            { rank: 5, text: "Conflicts over ideas", points: 10 },
+            { rank: 6, text: "Unclear task distribution", points: 5 }
+        ]
+    },
+    {
+        question: "Name something students do during a free lecture.",
+        order: 26,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Chat with friends", points: 35 },
+            { rank: 2, text: "Use social media", points: 25 },
+            { rank: 3, text: "Sleep", points: 15 },
+            { rank: 4, text: "Visit the canteen", points: 10 },
+            { rank: 5, text: "Study for another subject", points: 10 },
+            { rank: 6, text: "Play games", points: 5 }
+        ]
+    },
+    {
+        question: "What is something students worry about at the start of a new semester?",
+        order: 27,
+        category: "College Life",
+        answers: [
+            { rank: 1, text: "Attendance shortage", points: 35 },
+            { rank: 2, text: "Difficult subjects", points: 25 },
+            { rank: 3, text: "New timetable", points: 15 },
+            { rank: 4, text: "Internal exams", points: 10 },
+            { rank: 5, text: "Project deadlines", points: 10 },
+            { rank: 6, text: "Making new friends", points: 5 }
         ]
     }
 ];

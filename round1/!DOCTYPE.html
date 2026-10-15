@@ -718,7 +718,7 @@
             ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
             : 'http://localhost:5000';
 
-        // MASTER 19 QUESTIONS FROM OFFICIAL QUESTION BANK
+        // MASTER 27 QUESTIONS FROM OFFICIAL QUESTION BANK
         let quizData = [
             { q: "Which app do college students use the most during a boring lecture?", a1: "Instagram (Reels)", p1: 35, a2: "WhatsApp", p2: 25, a3: "Games (BGMI/Free Fire)", p3: 15, a4: "YouTube", p4: 10, a5: "Snapchat", p5: 10, a6: "Spotify", p6: 5 },
             { q: "Name a place where students go to bunk classes.", a1: "Washroom", p1: 35, a2: "Committee Work", p2: 25, a3: "Canteen / Café / Tapri", p3: 15, a4: "Home / Friend's Room", p4: 10, a5: "Library", p5: 10, a6: "Ground", p6: 5 },
@@ -738,7 +738,15 @@
             { q: "What ACTUALLY happens during a night-out \"Group Study\" session?", a1: "Gossiping about classmates and professors", p1: 35, a2: "Ordering fast food / Making midnight Maggi", p2: 25, a3: "Watching a movie or random YouTube videos", p3: 15, a4: "Playing multiplayer games (BGMI/FIFA/Valorant)", p4: 10, a5: "Everyone falling asleep one by one", p5: 10, a6: "Actually studying the syllabus", p6: 5 },
             { q: "What is the most common reason a student suddenly starts attending ALL lectures?", a1: "Received a defaulter / low attendance warning", p1: 35, a2: "The professor threatened to fail them in internals", p2: 25, a3: "Their crush attends that specific lecture", p3: 15, a4: "Internal assessment/Unit tests are next week", p4: 10, a5: "Parents were called by the HOD", p5: 10, a6: "They genuinely want to learn", p6: 5 },
             { q: "Name something you will ALWAYS find written or carved on a college last bench.", a1: "Random names with a heart / Crush's name", p1: 35, a2: "Answers or formulas for cheating in exams", p2: 25, a3: "Instagram handles / Snapchat IDs", p3: 15, a4: "Abusive words for the college or strict professors", p4: 10, a5: "Tick-Tack-Toe (Zero Kata) games", p5: 10, a6: "Abstract art / Random scribbling", p6: 5 },
-            { q: "Name a subject students often find difficult.", a1: "Mathematics", p1: 35, a2: "Science", p2: 25, a3: "Physics", p3: 15, a4: "Chemistry", p4: 10, a5: "History", p5: 10, a6: "English grammar", p6: 5 }
+            { q: "What is the first thing students check after an exam ends?", a1: "Answers with friends", p1: 35, a2: "The question paper", p2: 25, a3: "Messages on their phone", p3: 15, a4: "The next exam date", p4: 10, a5: "How many marks they may get", p5: 10, a6: "Whether attendance was taken", p6: 5 },
+            { q: "Name something students do when the college announces a holiday.", a1: "Sleep longer", p1: 35, a2: "Make plans with friends", p2: 25, a3: "Watch movies or series", p3: 15, a4: "Visit family", p4: 10, a5: "Play video games", p5: 10, a6: "Finish pending assignments", p6: 5 },
+            { q: "What is something students commonly borrow from classmates?", a1: "Pen", p1: 35, a2: "Class notes", p2: 25, a3: "Charger", p3: 15, a4: "Calculator", p4: 10, a5: "Lab coat or apron", p5: 10, a6: "Money", p6: 5 },
+            { q: "Name a reason students rush into class just before attendance.", a1: "Woke up late", p1: 35, a2: "Missed the earlier bus/train", p2: 25, a3: "Got ready slowly", p3: 15, a4: "Traffic jam", p4: 10, a5: "Forgot the timetable", p5: 10, a6: "Was chatting with friends", p6: 5 },
+            { q: "What is something students do in a computer lab when the internet stops working?", a1: "Refresh the page", p1: 35, a2: "Ask the lab assistant", p2: 25, a3: "Use mobile data", p3: 15, a4: "Talk to friends", p4: 10, a5: "Wait for it to return", p5: 10, a6: "Restart the computer", p6: 5 },
+            { q: "Name something students usually do the night before a submission.", a1: "Work all night", p1: 35, a2: "Ask for an extension", p2: 25, a3: "Borrow a laptop or charger", p3: 15, a4: "Print the report", p4: 10, a5: "Fix formatting", p5: 10, a6: "Message group members", p6: 5 },
+            { q: "What is a common reason a college group project becomes stressful?", a1: "Members do not contribute equally", p1: 35, a2: "Someone misses deadlines", p2: 25, a3: "Poor communication", p3: 15, a4: "Last-minute changes", p4: 10, a5: "Conflicts over ideas", p5: 10, a6: "Unclear task distribution", p6: 5 },
+            { q: "Name something students do during a free lecture.", a1: "Chat with friends", p1: 35, a2: "Use social media", p2: 25, a3: "Sleep", p3: 15, a4: "Visit the canteen", p4: 10, a5: "Study for another subject", p5: 10, a6: "Play games", p6: 5 },
+            { q: "What is something students worry about at the start of a new semester?", a1: "Attendance shortage", p1: 35, a2: "Difficult subjects", p2: 25, a3: "New timetable", p3: 15, a4: "Internal exams", p4: 10, a5: "Project deadlines", p5: 10, a6: "Making new friends", p6: 5 }
         ];
 
         let currentQIndex = 0;
