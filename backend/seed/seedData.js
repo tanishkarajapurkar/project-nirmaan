@@ -7,6 +7,7 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const Round1Question = require('../models/Round1Question');
 const Round2Option = require('../models/Round2Option');
 const Round3Puzzle = require('../models/Round3Puzzle');
+const Team = require('../models/Team');
 const connectDB = require('../config/db');
 
 const round1Questions = [
@@ -528,6 +529,52 @@ const round3Puzzles = [
     }
 ];
 
+// Master 42 Verified Teams (Pool A: 1-21, Pool B: 22-42)
+const officialTeams = [
+    { teamNumber: 1, teamName: "Supermovaa" },
+    { teamNumber: 2, teamName: "Team Rocket" },
+    { teamNumber: 3, teamName: "Team harmony" },
+    { teamNumber: 4, teamName: "Fab 3" },
+    { teamNumber: 5, teamName: "Team Alpha" },
+    { teamNumber: 6, teamName: "Og's" },
+    { teamNumber: 7, teamName: "H.K.TTECH" },
+    { teamNumber: 8, teamName: "TriNova" },
+    { teamNumber: 9, teamName: "Badshah boys" },
+    { teamNumber: 10, teamName: "Dedar Fast" },
+    { teamNumber: 11, teamName: "Project Alchemists" },
+    { teamNumber: 12, teamName: "Cmkar kadam's Squad" },
+    { teamNumber: 13, teamName: "Elite duo" },
+    { teamNumber: 14, teamName: "Elite duo 1" },
+    { teamNumber: 15, teamName: "Master planers" },
+    { teamNumber: 16, teamName: "TriTech" },
+    { teamNumber: 17, teamName: "Sanika Panchal's Squad" },
+    { teamNumber: 18, teamName: "Anushka Kori's Squad" },
+    { teamNumber: 19, teamName: "Civil Titans" },
+    { teamNumber: 20, teamName: "Civil Titans 1" },
+    { teamNumber: 21, teamName: "Sakshi and Priya" },
+    { teamNumber: 22, teamName: "Kuchupuchu" },
+    { teamNumber: 23, teamName: "ACDC" },
+    { teamNumber: 24, teamName: "Rising stars" },
+    { teamNumber: 25, teamName: "Novacode" },
+    { teamNumber: 26, teamName: "Cyberpulse" },
+    { teamNumber: 27, teamName: "TEAM CHEETAH" },
+    { teamNumber: 28, teamName: "Trio" },
+    { teamNumber: 29, teamName: "Siddharth Shejwal's Squad" },
+    { teamNumber: 30, teamName: "GxdL(Tag)" },
+    { teamNumber: 31, teamName: "Mechanic" },
+    { teamNumber: 32, teamName: "Prakshata grp" },
+    { teamNumber: 33, teamName: "Team IT" },
+    { teamNumber: 34, teamName: "Team rocket 1" },
+    { teamNumber: 35, teamName: "The crew" },
+    { teamNumber: 36, teamName: "Dhurandar" },
+    { teamNumber: 37, teamName: "Chronos" },
+    { teamNumber: 38, teamName: "Power rangers SPD" },
+    { teamNumber: 39, teamName: "MegaX" },
+    { teamNumber: 40, teamName: "Team Mech" },
+    { teamNumber: 41, teamName: "Team bsquare" },
+    { teamNumber: 42, teamName: "Team Civil" }
+];
+
 const seedDatabase = async () => {
     try {
         console.log('🌱 Checking database seeding...');
@@ -566,6 +613,23 @@ const seedDatabase = async () => {
             console.log(`✅ Seeded ${round3Puzzles.length} Round 3 Puzzles`);
         } else {
             console.log(`ℹ️ Round 3 Puzzles already exist (${r3Count} found)`);
+        }
+
+        // Master 42 Teams Seeding (Pool A: 1-21, Pool B: 22-42)
+        const teamCount = await Team.countDocuments();
+        if (teamCount < officialTeams.length) {
+            for (const t of officialTeams) {
+                const existing = await Team.findOne({ teamNumber: t.teamNumber });
+                if (!existing) {
+                    await Team.create(t);
+                } else if (existing.teamName !== t.teamName) {
+                    existing.teamName = t.teamName;
+                    await existing.save();
+                }
+            }
+            console.log(`✅ Seeded / Verified 42 Official Teams from Master List`);
+        } else {
+            console.log(`ℹ️ Teams already up to date (${teamCount} found)`);
         }
 
         console.log('🎉 Seeding check complete!');
