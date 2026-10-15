@@ -752,6 +752,11 @@
                 <option value="8">TEAM 8 (SET 8)</option>
                 <option value="9">TEAM 9 (SET 9)</option>
                 <option value="10">TEAM 10 (SET 10)</option>
+                <option value="11">TEAM 11 (SET 11)</option>
+                <option value="12">TEAM 12 (SET 12)</option>
+                <option value="13">TEAM 13 (SET 13)</option>
+                <option value="14">TEAM 14 (SET 14)</option>
+                <option value="15">TEAM 15 (SET 15)</option>
             </select>
 
             <span class="nav-label" style="margin-left:15px;">SET:</span>
@@ -766,6 +771,11 @@
                 <option value="8">SET 8 (Q36 - Q40)</option>
                 <option value="9">SET 9 (Q41 - Q45)</option>
                 <option value="10">SET 10 (Q46 - Q50)</option>
+                <option value="11">SET 11 (Q51 - Q55)</option>
+                <option value="12">SET 12 (Q56 - Q60)</option>
+                <option value="13">SET 13 (Q61 - Q65)</option>
+                <option value="14">SET 14 (Q66 - Q70)</option>
+                <option value="15">SET 15 (Q71 - Q75)</option>
             </select>
         </div>
 
@@ -919,629 +929,1764 @@
             ? (window.location.port === '5000' ? window.location.origin : 'http://localhost:5000') 
             : 'http://localhost:5000';
 
-        // ================= COMPLETE 10 SETS QUESTION BANK (50 QUESTIONS, WITH VERIFIED CORRECT ANSWERS) =================
+        // ================= OFFICIAL 15 SETS QUESTION BANK (75 GENERAL KNOWLEDGE QUESTIONS) =================
         const questionBank = {
-            1: [
-                {
-                    qNum: 1,
-                    question: "Which component is known as the brain of a computer?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "RAM" },
-                        { key: "B", text: "CPU" },
-                        { key: "C", text: "SSD" },
-                        { key: "D", text: "GPU" },
-                        { key: "E", text: "Motherboard" }
-                    ]
-                },
-                {
-                    qNum: 2,
-                    question: "Which protocol is used to securely access websites?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "HTTP" },
-                        { key: "B", text: "FTP" },
-                        { key: "C", text: "SMTP" },
-                        { key: "D", text: "HTTPS" },
-                        { key: "E", text: "Telnet" }
-                    ]
-                },
-                {
-                    qNum: 3,
-                    question: "Which data structure follows the LIFO principle?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Queue" },
-                        { key: "B", text: "Graph" },
-                        { key: "C", text: "Stack" },
-                        { key: "D", text: "Tree" },
-                        { key: "E", text: "Linked list" }
-                    ]
-                },
-                {
-                    qNum: 4,
-                    question: "Which country has the largest population in the world as of recent estimates?",
-                    correctKey: "A",
-                    options: [
-                        { key: "A", text: "India" },
-                        { key: "B", text: "China" },
-                        { key: "C", text: "United States" },
-                        { key: "D", text: "Indonesia" },
-                        { key: "E", text: "Brazil" }
-                    ]
-                },
-                {
-                    qNum: 5,
-                    question: "A team completes 3 tasks in 12 minutes at a constant rate. How long will it take to complete 8 tasks?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "24 minutes" },
-                        { key: "B", text: "28 minutes" },
-                        { key: "C", text: "30 minutes" },
-                        { key: "D", text: "32 minutes" },
-                        { key: "E", text: "36 minutes" }
-                    ]
-                }
-            ],
-            2: [
-                {
-                    qNum: 6,
-                    question: "Which language is primarily used to structure web pages?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Python" },
-                        { key: "B", text: "SQL" },
-                        { key: "C", text: "HTML" },
-                        { key: "D", text: "C++" },
-                        { key: "E", text: "Java" }
-                    ]
-                },
-                {
-                    qNum: 7,
-                    question: "Which device forwards data packets between different networks?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Switch" },
-                        { key: "B", text: "Router" },
-                        { key: "C", text: "Repeater" },
-                        { key: "D", text: "Hub" },
-                        { key: "E", text: "Bridge" }
-                    ]
-                },
-                {
-                    qNum: 8,
-                    question: "What is the time complexity of binary search on a sorted array?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "O(n)" },
-                        { key: "B", text: "O(n²)" },
-                        { key: "C", text: "O(1) in every case" },
-                        { key: "D", text: "O(log n)" },
-                        { key: "E", text: "O(n log n)" }
-                    ]
-                },
-                {
-                    qNum: 9,
-                    question: "Which Indian state is the largest by area?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Maharashtra" },
-                        { key: "B", text: "Madhya Pradesh" },
-                        { key: "C", text: "Rajasthan" },
-                        { key: "D", text: "Uttar Pradesh" },
-                        { key: "E", text: "Gujarat" }
-                    ]
-                },
-                {
-                    qNum: 10,
-                    question: "What is the next number in the sequence: 5, 11, 19, 29, 41, __?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "49" },
-                        { key: "B", text: "53" },
-                        { key: "C", text: "54" },
-                        { key: "D", text: "55" },
-                        { key: "E", text: "57" }
-                    ]
-                }
-            ],
-            3: [
-                {
-                    qNum: 11,
-                    question: "Which SQL command retrieves records from a database?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "INSERT" },
-                        { key: "B", text: "DELETE" },
-                        { key: "C", text: "UPDATE" },
-                        { key: "D", text: "SELECT" },
-                        { key: "E", text: "DROP" }
-                    ]
-                },
-                {
-                    qNum: 12,
-                    question: "Which MongoDB format is used to represent documents internally?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "CSV" },
-                        { key: "B", text: "BSON" },
-                        { key: "C", text: "HTML" },
-                        { key: "D", text: "CSS" },
-                        { key: "E", text: "TXT" }
-                    ]
-                },
-                {
-                    qNum: 13,
-                    question: "Which MongoDB update operator increments a numeric field?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "$set" },
-                        { key: "B", text: "$push" },
-                        { key: "C", text: "$inc" },
-                        { key: "D", text: "$unset" },
-                        { key: "E", text: "$rename" }
-                    ]
-                },
-                {
-                    qNum: 14,
-                    question: "Which organization publishes the Human Development Report?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "UNESCO" },
-                        { key: "B", text: "World Trade Organization" },
-                        { key: "C", text: "UNICEF" },
-                        { key: "D", text: "UNDP" },
-                        { key: "E", text: "World Bank" }
-                    ]
-                },
-                {
-                    qNum: 15,
-                    question: "A number is increased by 20% and becomes 360. What was the original number?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "280" },
-                        { key: "B", text: "290" },
-                        { key: "C", text: "300" },
-                        { key: "D", text: "320" },
-                        { key: "E", text: "330" }
-                    ]
-                }
-            ],
-            4: [
-                {
-                    qNum: 16,
-                    question: "Which tool is widely used for version control?",
-                    correctKey: "A",
-                    options: [
-                        { key: "A", text: "Git" },
-                        { key: "B", text: "Docker" },
-                        { key: "C", text: "Jenkins" },
-                        { key: "D", text: "Kubernetes" },
-                        { key: "E", text: "Selenium" }
-                    ]
-                },
-                {
-                    qNum: 17,
-                    question: "Which security technique converts readable information into an encoded form that requires a key to decrypt?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Debugging" },
-                        { key: "B", text: "Encryption" },
-                        { key: "C", text: "Indexing" },
-                        { key: "D", text: "Compilation" },
-                        { key: "E", text: "Routing" }
-                    ]
-                },
-                {
-                    qNum: 18,
-                    question: "Which type of attack attempts to make a service unavailable by overwhelming it with traffic?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "Phishing" },
-                        { key: "B", text: "SQL injection" },
-                        { key: "C", text: "Brute-force login" },
-                        { key: "D", text: "Denial of Service" },
-                        { key: "E", text: "Spoofed email only" }
-                    ]
-                },
-                {
-                    qNum: 19,
-                    question: "Which Indian institution is responsible for monetary policy decisions through its Monetary Policy Committee?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "SEBI" },
-                        { key: "B", text: "NITI Aayog" },
-                        { key: "C", text: "Reserve Bank of India" },
-                        { key: "D", text: "NABARD" },
-                        { key: "E", text: "Finance Commission" }
-                    ]
-                },
-                {
-                    qNum: 20,
-                    question: "A product costs ₹800 after a 20% discount. What was its original price?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "₹900" },
-                        { key: "B", text: "₹960" },
-                        { key: "C", text: "₹1,000" },
-                        { key: "D", text: "₹1,040" },
-                        { key: "E", text: "₹1,200" }
-                    ]
-                }
-            ],
-            5: [
-                {
-                    qNum: 21,
-                    question: "Which command downloads a Git repository to your local machine?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "git push" },
-                        { key: "B", text: "git clone" },
-                        { key: "C", text: "git commit" },
-                        { key: "D", text: "git status" },
-                        { key: "E", text: "git merge" }
-                    ]
-                },
-                {
-                    qNum: 22,
-                    question: "What is the main purpose of a CI/CD pipeline?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Design hardware" },
-                        { key: "B", text: "Replace databases" },
-                        { key: "C", text: "Automate software build, testing, and delivery" },
-                        { key: "D", text: "Increase internet speed" },
-                        { key: "E", text: "Create user passwords" }
-                    ]
-                },
-                {
-                    qNum: 23,
-                    question: "In Kubernetes, what is the smallest deployable unit?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "Cluster" },
-                        { key: "B", text: "Node" },
-                        { key: "C", text: "Namespace" },
-                        { key: "D", text: "Pod" },
-                        { key: "E", text: "Deployment" }
-                    ]
-                },
-                {
-                    qNum: 24,
-                    question: "Which country hosted the 2024 Summer Olympics?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Japan" },
-                        { key: "B", text: "France" },
-                        { key: "C", text: "Brazil" },
-                        { key: "D", text: "Australia" },
-                        { key: "E", text: "Italy" }
-                    ]
-                },
-                {
-                    qNum: 25,
-                    question: "The average of five numbers is 24. Four numbers are 18, 20, 25, and 27. What is the fifth number?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "28" },
-                        { key: "B", text: "29" },
-                        { key: "C", text: "30" },
-                        { key: "D", text: "31" },
-                        { key: "E", text: "32" }
-                    ]
-                }
-            ],
-            6: [
-                {
-                    qNum: 26,
-                    question: "Which of these is an open-source operating system?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Windows" },
-                        { key: "B", text: "Linux" },
-                        { key: "C", text: "macOS" },
-                        { key: "D", text: "iOS" },
-                        { key: "E", text: "MS-DOS" }
-                    ]
-                },
-                {
-                    qNum: 27,
-                    question: "Which protocol translates domain names into IP addresses?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "FTP" },
-                        { key: "B", text: "SSH" },
-                        { key: "C", text: "DNS" },
-                        { key: "D", text: "SMTP" },
-                        { key: "E", text: "DHCP" }
-                    ]
-                },
-                {
-                    qNum: 28,
-                    question: "Which scheduling algorithm allocates a fixed time slice to each process in turn?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "First Come, First Served" },
-                        { key: "B", text: "Shortest Job First" },
-                        { key: "C", text: "Priority Scheduling" },
-                        { key: "D", text: "Round Robin" },
-                        { key: "E", text: "Shortest Remaining Time" }
-                    ]
-                },
-                {
-                    qNum: 29,
-                    question: "Which is the headquarters city of the United Nations?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Geneva" },
-                        { key: "B", text: "Paris" },
-                        { key: "C", text: "New York City" },
-                        { key: "D", text: "London" },
-                        { key: "E", text: "Vienna" }
-                    ]
-                },
-                {
-                    qNum: 30,
-                    question: "If 3x - 7 = 32, what is the value of x?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "9" },
-                        { key: "B", text: "11" },
-                        { key: "C", text: "12" },
-                        { key: "D", text: "13" },
-                        { key: "E", text: "15" }
-                    ]
-                }
-            ],
-            7: [
-                {
-                    qNum: 31,
-                    question: "What does API stand for?",
-                    correctKey: "A",
-                    options: [
-                        { key: "A", text: "Application Programming Interface" },
-                        { key: "B", text: "Automated Program Internet" },
-                        { key: "C", text: "Advanced Processing Input" },
-                        { key: "D", text: "Application Protocol Integration" },
-                        { key: "E", text: "Applied Programming Instruction" }
-                    ]
-                },
-                {
-                    qNum: 32,
-                    question: "Which HTTP method is generally used to retrieve a resource?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "POST" },
-                        { key: "B", text: "DELETE" },
-                        { key: "C", text: "PATCH" },
-                        { key: "D", text: "GET" },
-                        { key: "E", text: "CONNECT" }
-                    ]
-                },
-                {
-                    qNum: 33,
-                    question: "What does HTTP status code 404 usually indicate?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Request succeeded" },
-                        { key: "B", text: "Unauthorized access" },
-                        { key: "C", text: "Resource not found" },
-                        { key: "D", text: "Internal server error" },
-                        { key: "E", text: "Permanent redirect" }
-                    ]
-                },
-                {
-                    qNum: 34,
-                    question: "Which Indian state is famous for the classical dance form Kathakali?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Tamil Nadu" },
-                        { key: "B", text: "Kerala" },
-                        { key: "C", text: "Odisha" },
-                        { key: "D", text: "Assam" },
-                        { key: "E", text: "Punjab" }
-                    ]
-                },
-                {
-                    qNum: 35,
-                    question: "Two numbers are in the ratio 3:5, and their sum is 64. What is the smaller number?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "18" },
-                        { key: "B", text: "21" },
-                        { key: "C", text: "24" },
-                        { key: "D", text: "32" },
-                        { key: "E", text: "40" }
-                    ]
-                }
-            ],
-            8: [
-                {
-                    qNum: 36,
-                    question: "What does AWS stand for?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Advanced Web Software" },
-                        { key: "B", text: "Amazon Web Services" },
-                        { key: "C", text: "Automated Web System" },
-                        { key: "D", text: "Application Workflow Server" },
-                        { key: "E", text: "Advanced Wireless Service" }
-                    ]
-                },
-                {
-                    qNum: 37,
-                    question: "In cloud computing, what does auto-scaling do?",
-                    correctKey: "A",
-                    options: [
-                        { key: "A", text: "Automatically adjusts computing resources to demand" },
-                        { key: "B", text: "Deletes all inactive users" },
-                        { key: "C", text: "Encrypts every file manually" },
-                        { key: "D", text: "Replaces all databases" },
-                        { key: "E", text: "Converts source code into HTML" }
-                    ]
-                },
-                {
-                    qNum: 38,
-                    question: "Which container platform is commonly used to package and run applications?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "Git" },
-                        { key: "B", text: "Jenkins" },
-                        { key: "C", text: "Docker" },
-                        { key: "D", text: "Maven" },
-                        { key: "E", text: "Selenium" }
-                    ]
-                },
-                {
-                    qNum: 39,
-                    question: "Which is the world's largest democracy by population?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "United States" },
-                        { key: "B", text: "Indonesia" },
-                        { key: "C", text: "India" },
-                        { key: "D", text: "Brazil" },
-                        { key: "E", text: "Japan" }
-                    ]
-                },
-                {
-                    qNum: 40,
-                    question: "A server processes 1,200 requests in 4 minutes. At the same rate, how many requests can it process in 7 minutes?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "1,800" },
-                        { key: "B", text: "2,000" },
-                        { key: "C", text: "2,100" },
-                        { key: "D", text: "2,400" },
-                        { key: "E", text: "2,800" }
-                    ]
-                }
-            ],
-            9: [
-                {
-                    qNum: 41,
-                    question: "Which of the following is a NoSQL database?",
-                    correctKey: "A",
-                    options: [
-                        { key: "A", text: "MongoDB" },
-                        { key: "B", text: "Microsoft Word" },
-                        { key: "C", text: "Excel" },
-                        { key: "D", text: "PowerPoint" },
-                        { key: "E", text: "Notepad" }
-                    ]
-                },
-                {
-                    qNum: 42,
-                    question: "What is the purpose of a database index?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Increase screen resolution" },
-                        { key: "B", text: "Improve data retrieval speed" },
-                        { key: "C", text: "Replace database backups" },
-                        { key: "D", text: "Encrypt all network traffic" },
-                        { key: "E", text: "Compile programs" }
-                    ]
-                },
-                {
-                    qNum: 43,
-                    question: "Which ACID property ensures that a transaction is completed entirely or not at all?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "Consistency" },
-                        { key: "B", text: "Isolation" },
-                        { key: "C", text: "Durability" },
-                        { key: "D", text: "Atomicity" },
-                        { key: "E", text: "Availability" }
-                    ]
-                },
-                {
-                    qNum: 44,
-                    question: "Which international organization primarily coordinates global public health efforts?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "WTO" },
-                        { key: "B", text: "WHO" },
-                        { key: "C", text: "IMF" },
-                        { key: "D", text: "FIFA" },
-                        { key: "E", text: "UNESCO" }
-                    ]
-                },
-                {
-                    qNum: 45,
-                    question: "A value increases from 80 to 100. What is the percentage increase?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "15%" },
-                        { key: "B", text: "20%" },
-                        { key: "C", text: "25%" },
-                        { key: "D", text: "30%" },
-                        { key: "E", text: "35%" }
-                    ]
-                }
-            ],
-            10: [
-                {
-                    qNum: 46,
-                    question: "Which language is commonly used for data analysis and scripting?",
-                    correctKey: "A",
-                    options: [
-                        { key: "A", text: "Python" },
-                        { key: "B", text: "HTML" },
-                        { key: "C", text: "CSS" },
-                        { key: "D", text: "XML" },
-                        { key: "E", text: "Markdown" }
-                    ]
-                },
-                {
-                    qNum: 47,
-                    question: "Which security method verifies a user's identity using two different authentication factors?",
-                    correctKey: "B",
-                    options: [
-                        { key: "A", text: "Data compression" },
-                        { key: "B", text: "Two-factor authentication" },
-                        { key: "C", text: "Load balancing" },
-                        { key: "D", text: "Version control" },
-                        { key: "E", text: "Virtual memory" }
-                    ]
-                },
-                {
-                    qNum: 48,
-                    question: "Which SQL clause filters grouped results after aggregation?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "WHERE" },
-                        { key: "B", text: "ORDER BY" },
-                        { key: "C", text: "HAVING" },
-                        { key: "D", text: "DISTINCT" },
-                        { key: "E", text: "LIMIT" }
-                    ]
-                },
-                {
-                    qNum: 49,
-                    question: "Which Indian space mission successfully landed near the Moon's south polar region in 2023?",
-                    correctKey: "D",
-                    options: [
-                        { key: "A", text: "Chandrayaan-1" },
-                        { key: "B", text: "Mangalyaan" },
-                        { key: "C", text: "Chandrayaan-2" },
-                        { key: "D", text: "Chandrayaan-3" },
-                        { key: "E", text: "Aditya-L1" }
-                    ]
-                },
-                {
-                    qNum: 50,
-                    question: "A team scores 72, 84, 91, and 77 points in four rounds. What is its average score?",
-                    correctKey: "C",
-                    options: [
-                        { key: "A", text: "78" },
-                        { key: "B", text: "80" },
-                        { key: "C", text: "81" },
-                        { key: "D", text: "82" },
-                        { key: "E", text: "84" }
-                    ]
-                }
-            ]
-        };
+          "1": [
+                    {
+                              "qNum": 1,
+                              "question": "Who is the President of India?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Narendra Modi"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Rahul Gandhi"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Amit Shah"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Droupadi Murmu"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 2,
+                              "question": "Which country is known as the Land of the Rising Sun?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "China"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "South Korea"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Japan"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Thailand"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 3,
+                              "question": "Which Indian mission made a successful soft landing near the Moon's south polar region in 2023?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Chandrayaan-1"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Chandrayaan-2"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Chandrayaan-3"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Aditya-L1"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 4,
+                              "question": "Who wrote 'The Discovery of India'?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Mahatma Gandhi"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Subhas Chandra Bose"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Rabindranath Tagore"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Jawaharlal Nehru"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 5,
+                              "question": "Which constitutional body conducts elections to Parliament and state legislatures in India?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "UPSC"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Finance Commission"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Election Commission of India"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "NITI Aayog"
+                                        }
+                              ]
+                    }
+          ],
+          "2": [
+                    {
+                              "qNum": 6,
+                              "question": "Which river is often called the Ganga's major tributary from the north?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Kaveri"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Godavari"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Narmada"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Yamuna"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 7,
+                              "question": "Which festival is widely known as the festival of lights?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Holi"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Diwali"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Eid"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Christmas"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 8,
+                              "question": "How many rings are there in the Olympic symbol?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "3"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "4"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "6"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "5"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 9,
+                              "question": "What is inflation?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "A fall in the general price level"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "A sustained rise in the general price level"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "An increase in the value of money"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "A decrease in money supply"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 10,
+                              "question": "Which award is India's highest civilian honour?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Padma Shri"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Padma Bhushan"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Bharat Ratna"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Padma Vibhushan"
+                                        }
+                              ]
+                    }
+          ],
+          "3": [
+                    {
+                              "qNum": 11,
+                              "question": "Who was known as the 'Iron Man of India'?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Sardar Vallabhbhai Patel"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Bhagat Singh"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Bal Gangadhar Tilak"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Lal Bahadur Shastri"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 12,
+                              "question": "Which blood cells mainly help the body fight infections?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "White blood cells"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Red blood cells"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Platelets"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Plasma cells"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 13,
+                              "question": "Which international organization oversees rules of global trade between nations?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "WTO"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "WHO"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "UNESCO"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "ILO"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 14,
+                              "question": "Which animal is the national animal of India?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Asiatic lion"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Bengal tiger"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Indian elephant"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Snow leopard"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 15,
+                              "question": "Who developed the theory of relativity?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Albert Einstein"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Isaac Newton"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Galileo Galilei"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Niels Bohr"
+                                        }
+                              ]
+                    }
+          ],
+          "4": [
+                    {
+                              "qNum": 16,
+                              "question": "Which river flows through Egypt and is central to its history?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Amazon"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Danube"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Nile"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Yangtze"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 17,
+                              "question": "What boundary marks the point beyond which nothing can escape a black hole?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Accretion disk"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Photon sphere"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Event horizon"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Singularity"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 18,
+                              "question": "Who wrote the Harry Potter book series?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Roald Dahl"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "George R. R. Martin"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "J. K. Rowling"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Stephen King"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 19,
+                              "question": "What is the minimum voting age for Indian citizens in general elections?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "16 years"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "20 years"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "18 years"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "21 years"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 20,
+                              "question": "What is the capital of India?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Mumbai"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Kolkata"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "New Delhi"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Chennai"
+                                        }
+                              ]
+                    }
+          ],
+          "5": [
+                    {
+                              "qNum": 21,
+                              "question": "Sattriya, a classical dance form, originated in which state?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Odisha"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Assam"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Kerala"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Manipur"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 22,
+                              "question": "How many players from one team are on the field in a standard football match?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "11"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "9"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "10"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "12"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 23,
+                              "question": "Which institution issues most banknotes in India?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Ministry of Finance"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Reserve Bank of India"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "State Bank of India"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Securities and Exchange Board of India"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 24,
+                              "question": "When is World Environment Day observed?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "5 June"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "22 April"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "16 September"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "1 December"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 25,
+                              "question": "Which is the highest mountain peak located entirely within India?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "K2"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Kangchenjunga"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Nanda Devi"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Kamet"
+                                        }
+                              ]
+                    }
+          ],
+          "6": [
+                    {
+                              "qNum": 26,
+                              "question": "Which planet is known as the Red Planet?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Venus"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Mars"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Jupiter"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Mercury"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 27,
+                              "question": "Which organization is primarily responsible for coordinating international public health?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "UNICEF"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "UNDP"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "UNHCR"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "WHO"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 28,
+                              "question": "Which layer of the atmosphere contains the ozone layer?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Troposphere"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Mesosphere"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Stratosphere"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Thermosphere"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 29,
+                              "question": "Which scientist formulated the three laws of motion?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Albert Einstein"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Galileo Galilei"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Isaac Newton"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Johannes Kepler"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 30,
+                              "question": "The Dandi March of 1930 was associated with which movement?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Non-Cooperation Movement"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Civil Disobedience Movement"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Quit India Movement"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Swadeshi Movement"
+                                        }
+                              ]
+                    }
+          ],
+          "7": [
+                    {
+                              "qNum": 31,
+                              "question": "Which star is closest to Earth?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Proxima Centauri"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "The Sun"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Sirius"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Alpha Centauri A"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 32,
+                              "question": "Who wrote the play 'Romeo and Juliet'?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Charles Dickens"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Jane Austen"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "William Shakespeare"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Mark Twain"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 33,
+                              "question": "Who appoints the Prime Minister of India?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Chief Justice of India"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "President of India"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Speaker of the Lok Sabha"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Vice President of India"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 34,
+                              "question": "Which Article of the Indian Constitution guarantees equality before the law?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Article 19"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Article 21"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Article 32"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Article 14"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 35,
+                              "question": "Which is the largest ocean on Earth?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Pacific Ocean"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Atlantic Ocean"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Indian Ocean"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Arctic Ocean"
+                                        }
+                              ]
+                    }
+          ],
+          "8": [
+                    {
+                              "qNum": 36,
+                              "question": "The Thomas Cup is an international team championship in which sport?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Table Tennis"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Tennis"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Squash"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Badminton"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 37,
+                              "question": "Which currency is used in Japan?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Yuan"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Yen"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Won"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Ringgit"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 38,
+                              "question": "The Nobel Peace Prize is awarded in which city?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Stockholm"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Geneva"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "The Hague"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Oslo"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 39,
+                              "question": "Which is the largest state in India by area?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Madhya Pradesh"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Rajasthan"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Maharashtra"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Uttar Pradesh"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 40,
+                              "question": "Bharatanatyam is a classical dance form associated with which state?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Tamil Nadu"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Kerala"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Andhra Pradesh"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Karnataka"
+                                        }
+                              ]
+                    }
+          ],
+          "9": [
+                    {
+                              "qNum": 41,
+                              "question": "Which organization publishes the Human Development Report?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "World Bank"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "IMF"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "UNDP"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "UNESCO"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 42,
+                              "question": "What is a keystone species?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "The most abundant species in a community"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "A non-native invasive species"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "A species whose impact on its ecosystem is disproportionately large"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "An extinct species"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 43,
+                              "question": "Who is commonly credited with inventing the practical telephone?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Thomas Edison"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Nikola Tesla"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Guglielmo Marconi"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Alexander Graham Bell"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 44,
+                              "question": "In which year did India gain independence?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "1945"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "1947"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "1950"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "1952"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 45,
+                              "question": "What is the largest organ of the human body?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Liver"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Skin"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Brain"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Heart"
+                                        }
+                              ]
+                    }
+          ],
+          "10": [
+                    {
+                              "qNum": 46,
+                              "question": "Who is traditionally credited with composing the ancient Greek epic 'The Odyssey'?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Homer"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Sophocles"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Virgil"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Plato"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 47,
+                              "question": "Who is widely known as the chief architect of the Indian Constitution?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Jawaharlal Nehru"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Mahatma Gandhi"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Sardar Vallabhbhai Patel"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "B. R. Ambedkar"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 48,
+                              "question": "Who is the Prime Minister of India?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Rahul Gandhi"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Narendra Modi"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Arvind Kejriwal"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Amit Shah"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 49,
+                              "question": "What is the capital of Australia?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Sydney"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Melbourne"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Brisbane"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Canberra"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 50,
+                              "question": "What is the name of India's space agency?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "NASA"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "ESA"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "JAXA"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "ISRO"
+                                        }
+                              ]
+                    }
+          ],
+          "11": [
+                    {
+                              "qNum": 51,
+                              "question": "What is the currency of India?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Dollar"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Rupee"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Euro"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Yen"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 52,
+                              "question": "When is India's Independence Day celebrated?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "26 January"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "15 August"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "2 October"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "14 November"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 53,
+                              "question": "Which Indian state is famous for its backwaters?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Goa"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Gujarat"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Kerala"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Odisha"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 54,
+                              "question": "The Konark Sun Temple is located in which state?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "West Bengal"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Odisha"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Bihar"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Andhra Pradesh"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 55,
+                              "question": "The Ranji Trophy is associated with which sport in India?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Cricket"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Football"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Hockey"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Kabaddi"
+                                        }
+                              ]
+                    }
+          ],
+          "12": [
+                    {
+                              "qNum": 56,
+                              "question": "Which gas is most associated with human-caused global warming?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Oxygen"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Carbon dioxide"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Nitrogen"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Hydrogen"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 57,
+                              "question": "Who is associated with the discovery of penicillin?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Louis Pasteur"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Alexander Fleming"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Robert Koch"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Edward Jenner"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 58,
+                              "question": "Who founded the Maurya Empire?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Ashoka"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Bindusara"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Chandragupta Maurya"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Samudragupta"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 59,
+                              "question": "Which vitamin is produced in the skin with the help of sunlight?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Vitamin A"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Vitamin C"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Vitamin D"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Vitamin K"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 60,
+                              "question": "What does UN stand for?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "United Nations"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "United Nationalists"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Universal Network"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Union of Nations"
+                                        }
+                              ]
+                    }
+          ],
+          "13": [
+                    {
+                              "qNum": 61,
+                              "question": "Which house of Parliament is also called the House of the People?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Lok Sabha"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Rajya Sabha"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Vidhan Sabha"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Vidhan Parishad"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 62,
+                              "question": "Who is the constitutional head of an Indian state?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Chief Minister"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Chief Justice of the High Court"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Governor"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Advocate General"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 63,
+                              "question": "Which strait separates Asia and North America?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Strait of Gibraltar"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Strait of Malacca"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Bosphorus Strait"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Bering Strait"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 64,
+                              "question": "What is the name of Earth's natural satellite?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Titan"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "The Moon"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Europa"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Ganymede"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 65,
+                              "question": "Who wrote India's national song 'Vande Mataram'?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Rabindranath Tagore"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Sarojini Naidu"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Bankim Chandra Chattopadhyay"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Sri Aurobindo"
+                                        }
+                              ]
+                    }
+          ],
+          "14": [
+                    {
+                              "qNum": 66,
+                              "question": "Which award is associated with outstanding contributions to literature and is presented in Sweden?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Nobel Prize in Literature"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Booker Prize"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Pulitzer Prize"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Sahitya Akademi Award"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 67,
+                              "question": "The Tropic of Cancer passes through how many Indian states?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "6"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "7"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "9"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "8"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 68,
+                              "question": "Which monument is located in Agra?",
+                              "correctKey": "D",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Qutub Minar"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Red Fort"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Gateway of India"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Taj Mahal"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 69,
+                              "question": "The Wimbledon Championships are associated with which sport?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Tennis"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Golf"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Cricket"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Polo"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 70,
+                              "question": "What does GDP stand for?",
+                              "correctKey": "B",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "General Domestic Productivity"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Gross Domestic Product"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Gross Daily Production"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Global Development Policy"
+                                        }
+                              ]
+                    }
+          ],
+          "15": [
+                    {
+                              "qNum": 71,
+                              "question": "Who proposed the heliocentric model that placed the Sun near the centre of the planetary system in the modern scientific era?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Claudius Ptolemy"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Tycho Brahe"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Nicolaus Copernicus"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Johannes Kepler"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 72,
+                              "question": "Who was the first Prime Minister of independent India?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Sardar Vallabhbhai Patel"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Dr. Rajendra Prasad"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Jawaharlal Nehru"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Lal Bahadur Shastri"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 73,
+                              "question": "Which gas do plants absorb during photosynthesis?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Oxygen"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Nitrogen"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Carbon dioxide"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Hydrogen"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 74,
+                              "question": "Where is the headquarters of the United Nations located?",
+                              "correctKey": "A",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "New York City"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Geneva"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Paris"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Vienna"
+                                        }
+                              ]
+                    },
+                    {
+                              "qNum": 75,
+                              "question": "Which international agreement is designed to protect the ozone layer by phasing out ozone-depleting substances?",
+                              "correctKey": "C",
+                              "options": [
+                                        {
+                                                  "key": "A",
+                                                  "text": "Paris Agreement"
+                                        },
+                                        {
+                                                  "key": "B",
+                                                  "text": "Kyoto Protocol"
+                                        },
+                                        {
+                                                  "key": "C",
+                                                  "text": "Montreal Protocol"
+                                        },
+                                        {
+                                                  "key": "D",
+                                                  "text": "Basel Convention"
+                                        }
+                              ]
+                    }
+          ]
+};
 
         // ================= GAME & SESSION STATE =================
         let currentTeamNum = 1;
@@ -1884,7 +3029,7 @@
             breakdownList.innerHTML = breakdownHTML;
 
             const nextTeam = rec.teamNumber + 1;
-            nextBtn.innerText = `🚀 START TEAM ${nextTeam} (SET ${nextTeam <= 10 ? nextTeam : 1})`;
+            nextBtn.innerText = `🚀 START TEAM ${nextTeam} (SET ${nextTeam <= 15 ? nextTeam : 1})`;
 
             resultModal.classList.add('active');
         }
@@ -1898,7 +3043,7 @@
         function advanceToNextTeamAndSet() {
             closeResultModal();
             let nextTeam = currentTeamNum + 1;
-            if (nextTeam > 10) nextTeam = 1;
+            if (nextTeam > 15) nextTeam = 1;
 
             currentTeamNum = nextTeam;
             activeSetNumber = nextTeam;
